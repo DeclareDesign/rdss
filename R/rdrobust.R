@@ -1,5 +1,8 @@
 
 #' @importFrom rlang quo_is_null quo
+#' @importFrom dplyr filter pull
+#' @importFrom rlang quo_is_null quo enquo
+#' @importFrom rdrobust rdrobust
 #' @export
 rdrobust_helper <-
   function(data, y, x, c, vce, subset = NULL, term = NULL){

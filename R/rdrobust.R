@@ -6,7 +6,7 @@
 #' @export
 rdrobust_helper <-
   function(data, y, x, c, vce, subset = NULL, term = NULL){
-    if(!quo_is_null(quo(subset)))
+    if(!missing(subset))
       data <- filter(data, !!enquo(subset))
     fit <- try(rdrobust(y = pull(data, {{y}}), x = pull(data, {{x}}), c = c))
     if(!inherits(fit, "try-error")) {

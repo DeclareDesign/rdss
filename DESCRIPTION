@@ -1,5 +1,5 @@
-Package: DeclareDesignHelpers
-Title: Helper functions for learning and using the DeclareDesign package with the book "Research Design" (book.declaredesign.org).
+Package: rdddr
+Title: Companion datasets and functions for the book "Research Design: Declare, Diagnose, Redesign" (book.declaredesign.org).
 Version: 0.1
 Authors@R: 
     c(person("Graeme", "Blair", email = "graeme.blair@ucla.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9164-2102")),
@@ -11,7 +11,10 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-Suggests: DeclareDesign
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0),
+    DeclareDesign
 Depends: 
     R (>= 2.10)
+Config/testthat/edition: 3

@@ -2,6 +2,9 @@
 #'
 #' @return
 #' @export
+#' @importFrom ggplot2 theme_minimal theme element_blank element_text margin
+#'
+#'
 #'
 theme_dd <-
   function() {

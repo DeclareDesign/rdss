@@ -13,7 +13,7 @@ hex_add_alpha <- function(col, alpha) {
 
 dd_palettes <- list(
   # ColorPalette = c(dd_light_blue, dd_orange, dd_pink)
-  color_palette = c("#72B4F3", "#F38672", "#C6227F"),
+  three_color_palette = c("#72B4F3", "#F38672", "#C6227F"),
   # GreyPalette = c(dd_light_blue, dd_orange, dd_pink, dd_light_gray)
   grey_palette = c("#72B4F3", "#F38672", "#C6227F", gray(0.8)),
   # quilt_palette = c(dd_light_gray, dd_pink, dd_purple , dd_light_blue, dd_orange)

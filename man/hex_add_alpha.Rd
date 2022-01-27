@@ -11,9 +11,6 @@ hex_add_alpha(col, alpha)
 
 \item{alpha}{Level of alpha transparency to add}
 }
-\value{
-
-}
 \description{
 Add alpha transparency to a color defined in hexadecimal
 }

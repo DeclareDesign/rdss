@@ -40,7 +40,6 @@ format_num <- function(x, digits = 3) {
 #' @param std.error a numeric vector of standard error estimates
 #' @param digits number of digits to retain
 #'
-#' @return
 #' @export
 #'
 #' @examples

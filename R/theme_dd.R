@@ -1,8 +1,7 @@
 #' ggplot Theme used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)
 #'
-#' @return
 #' @export
-#' @importFrom ggplot2 theme_minimal theme element_blank element_text margin
+#' @importFrom ggplot2 theme_minimal theme element_blank element_text margin element_line
 #'
 #'
 #'

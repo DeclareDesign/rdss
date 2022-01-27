@@ -4,7 +4,6 @@
 #' @param col Original color code in hex
 #' @param alpha Level of alpha transparency to add
 #'
-#' @return
 #' @export
 #'
 hex_add_alpha <- function(col, alpha) {
@@ -77,7 +76,6 @@ dd_palettes <- list(
 #'
 #' dd_light_blue_alpha = "#72B4F3A0"
 #'
-#' @return
 #' @export
 #'
 dd_palette <- function(name, n) {

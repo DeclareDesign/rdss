@@ -11,9 +11,6 @@ dd_palette(name, n)
 
 \item{n}{Number of colors}
 }
-\value{
-
-}
 \description{
 Based on Karthik Ram's wesanderson package (https://github.com/karthik/wesanderson)
 }

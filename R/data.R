@@ -11,3 +11,21 @@
 #' }
 #' @source California Secretary of State.
 "la_voter_file"
+
+#' Shapefile of Fairfax County, Virginia, voting precincts
+#'
+#' An sf object containing the boundaries of voting precincts for Fairfax County, Virginia as well as precinct ID, name, district, polling place name, address, city, zip code, area, length, and geometry (polygons)
+#'
+#' @format An sf object with 236 rows and 10 variables:
+"fairfax"
+
+#' Replication data for Bonilla and Tillery (2020), American Political Science Review (obtained from Dataverse 10.7910/DVN/IUZDQI)
+#'
+#' @format A data.frame
+"bonilla_tillery"
+
+
+#' Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133–1170
+#'
+#' @format A data.frame
+"clingingsmith_etal"

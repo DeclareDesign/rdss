@@ -24,6 +24,9 @@ dd_palettes <- list(
   # c(dd_light_gray, "#72B4F366", dd_light_blue)
   quilt_three_color_palette = c(gray(0.8), "#72B4F366", "#72B4F3"),
 
+  # dark blue, light gray
+  two_color_gray = c("#3564ED", gray(0.8)),
+
   dd_dark_blue = "#3564ED",
   dd_light_blue = "#72B4F3",
   dd_orange = "#F38672",

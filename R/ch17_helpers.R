@@ -38,16 +38,15 @@ estimator_AS <-
     out_AS <-
       estimates(
         obs_exposure =
-          make_exposure_map_AS(adj_matrix, data$Z, hop = 1),
+          make_exposure_map_AS(adj_matrix = adj_matrix, tr_vector = data$Z, hop = 1),
         obs_outcome = data$Y,
         obs_prob_exposure = make_exposure_prob(
-          permutatation_matrix,
-          adj_matrix,
-          make_exposure_map_AS,
-          list(hop = 1)
+          potential_tr_vector = permutatation_matrix,
+          adj_matrix = adj_matrix,
+          exposure_map_fn = make_exposure_map_AS,
+          exposure_map_fn_add_args = list(hop = 1)
         ),
-        n_var_permutations = 30,
-        hop = 1
+        n_var_permutations = 30
       )
     tibble(
       term = c(names(out_AS$tau_ht), names(out_AS$tau_h)),

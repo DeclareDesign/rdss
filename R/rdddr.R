@@ -6,4 +6,4 @@
 #' @name rdddr
 NULL
 
-utils::globalVariables(c("X"))
+utils::globalVariables(c("X", "variance", "estimate", "std.error", "value", "name", "order_by___", "state", "fitted", "PS_weight", "covariates", "pred"))

@@ -52,10 +52,13 @@ estimator_AS <-
       term = c(names(out_AS$tau_ht), names(out_AS$tau_h)),
       inquiry = rep(c("total_ATE", "direct_ATE", "indirect_ATE"), 2),
       estimator = rep(c("Horvitz-Thompson", "Hajek"), each = 3),
-      estimate = c(out_AS$tau_ht, out_AS$tau_h),
-      variance = c(out_AS$var_tau_ht, out_AS$var_tau_h),
-      std.error = sqrt(variance),
-      conf.low = estimate - 1.96 * std.error,
-      conf.high = estimate + 1.96 * std.error
+      estimate = c(out_AS$tau_ht, out_AS$tau_h)
+      # something appears to have changed in the interference package;
+      # for the moment, only returning estimates, not variance estimates (2022-10-30)
+    #   variance = c(out_AS$var_tau_ht, out_AS$var_tau_h),
+    #   std.error = sqrt(variance),
+    #   conf.low = estimate - 1.96 * std.error,
+    #   conf.high = estimate + 1.96 * std.error
+    # )
     )
   }

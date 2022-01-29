@@ -4,7 +4,7 @@
 \alias{causal_forest_handler}
 \title{Tidy causal forest results}
 \usage{
-causal_forest_handler(data, ...)
+causal_forest_handler(data, covariates, ...)
 }
 \arguments{
 \item{data}{A data.frame}

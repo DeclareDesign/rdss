@@ -18,5 +18,6 @@ Suggests:
 Depends: 
     R (>= 2.10)
 Remotes:
-    szonszein/interference
+    szonszein/interference,
+    macartan/CausalQueries
 Config/testthat/edition: 3

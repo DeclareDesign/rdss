@@ -1,3 +1,29 @@
+#' Process tracing estimator
+#'
+#' Draw conclusions from a model given a query, data, and process tracing strategies
+#' See https://book.declaredesign.org/observational-causal.html#process-tracing
+#'
+#' @param causal_model a model generation by `CausalQueries`
+#' @param data a single row dataset with data on nodes in the model
+#' @param query a causal query of interest
+#' @param strategies a list of sets of nodes examined
+#'
+#' @export
+#'
+#' @importFrom CausalQueries query_model
+#'
+pt_estimator <- function(causal_model, query, data, strategies)
+
+  causal_model %>%
+
+  query_model(query = query,
+              given = strategy_statements(data, strategies)) %>%
+
+  select(estimate = mean) %>%
+
+  mutate(XY = paste0("X", data$X, "Y", data$Y),
+         term = strategies %>% lapply(paste, collapse = "-") %>% unlist)
+
 
 
 #' Generate lags in grouped data

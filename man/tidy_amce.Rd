@@ -9,11 +9,26 @@ tidy_amce(fit, alpha = 0.05)
 \arguments{
 \item{fit}{an amce fit object from cjoint::amce}
 
-\item{alpha}{the type 1 error rate, set to 0.05 by default. Used for the calucluation of p.values and confidence intervals}
+\item{alpha}{the type 1 error rate, set to 0.05 by default. Used for the calculation of confidence intervals}
 }
 \value{
 
 }
 \description{
 Tidy estimates from the amce estimator
+}
+\examples{
+
+
+data("immigrationconjoint")
+data("immigrationdesign")
+# Run AMCE estimator using all attributes in the design
+results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
+                  `Country of Origin` + Job + `Job Experience` + `Job Plans` +
+                  `Reason for Application` + `Prior Entry`, data=immigrationconjoint,
+                cluster=TRUE, respondent.id="CaseID", design=immigrationdesign)
+# Print summary
+tidy_amce(results)
+
+
 }

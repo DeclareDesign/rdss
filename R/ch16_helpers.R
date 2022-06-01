@@ -55,7 +55,7 @@ rr_forced_known <-
 #' @export
 #'
 #' @importFrom dplyr `%>%` rename select mutate
-#' @importFrom cjoint summary
+#' @importFrom cjoint summary.amce
 #'
 #' @examples
 #'
@@ -80,11 +80,117 @@ tidy_amce <-
         estimate = Estimate,
         std.error = `Std. Err`,
         statistic = `z value`,
-        p.value = `Pr(>|z|)`
+        p.value = `Pr(>|z|)`,
+        attribute = Attribute,
+        level = Level
       ) %>%
       select(-" ") %>%
       mutate(
         conf.low = estimate - z_score * std.error,
         conf.high = estimate + z_score * std.error,
+      )
+  }
+
+
+
+
+
+#' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+#'
+#' @param data
+#' @param levels_list
+#'
+#' @return
+#' @export
+#' @importFrom purrr map
+#' @importFrom randomizr complete_ra
+#' @importFrom tibble as_tibble
+#'
+#'
+conjoint_assignment <-
+  function(data, levels_list) {
+    assignment_df <-
+      levels_list %>%
+      map( ~ complete_ra(N = nrow(data), conditions = .)) %>%
+      as_tibble()
+    data[,names(assignment_df)] <- assignment_df
+    data
+  }
+
+#' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+#'
+#' @param data
+#'
+#' @return
+#' @export
+#'
+#' @importFrom dplyr group_by mutate ungroup
+#'
+conjoint_measurement <-
+  function(data) {
+    data %>%
+      conjoint_utility %>%
+      group_by(subject, task) %>%
+      mutate(choice = as.numeric(c(U[1] > U[2], U[1] <= U[2]))) %>%
+      ungroup()
+  }
+
+#' Conjoint experiment Inquiries handler
+#'
+#' @param data
+#' @param levels_list
+#'
+#' @importFrom dplyr filter `%>%` mutate bind_rows
+#' @importFrom rlang `!!` `:=`
+#' @importFrom purrr map_dbl map_chr map pmap_dbl as_vector
+#' @return
+#'
+#'
+#' @export
+conjoint_inquiries <-
+  function(data, levels_list) {
+
+    # AMCE helper: AMCE for a change of attribute from reference to level
+    calculate_amce <-
+      function(data, levels_list, attribute, reference, level) {
+
+        # A random draw of the other conjoint levels
+        data <- conjoint_assignment(data, levels_list)
+
+        first_profiles <- data %>% filter(profile == 1)
+        second_profiles <- data %>% filter(profile == 2)
+
+        # Is second_profile chosen when attribute = reference?
+        A <- first_profiles %>%
+          bind_rows(mutate(second_profiles,!!attribute := factor(reference))) %>%
+          conjoint_measurement() %>%
+          filter(profile == 2)
+
+        # Is second_profile chosen when attribute = level?
+        B <- first_profiles %>%
+          bind_rows(mutate(second_profiles,!!attribute := factor(level))) %>%
+          conjoint_measurement()%>%
+          filter(profile == 2)
+
+        # Average difference
+        mean(B$choice - A$choice)
+      }
+
+
+    repetitions <- levels_list %>% map_dbl(length) - 1
+
+    inquiries_df <-
+      tibble(
+        attribute = rep(names(levels_list), repetitions),
+        reference = rep(map_chr(levels_list, ~ .[1]), repetitions),
+        level = map(levels_list, ~ as.character(.[-1])) %>% as_vector()
+      )
+
+    inquiries_df %>%
+      mutate(
+        inquiry = paste0(attribute, level),
+        estimand = pmap_dbl(inquiries_df, partial(
+          calculate_amce, data = data, levels_list = levels_list
+        ))
       )
   }

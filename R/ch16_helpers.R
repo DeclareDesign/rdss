@@ -39,3 +39,52 @@ rr_forced_known <-
     }
     pred
   }
+
+
+
+
+
+#' Tidy estimates from the amce estimator
+#'
+#'
+#'
+#' @param fit an amce fit object from cjoint::amce
+#' @param alpha the type 1 error rate, set to 0.05 by default. Used for the calculation of confidence intervals
+#'
+#' @return
+#' @export
+#'
+#' @importFrom dplyr `%>%` rename select mutate
+#' @importFrom cjoint summary
+#'
+#' @examples
+#'
+#'
+#' data("immigrationconjoint")
+#' data("immigrationdesign")
+#' # Run AMCE estimator using all attributes in the design
+#' results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
+#'                   `Country of Origin` + Job + `Job Experience` + `Job Plans` +
+#'                   `Reason for Application` + `Prior Entry`, data=immigrationconjoint,
+#'                 cluster=TRUE, respondent.id="CaseID", design=immigrationdesign)
+#' # Print summary
+#' tidy_amce(results)
+#'
+#'
+tidy_amce <-
+  function(fit, alpha = 0.05) {
+    z_score = qnorm(1 - ((alpha) / 2))
+    summary_fit <- summary(fit)
+    summary_fit$amce %>%
+      rename(
+        estimate = Estimate,
+        std.error = `Std. Err`,
+        statistic = `z value`,
+        p.value = `Pr(>|z|)`
+      ) %>%
+      select(-" ") %>%
+      mutate(
+        conf.low = estimate - z_score * std.error,
+        conf.high = estimate + z_score * std.error,
+      )
+  }

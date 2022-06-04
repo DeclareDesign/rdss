@@ -5,8 +5,8 @@ library(DeclareDesign)
 library(tidyverse)
 library(rdddr)
 library(CausalQueries)
-sims <- 20
-bootstrap_sims <- 20
+sims <- 3
+bootstrap_sims <- 3
 source("../book_scripts/declaration_15.1.R")
 diagnosis_15.1 <- diagnose_design(declaration_15.1,
                                   sims = sims, 

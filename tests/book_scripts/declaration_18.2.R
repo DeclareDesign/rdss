@@ -23,7 +23,7 @@ declaration_18.2 <-
                       Y = reveal_outcomes(Y ~ Z), 
                       train = simple_rs(N) == 1) +
   declare_inquiry(handler = best_predictor, covariates = paste0("X.", 1:10), label = "custom") +
-  declare_step(handler = causal_forest_handler, covariates = paste0("X.", 1:10)) +
+  declare_step(handler = causal_forest_helper, covariates = paste0("X.", 1:10)) +
   declare_inquiry(
     worst_effects = mean(tau[tau <= quantile(tau, 0.2)]),
     weak_effects = mean(tau[low_test]),

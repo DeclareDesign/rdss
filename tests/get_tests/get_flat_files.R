@@ -26,8 +26,8 @@ r_files %>%
   separate(filename, into = c("dir", "file"), sep = "/") %>%
   rename(value = X1) %>%
   mutate(file = str_replace(file, "simulation", "a_simulation")) %>%
-  mutate(value = str_replace(value, "sims <- 2000", "sims <- 20")) %>%
-  mutate(value = str_replace(value, "bootstrap_sims <- 2000", "bootstrap_sims <- 20")) %>%
+  mutate(value = str_replace(value, "sims <- 2000", "sims <- 3")) %>%
+  mutate(value = str_replace(value, "bootstrap_sims <- 2000", "bootstrap_sims <- 3")) %>%
   mutate(value = if_else(str_detect(value, "write_rds"), "", value)) %>%
   mutate(value = str_replace(value, "scripts_declarations", "..\\/book_scripts")) %>%
   mutate(value = str_replace(value, "scripts_declarations", "..\\/book_scripts")) %>%

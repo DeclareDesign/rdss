@@ -1,7 +1,7 @@
 library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
-sims <- 20
+sims <- 3
 p.values <- rep(NA, sims)
 for(i in 1:sims){
   Z <- rbinom(100, 1, 0.5)

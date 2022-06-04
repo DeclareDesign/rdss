@@ -5,8 +5,8 @@ library(DeclareDesign)
 library(tidyverse)
 library(rdddr)
 library(DIDmultiplegt)
-sims <- 20
-bootstrap_sims <- 20
+sims <- 3
+bootstrap_sims <- 3
 lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
   x_nm <- enexpr(x)
   grp_nm <- enexpr(groups)

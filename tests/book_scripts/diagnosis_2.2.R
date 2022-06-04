@@ -4,7 +4,7 @@ library(DeclareDesign); library(rdddr); library(tidyverse)
 library(DeclareDesign)
 library(tidyverse)
 set.seed(42)
-sims <- 20
+sims <- 3
 b_sims <- FALSE
 source("../book_scripts/declaration_2.2.R")
 diagnosands <-

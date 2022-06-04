@@ -5,8 +5,8 @@ library(DeclareDesign)
 library(tidyverse)
 library(rdddr)
 set.seed(42)
-sims <- 20
-bootstrap_sims <- 20
+sims <- 3
+bootstrap_sims <- 3
 observed_estimate <-
   difference_in_means(views ~ success, data = clingingsmith_etal)
 source("../book_scripts/declaration_9.3.R")

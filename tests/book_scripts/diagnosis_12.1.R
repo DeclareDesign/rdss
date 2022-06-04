@@ -4,8 +4,8 @@ library(DeclareDesign); library(rdddr); library(tidyverse)
 library(DeclareDesign)
 library(tidyverse)
 library(rdddr)
-sims <- 20
-bootstrap_sims <- 20
+sims <- 3
+bootstrap_sims <- 3
 source("../book_scripts/declaration_12.1a.R")
 source("../book_scripts/declaration_12.1b.R")
 source("../book_scripts/declaration_12.1c.R")

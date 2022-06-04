@@ -4,7 +4,7 @@ library(DeclareDesign); library(rdddr); library(tidyverse)
 library(DeclareDesign)
 library(tidyverse)
 library(rdddr)
-sims <- 20
+sims <- 3
 bootstrap_sims <- FALSE
 source("../book_scripts/declaration_14.3_LOGIT.R")
 diagnosis_11.3_LOGIT <-

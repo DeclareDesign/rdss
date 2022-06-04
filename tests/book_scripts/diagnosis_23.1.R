@@ -4,8 +4,8 @@ library(DeclareDesign); library(rdddr); library(tidyverse)
 library(DeclareDesign)
 library(tidyverse)
 library(rdddr)
-sims <- 20
-bootstrap_sims <- 20
+sims <- 3
+bootstrap_sims <- 3
 source("../book_scripts/declaration_23.1.R")
 diagnosands <- declare_diagnosands(
   power = mean(p.value <= 0.05),

@@ -1,80 +1,72 @@
-#' Tidy estimates from rrreg
+#' Tidy predictions from rrreg
+#'
+#' Runs prediction based on rrreg model fit and returns tidy data frame output
 #'
 #' See https://draft.declaredesign.org/experimental-descriptive.html#list-experiments
 #'
-#' @param data a formula
-#' @param data a data.frame
+#' @param fit a rrreg fit object
 #'
 #' @export
-#'
-#' @importFrom rr rrreg
-#'
-rr_forced_known <-
-  function(formula, data) {
-    fit  <-
-      try(rrreg(
-        formula,
-        data = data,
-        p = 2 / 3,
-        p0 = 1 / 6,
-        p1 = 1 / 6,
-        design = "forced-known"
-      ))
-    pred <-
-      try(as.data.frame(predict(fit, avg = TRUE, quasi.bayes = TRUE)))
-    if (class(fit) != "try-error" & class(pred) != "try-error") {
-      names(pred) <- c("estimate", "std.error", "conf.low", "conf.high")
-      pred$p.value <-
-        with(pred, 2 * pnorm(-abs(estimate / std.error)))
-    } else {
-      pred <-
-        data.frame(
-          estimate = NA,
-          std.error = NA,
-          conf.low = NA,
-          conf.high = NA,
-          p.value = NA,
-          error = TRUE
-        )
-    }
-    pred
+rr_predict_tidy <- function(fit) {
+
+  if(!requireNamespace("rr")){
+    message("The rr_forced_known function requires the 'rr' package.")
+    return(invisible())
   }
-
-
-
-
+  pred <-
+    try(as.data.frame(predict(fit, avg = TRUE, quasi.bayes = TRUE)))
+  if (class(fit) != "try-error" & class(pred) != "try-error") {
+    names(pred) <- c("estimate", "std.error", "conf.low", "conf.high")
+    pred$p.value <-
+      with(pred, 2 * pnorm(-abs(estimate / std.error)))
+  } else {
+    pred <-
+      data.frame(
+        estimate = NA,
+        std.error = NA,
+        conf.low = NA,
+        conf.high = NA,
+        p.value = NA,
+        error = TRUE
+      )
+  }
+  pred
+}
 
 #' Tidy estimates from the amce estimator
 #'
+#' Runs amce estimation function and returns tidy data frame output
 #'
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @param fit an amce fit object from cjoint::amce
-#' @param alpha the type 1 error rate, set to 0.05 by default. Used for the calculation of confidence intervals
+#' @param x an amce fit object from cjoint::amce
+#' @param ... Extra arguments to pass to tidy
 #'
-#' @return
 #' @export
 #'
 #' @importFrom dplyr `%>%` rename select mutate
 #' @importFrom cjoint summary.amce
+#' @importFrom stats qnorm
 #'
 #' @examples
 #'
+#' # data(immigrationconjoint)
+#' # data(immigrationdesign)
 #'
-#' data("immigrationconjoint")
-#' data("immigrationdesign")
-#' # Run AMCE estimator using all attributes in the design
-#' results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
-#'                   `Country of Origin` + Job + `Job Experience` + `Job Plans` +
-#'                   `Reason for Application` + `Prior Entry`, data=immigrationconjoint,
-#'                 cluster=TRUE, respondent.id="CaseID", design=immigrationdesign)
-#' # Print summary
-#' tidy_amce(results)
+#' # # Run AMCE estimator using all attributes in the design
+#' # results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
+#' #                   `Country of Origin` + Job + `Job Experience` + `Job Plans` +
+#' #                   `Reason for Application` + `Prior Entry`, data = immigrationconjoint,
+#' #                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
 #'
+#' # # Print summary
+#' # tidy(results)
 #'
-tidy_amce <-
-  function(fit, alpha = 0.05) {
-    z_score = qnorm(1 - ((alpha) / 2))
-    summary_fit <- summary(fit)
+tidy.amce <-
+  function(x, ...) {
+    if(missing("alpha")) alpha <- 0.05
+    z_score <- qnorm(1 - ((alpha) / 2))
+    summary_fit <- summary(x)
     summary_fit$amce %>%
       rename(
         estimate = Estimate,
@@ -92,20 +84,17 @@ tidy_amce <-
   }
 
 
-
-
-
 #' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
 #'
-#' @param data
-#' @param levels_list
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @return
+#' @param data A data.frame
+#' @param levels_list List of conjoint levels
+#'
 #' @export
 #' @importFrom purrr map
 #' @importFrom randomizr complete_ra
 #' @importFrom tibble as_tibble
-#'
 #'
 conjoint_assignment <-
   function(data, levels_list) {
@@ -119,9 +108,10 @@ conjoint_assignment <-
 
 #' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
 #'
-#' @param data
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @return
+#' @param data A data.frame
+#'
 #' @export
 #'
 #' @importFrom dplyr group_by mutate ungroup
@@ -135,22 +125,23 @@ conjoint_measurement <-
       ungroup()
   }
 
-#' Conjoint experiment Inquiries handler
+#' Conjoint experiment inquiries handler
 #'
-#' @param data
-#' @param levels_list
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+#'
+#' @param data A data.frame
+#' @param levels_list List of conjoint levels
 #'
 #' @importFrom dplyr filter `%>%` mutate bind_rows
 #' @importFrom rlang `!!` `:=`
 #' @importFrom purrr map_dbl map_chr map pmap_dbl as_vector
-#' @return
-#'
 #'
 #' @export
 conjoint_inquiries <-
   function(data, levels_list) {
 
     # AMCE helper: AMCE for a change of attribute from reference to level
+
     calculate_amce <-
       function(data, levels_list, attribute, reference, level) {
 

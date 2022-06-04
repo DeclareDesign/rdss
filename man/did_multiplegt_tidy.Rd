@@ -2,7 +2,7 @@
 % Please edit documentation in R/ch15_helpers.R
 \name{did_multiplegt_tidy}
 \alias{did_multiplegt_tidy}
-\title{Tidy estimates from did_multiplegt}
+\title{Tidy helper function for did_multiplegt}
 \usage{
 did_multiplegt_tidy(data, ...)
 }
@@ -12,5 +12,8 @@ did_multiplegt_tidy(data, ...)
 \item{...}{options passed to did_multiplegt}
 }
 \description{
+Runs did_multiplegt estimation function and returns tidy data frame output
+}
+\details{
 See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 }

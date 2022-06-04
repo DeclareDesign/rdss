@@ -1,6 +1,6 @@
 
 
-#' Helper function to obtain the observed exposure
+#' Helper function to obtain the observed exposure for the Aronow and Samii estimator
 #'
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
@@ -20,7 +20,9 @@ get_exposure_AS <- function(obs_exposure) {
     pull(name)
 }
 
-#' Helper function for the Aronow and Samii estimator
+#' Tidy helper function for estimator_AS function
+#'
+#' Runs estimates estimation function from interference package and returns tidy data frame output
 #'
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
@@ -30,10 +32,10 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 #' @export
 #'
-#' @importFrom interference estimates make_exposure_map_AS make_exposure_prob
 #' @importFrom tibble tibble
+#' @importFrom interference estimates make_exposure_map_AS make_exposure_prob
 #'
-estimator_AS <-
+estimator_AS_tidy <-
   function(data, permutatation_matrix, adj_matrix) {
     out_AS <-
       estimates(
@@ -55,10 +57,9 @@ estimator_AS <-
       estimate = c(out_AS$tau_ht, out_AS$tau_h)
       # something appears to have changed in the interference package;
       # for the moment, only returning estimates, not variance estimates (2022-10-30)
-    #   variance = c(out_AS$var_tau_ht, out_AS$var_tau_h),
-    #   std.error = sqrt(variance),
-    #   conf.low = estimate - 1.96 * std.error,
-    #   conf.high = estimate + 1.96 * std.error
-    # )
+      #  variance = c(out_AS$var_tau_ht, out_AS$var_tau_h),
+      #  std.error = sqrt(variance),
+      #  conf.low = estimate - 1.96 * std.error,
+      #  conf.high = estimate + 1.96 * std.error
     )
   }

@@ -1,6 +1,7 @@
 #' Process tracing estimator
 #'
 #' Draw conclusions from a model given a query, data, and process tracing strategies
+#'
 #' See https://book.declaredesign.org/observational-causal.html#process-tracing
 #'
 #' @param causal_model a model generation by `CausalQueries`
@@ -8,23 +9,25 @@
 #' @param query a causal query of interest
 #' @param strategies a list of sets of nodes examined
 #'
+#' @importFrom CausalQueries query_model strategy_statements
+#'
 #' @export
 #'
-#' @importFrom CausalQueries query_model
-#'
-pt_estimator <- function(causal_model, query, data, strategies)
+process_tracing_estimator <- function(causal_model, query, data, strategies) {
+
+  if(!requireNamespace("CausalQueries")){
+    message("The process_tracing_estimator function requires the 'CausalQueries' package.")
+    return(invisible())
+  }
 
   causal_model %>%
+    query_model(query = query,
+                given = strategy_statements(data, strategies)) %>%
+    select(estimate = mean) %>%
+    mutate(XY = paste0("X", data$X, "Y", data$Y),
+           term = strategies %>% lapply(paste, collapse = "-") %>% unlist)
 
-  query_model(query = query,
-              given = strategy_statements(data, strategies)) %>%
-
-  select(estimate = mean) %>%
-
-  mutate(XY = paste0("X", data$X, "Y", data$Y),
-         term = strategies %>% lapply(paste, collapse = "-") %>% unlist)
-
-
+}
 
 #' Generate lags in grouped data
 #'
@@ -53,7 +56,9 @@ lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
     pull(!!x_nm)
 }
 
-#' Tidy estimates from did_multiplegt
+#' Tidy helper function for did_multiplegt
+#'
+#' Runs did_multiplegt estimation function and returns tidy data frame output
 #'
 #' See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 #'
@@ -62,10 +67,57 @@ lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
 #'
 #' @export
 #'
-#' @importFrom DIDmultiplegt did_multiplegt
 #' @importFrom tibble tibble
+#' @importFrom DIDmultiplegt did_multiplegt
 #'
 did_multiplegt_tidy <- function(data, ...) {
+
+  if(!requireNamespace("DIDmultiplegt")){
+    message("The did_multiplegt_tidy function requires the 'DIDmultiplegt' package.")
+    return(invisible())
+  }
+
   fit <- did_multiplegt(df = data, ...)
   tibble(estimate = fit$effect)
 }
+
+#' Tidy helper function for rdrobust function
+#'
+#' Runs rdrobust estimation function and returns tidy data frame output
+#'
+#' See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs
+#'
+#' @param data a data.frame
+#' @param y is the dependent variable (rdrobust argument)
+#' @param x is the running variable (a.k.a. score or forcing variable) (rdrobust argument)
+#' @param c specifies the RD cutoff in x; default is c = 0 (rdrobust argument)
+#' @param subset An optional bare (unquoted) expression specifying a subset of observations to be used
+#' @param term Symbols or literal character vector of term that represent quantities of interest, i.e. Z. If FALSE, return the first non-intercept term; if TRUE return all term. To escape non-standard-evaluation use !!.
+#'
+#' @importFrom rlang quo_is_null quo
+#' @importFrom dplyr filter pull
+#' @importFrom rlang quo_is_null quo enquo
+#' @importFrom rdrobust rdrobust
+#' @export
+rdrobust_tidy <- function(data, y, x, c, subset = NULL, term = NULL){
+
+  if(!requireNamespace("rdrobust")){
+    message("The rdrobust_tidy function requires the 'rdrobust' package.")
+    return(invisible())
+  }
+
+  if(!missing(subset))
+    data <- filter(data, !!enquo(subset))
+  fit <- try(rdrobust(y = pull(data, {{y}}), x = pull(data, {{x}}), c = c))
+  if(!inherits(fit, "try-error")) {
+    ret <- data.frame(rownames(fit$coef), fit$coef, fit$se, fit$z, fit$pv, fit$ci, c = fit$c)
+    row.names(ret) <- NULL
+    names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value", "conf.low", "conf.high", "cutoff")
+    if(!is.null(term))
+      ret <- ret[ret$term == term, ]
+  } else {
+    ret <- data.frame(term = "Robust", estimate = NA, std.error = NA, statistic = NA, p.value = NA, conf.low = NA, conf.high = NA, cutoff = 0.5, error = as.character(fit))
+  }
+  ret
+}
+

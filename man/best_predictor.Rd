@@ -8,6 +8,8 @@ best_predictor(data, covariates)
 }
 \arguments{
 \item{data}{A data.frame}
+
+\item{covariates}{A character vector of covariates to assess}
 }
 \description{
 Best predictor function from causal_forest

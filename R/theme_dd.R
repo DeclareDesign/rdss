@@ -3,8 +3,6 @@
 #' @export
 #' @importFrom ggplot2 theme_minimal theme element_blank element_text margin element_line
 #'
-#'
-#'
 theme_dd <-
   function() {
     theme_minimal() +

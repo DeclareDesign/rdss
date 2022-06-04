@@ -7,11 +7,8 @@
 conjoint_measurement(data)
 }
 \arguments{
-\item{data}{}
-}
-\value{
-
+\item{data}{A data.frame}
 }
 \description{
-Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

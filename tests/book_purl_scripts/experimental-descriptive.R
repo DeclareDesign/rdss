@@ -1,185 +1,57 @@
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
 # -----------------
 # Audit experiments
 # -----------------
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-types <- c("Always-Responder","Anti-Latino Discriminator","Never-Responder")
-design <-
-  declare_model(
-    N = 1000,
-    type = sample(size = N, 
-                  replace = TRUE,
-                  x = types,
-                  prob = c(0.30, 0.05, 0.65)),
-    # Behavioral assumption represented here:
-    Y_Z_white = if_else(type == "Never-Responder", 0, 1),
-    Y_Z_latino = if_else(type == "Always-Responder", 1, 0)
-  ) +
-  declare_inquiry(anti_latino_discrimination = mean(type == "Anti-Latino Discriminator")) +
-  declare_assignment(Z = complete_ra(N, conditions = c("latino", "white"))) +
-  declare_measurement(Y = reveal_outcomes(Y ~ Z)) +
-  declare_estimator(Y ~ Z, inquiry = "anti_latino_discrimination")
+## ----file = "scripts_declarations/declaration_16.1.R"---------------------------------------------------------------------------------
 
 
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------
 # Audit experiments :: Intervening to decrease discrimination
 # -----------------------------------------------------------
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-N = 5000
-
-design <-
-  # This part of the design is about causal inference
-  declare_model(
-    N = N,
-    type_D_0 = sample(
-      size = N,
-      replace = TRUE,
-      x = types,
-      prob = c(0.30, 0.05, 0.65)
-    ),
-    type_tau_i = rbinom(N, 1, 0.5),
-    type_D_1 = if_else(
-      type_D_0 == "Anti-Latino Discriminator" &
-        type_tau_i == 1,
-      "Always-Responder",
-      type_D_0
-    )
-  ) +
-  declare_inquiry(ATE = mean((type_D_1 == "Anti-Latino Discriminator") -
-                               (type_D_0 == "Anti-Latino Discriminator")
-  )) +
-  declare_assignment(D = complete_ra(N)) +
-  declare_measurement(type = reveal_outcomes(type ~ D)) +
-  # This part is about descriptive inference in each condition!
-  declare_model(
-    Y_Z_white = if_else(type == "Never-Responder", 0, 1),
-    Y_Z_latino = if_else(type == "Always-Responder", 1, 0)
-  ) +
-  declare_assignment(
-    Z = complete_ra(N, conditions = c("latino", "white"))) +
-  declare_measurement(Y = reveal_outcomes(Y ~ Z)) +
-  declare_estimator(Y ~ Z * D, term = "Zwhite:D", inquiry = "ATE")
+## ----file = "scripts_declarations/declaration_16.2.R"---------------------------------------------------------------------------------
 
 
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+diagnosis_16.1 <- diagnose_design(declaration_16.2)
+
+
+## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
 # ----------------
 # List experiments
 # ----------------
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design <- 
-  declare_model(
-    N = 5000,
-    control_count = rbinom(N, size = 3, prob = 0.5),
-    Y_star = rbinom(N, size = 1, prob = 0.3),
-    potential_outcomes(Y_list ~ Y_star * Z + control_count) 
-  ) +
-  declare_inquiry(prevalence_rate = mean(Y_star)) +
-  declare_sampling(S = complete_rs(N, n = 500)) + 
-  declare_assignment(Z = complete_ra(N)) + 
-  declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z)) +
-  declare_estimator(Y_list ~ Z, model = difference_in_means, 
-                    inquiry = "prevalence_rate")
+## ----file = "scripts_declarations/declaration_16.3.R"---------------------------------------------------------------------------------
 
 
-## ----eval = do_diagnosis & !exists("do_bookdown")------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
 diagnosands <- declare_diagnosands(
   bias = mean(estimate - estimand),
-  mean_CI_width = mean(abs(conf.high - conf.low))
+  mean_CI_width = mean(conf.high - conf.low)
 )
-diagnosis <- diagnose_design(design, sims = sims, diagnosands = diagnosands)
+diagnosis_16.2 <- diagnose_design(declaration_16.3, diagnosands = diagnosands)
 
 
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# -----------------------------------------
-# List experiments :: Assumption violations
-# -----------------------------------------
-
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design_design_effects <- 
-  declare_model(
-    N = 5000,
-    U = rnorm(N),
-    control_count_control = rbinom(N, size = 3, prob = 0.5),
-    control_count_treat = rbinom(N, size = 3, prob = 0.25),
-    Y_star = rbinom(N, size = 1, prob = 0.3),
-    potential_outcomes(Y_list ~ (Y_star + control_count_treat) * Z + control_count_control * (1 - Z))
-  ) + 
-  declare_inquiry(prevalence_rate = mean(Y_star)) +
-  declare_sampling(S = complete_rs(N, n = 500)) + 
-  declare_assignment(Z = complete_ra(N)) + 
-  declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z)) +
-  declare_estimator(Y_list ~ Z, inquiry = "prevalence_rate")
+## ----file = "scripts_declarations/declaration_16.4.R"---------------------------------------------------------------------------------
 
 
-## ----eval = do_diagnosis-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnose_design_effects <- diagnose_design(design_design_effects, sims = sims)
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+diagnosis_16.3 <- 
+  declaration_16.4 %>% 
+  redesign(proportion_hiding = seq(from = 0, to = 0.3, by = 0.1), 
+           N = seq(from = 500, to = 2500, by = 500)) %>% 
+  diagnose_design
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design_liars <- 
-  declare_model(
-    N = 5000,
-    U = rnorm(N),
-    control_count = rbinom(N, size = 3, prob = 0.5),
-    Y_star = rbinom(N, size = 1, prob = 0.3),
-    potential_outcomes(
-      Y_list ~ 
-        if_else(control_count == 3 & Y_star == 1 & Z == 1, 
-                3, 
-                Y_star * Z + control_count))
-  ) + 
-  declare_inquiry(prevalence_rate = mean(Y_star)) +
-  declare_sampling(S = complete_rs(N, n = 500)) + 
-  declare_assignment(Z = complete_ra(N)) + 
-  declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z)) +
-  declare_estimator(Y_list ~ Z, inquiry = "prevalence_rate")
-
-
-## ----eval = do_diagnosis-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnose_liars <- diagnose_design(design_liars, sims = sims)
-
-
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# ----------------------------------------------
-# List experiments :: Choosing design parameters
-# ----------------------------------------------
-
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design <- 
-  declare_model(
-    N = 5000,
-    U = rnorm(N),
-    control_count = rbinom(N, size = 3, prob = 0.5),
-    Y_star = rbinom(N, size = 1, prob = 0.3),
-    W = case_when(Y_star == 0 ~ 0L,
-                  Y_star == 1 ~ rbinom(N, size = 1, prob = proportion_shy)),
-    potential_outcomes(Y_list ~ Y_star * Z + control_count)
-  ) +
-  declare_inquiry(prevalence_rate = mean(Y_star)) +
-  declare_sampling(S = complete_rs(N, n = n)) + 
-  declare_assignment(Z = complete_ra(N)) + 
-  declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z),
-                      Y_direct = Y_star - W) +
-  declare_estimator(Y_list ~ Z, inquiry = "prevalence_rate", label = "list") + 
-  declare_estimator(Y_direct ~ 1, inquiry = "prevalence_rate", label = "direct")
-
-designs <- redesign(design, proportion_shy = seq(from = 0, to = 0.3, by = 0.1), n = seq(from = 500, to = 2500, by = 500))
-
-
-## ----eval = do_diagnosis-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnosis_tradeoff <- diagnose_design(designs, sims = sims, bootstrap_sims = b_sims)
-
-
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
 # ---------------------------------
 # List experiments :: Exercises {-}
 # ---------------------------------
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+library(rdddr)
 model_rr <-
   declare_model(
     N = 100,
@@ -203,74 +75,12 @@ model_rr <-
                     label = "forced_known", inquiry = "proportion")
 
 
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design <-
-  declare_model(
-    N = 5000,
-    U = rnorm(N),
-    control_count = rbinom(N, size = J, prob = 0.5),
-    Y_star = rbinom(N, size = 1, prob = 0.3),
-    potential_outcomes(Y_list ~ Y_star * Z + control_count) 
-  ) + 
-  declare_inquiry(prevalence_rate = mean(Y_star)) +
-  declare_sampling(S = complete_rs(N, n = 500)) + 
-  declare_assignment(Z = complete_ra(N)) + 
-  declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z)) +
-  declare_estimator(Y_list ~ Z, inquiry = "prevalence_rate")
-
-designs <- redesign(design, J = 2:5)
-
-
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnosis_control_item_count <- diagnose_design(designs, sims = sims)
-
-
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnosis_control_item_count %>%
-  get_diagnosands %>%
-  select(J, bias, rmse) %>%
-  kable(booktabs = TRUE, align = "c", digits = 3,
-        caption = "Redesign  over number of control items")
-
-
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design <-
-  declare_model(
-    N = 5000,
-    U = rnorm(N),
-    control_item_1 = draw_binary(0.5, N), 
-    control_item_2 = correlate(given = control_item_1, rho = rho, draw_binary, prob = 0.5),
-    control_item_3 = draw_binary(0.5, N),
-    control_count = control_item_1 + control_item_2 + control_item_3,
-    Y_star = rbinom(N, size = 1, prob = 0.3),
-    potential_outcomes(Y_list ~ Y_star * Z + control_count)
-  ) + 
-  declare_inquiry(prevalence_rate = mean(Y_star)) +
-  declare_sampling(S = complete_rs(N, n = 500)) + 
-  declare_assignment(Z = complete_ra(N)) + 
-  declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z)) +
-  declare_estimator(Y_list ~ Z, inquiry = "prevalence_rate")
-
-designs <- redesign(design, rho = seq(from = 0, to = 1, by = 0.25))
-
-
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnose_control_item_correlation <- diagnose_design(designs, sims = sims, bootstrap_sims = b_sims)
-
-
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-diagnose_control_item_correlation %>%
-  get_diagnosands %>%
-  select(rho, estimator, inquiry, bias, rmse) %>%
-  kable(booktabs = TRUE, align = "c", digits = 3)
-
-
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
 # --------------------
 # Conjoint experiments
 # --------------------
 
-## ----include = FALSE-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----include = FALSE------------------------------------------------------------------------------------------------------------------
 calculate_amces <-
   function(candidate_individuals_df) {
     candidate_individuals_df_2 <-
@@ -335,7 +145,7 @@ pair_fun <- function(evaluation) {
 
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------------
 f1 = c("man", "woman")
 f1_prob = c(0.5, 0.5)
 f2 = c("young", "middleaged", "old")
@@ -357,7 +167,7 @@ candidates_df <-
   )
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------------
 individuals_df <-
   fabricate(
     N = 1000,
@@ -379,7 +189,7 @@ individuals_df <-
   )
 
 
-## ----results = "hide"----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----results = "hide"-----------------------------------------------------------------------------------------------------------------
 candidate_individuals_df <-
   left_join(candidates_df, individuals_df, by = character()) %>%
   mutate(
@@ -403,7 +213,7 @@ inquiries_df <- calculate_amces(candidate_individuals_df)
 inquiries_df
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------------
 individuals_wide_df <-
   candidate_individuals_df %>%
   transmute(ID, candidate, evaluation) %>%
@@ -412,8 +222,8 @@ individuals_wide_df <-
               values_from = evaluation)
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design <- 
+## -------------------------------------------------------------------------------------------------------------------------------------
+declaration_16.5 <- 
   declare_model(
     data = individuals_wide_df,
     pair = add_level(N = 4),
@@ -457,73 +267,26 @@ design <-
 
 
 
-## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+diagnosis_16.4 <- diagnose_design(declaration_16.5, sims = 100)
+
+
+## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
 # ----------------
 # Behavioral games
 # ----------------
 
-## ----eval = TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-returned <- function(x1, a_2 = 1 / 3) {
-  ((2 * a_2 * x1 - (1 - a_2) * (1 - x1)) / (2 * x1)) * (x1  > (1 - a_2) / (1 + a_2))
-}
-
-invested <- function(a_1, a_2) {
-  u_a = (1 - a_1) * log(1 - a_1) + a_1 * log(2 * a_1)  # give a1
-  u_b = (1 - a_1) * log(2 * a_2) + a_1 * log(2 * (1 - a_2)) # give 1
-  ifelse(u_a > u_b, a_1, 1)
-}
-
-average_invested <- function(a_1) {
-  mean(sapply(seq(0, 1, .01),  invested, a_1 = a_1))
-}
-
-average_returned <- function(a_2) {
-  mean(sapply(seq(0.01, 1, .01), returned, a_2 = a_2))
-}
-
-rho     <- 0.8
-n_pairs <- 200
-
-design <-
-  declare_model(N = 2 * n_pairs,
-                a = runif(N),
-                arrival = rank(correlate(given = a, rho = rho, runif))) +
-  declare_inquiries(
-    mean_invested = mean(sapply(a, average_invested)),
-    mean_returned = mean(sapply(a, average_returned)),
-    return_from_1 = mean(returned(1, a))
-  ) +
-  declare_assignment(pair = (arrival - 1) %% n_pairs,
-                     role = 1 + (arrival > n_pairs)) +
-  declare_step(
-    id_cols = pair,
-    names_from = role,
-    values_from = c(ID, a),
-    handler = tidyr::pivot_wider
-  ) +
-  declare_measurement(invested = invested(a_1, a_2),
-                      returned = returned(invested, a_2)) +
-  declare_estimator(invested ~ 1,
-                    model = lm_robust,
-                    inquiry = "mean_invested",
-                    label = "mean_invested") +
-  declare_estimator(returned ~ 1,
-                    model = lm_robust,
-                    inquiry = "mean_returned",
-                    label = "mean_returned") +
-  declare_estimator(
-    returned ~ 1,
-    model = lm_robust,
-    subset = invested == 1,
-    inquiry = "return_from_1",
-    label = "return_from_1"
-  )
+## ----file = "scripts_declarations/declaration_16.6.R"---------------------------------------------------------------------------------
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-design <- 
-  design %>%
-  replace_step(3, declare_assignment(pair = complete_ra(N=N, num_arms = n_pairs))) %>%
-  replace_step(4, declare_assignment(role = 1 + block_ra(blocks = pair))) 
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+diagnosis_16.5 <- diagnose_design(declaration_16.6) 
+
+
+## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+diagnosis_16.6 <-
+  declaration_16.6 %>%
+  replace_step(3, declare_assignment(pair = complete_ra(N = N, num_arms = n_pairs),
+                                     role = 1 + block_ra(blocks = pair))) %>% 
+  diagnose_design
 

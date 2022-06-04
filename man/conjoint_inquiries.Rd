@@ -2,16 +2,15 @@
 % Please edit documentation in R/ch16_helpers.R
 \name{conjoint_inquiries}
 \alias{conjoint_inquiries}
-\title{Conjoint experiment Inquiries handler}
+\title{Conjoint experiment inquiries handler}
 \usage{
 conjoint_inquiries(data, levels_list)
 }
 \arguments{
-\item{levels_list}{}
-}
-\value{
+\item{data}{A data.frame}
 
+\item{levels_list}{List of conjoint levels}
 }
 \description{
-Conjoint experiment Inquiries handler
+See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ch17_helpers.R
 \name{get_exposure_AS}
 \alias{get_exposure_AS}
-\title{Helper function to obtain the observed exposure}
+\title{Helper function to obtain the observed exposure for the Aronow and Samii estimator}
 \usage{
 get_exposure_AS(obs_exposure)
 }

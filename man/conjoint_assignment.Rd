@@ -7,11 +7,10 @@
 conjoint_assignment(data, levels_list)
 }
 \arguments{
-\item{levels_list}{}
-}
-\value{
+\item{data}{A data.frame}
 
+\item{levels_list}{List of conjoint levels}
 }
 \description{
-Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

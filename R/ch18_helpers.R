@@ -1,14 +1,21 @@
-#' Tidy causal forest results
+#' Tidy helper function for causal_forest function
+#'
+#' Runs estimates estimation function from interference package and returns tidy data frame output
+#'
+#' https://draft.declaredesign.org/complex-designs.html#discovery-using-causal-forests
+#'
+#' See ?causal_forest for further details
 #'
 #' @param data A data.frame
+#' @param covariates A character vector of covariates to assess
 #' @param ... Options to causal_forest
 #'
 #' @export
 #'
-#' @importFrom grf causal_forest variable_importance
 #' @importFrom dplyr mutate select all_of `%>%`
 #' @importFrom stats quantile
-causal_forest_handler <- function(data, covariates, ...) {
+#' @importFrom grf causal_forest variable_importance
+causal_forest_helper <- function(data, covariates, ...) {
 
   X <- as.matrix(data %>% select(all_of(covariates)))
   train <- data$train
@@ -41,6 +48,7 @@ causal_forest_handler <- function(data, covariates, ...) {
 #' Best predictor function from causal_forest
 #'
 #' @param data A data.frame
+#' @param covariates A character vector of covariates to assess
 #'
 #' @export
 #'
@@ -55,22 +63,21 @@ best_predictor <- function(data, covariates) {
   )
 }
 
-
-stan_re_estimator <- function(data, model) {
-  J      <- nrow(data)
-  df     <- list(J = J, y = data$estimate, sigma = data$std.error)
-  fit    <- sampling(object = model, data = df, refresh = 0)
-  fit_sm <- summary(fit)$summary
-  data.frame(term = c("mu", "tau", "theta[1]"), estimate = fit_sm[,1][c("mu", "tau", "theta[1]")])
-}
-
-stan_re_estimator_theta <- function(data, model) {
-  J      <- nrow(data)
-  df     <- list(J = J, y = data$estimate, sigma = data$std.error)
-  fit    <- sampling(object = model, data = df, refresh = 0)
-  fit_sm <- summary(fit)$summary
-  data.frame(site = 1:J, estimate = fit_sm[,1][paste0("theta[", 1:J, "]")])
-}
+# stan_re_estimator <- function(data, model) {
+#   J      <- nrow(data)
+#   df     <- list(J = J, y = data$estimate, sigma = data$std.error)
+#   fit    <- sampling(object = model, data = df, refresh = 0)
+#   fit_sm <- summary(fit)$summary
+#   data.frame(term = c("mu", "tau", "theta[1]"), estimate = fit_sm[,1][c("mu", "tau", "theta[1]")])
+# }
+#
+# stan_re_estimator_theta <- function(data, model) {
+#   J      <- nrow(data)
+#   df     <- list(J = J, y = data$estimate, sigma = data$std.error)
+#   fit    <- sampling(object = model, data = df, refresh = 0)
+#   fit_sm <- summary(fit)$summary
+#   data.frame(site = 1:J, estimate = fit_sm[,1][paste0("theta[", 1:J, "]")])
+# }
 
 #' Extract mu and tau parameters from rma model fit
 #'
@@ -116,7 +123,7 @@ rma_mu_tau <- function(fit) {
   }
 }
 
-#' Tidy wrapper for rma function in metafor package
+#' Helper function for rma function in metafor package
 #'
 #' See https://book.declaredesign.org/complex-designs.html#meta-analysis
 #'
@@ -131,7 +138,7 @@ rma_mu_tau <- function(fit) {
 #'
 #' @importFrom rlang quo_text enexpr
 #' @importFrom metafor rma
-rma_estimator <- function(data, yi, sei, method = "REML"){
+rma_helper <- function(data, yi, sei, method = "REML"){
   fit <- try({rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = method)})
   if(inherits(fit, "try-error")) {
     class(fit) <- c("rma.uni", "try-error")

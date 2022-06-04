@@ -1,3 +1,5 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
 ## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---------------------------
 # Declaring inquiries in code
@@ -75,4 +77,5 @@ MRP_inquiry <-
   }
 
 I <- declare_inquiry(handler = MRP_inquiry)
+
 

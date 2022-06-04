@@ -1,0 +1,15 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
+
+library(DeclareDesign)
+library(tidyverse)
+set.seed(42)
+sims <- 20
+b_sims <- FALSE
+source("../book_scripts/declaration_2.2.R")
+diagnosands <-
+  declare_diagnosands(
+    correct_call_rate = mean((estimate > 0.5) == (estimand > 0.5))
+  )
+diagnosis_2.2 <- diagnose_design(design = declaration_2.2, diagnosands = diagnosands, sims = sims, bootstrap_sims = b_sims)
+

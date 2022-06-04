@@ -1,3 +1,5 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
 ## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---------------------------------------------
 # Declaring data strategies in code :: Sampling
@@ -104,4 +106,5 @@ D <- declare_measurement(
     rotate = "varimax"
   )$scores
 )
+
 

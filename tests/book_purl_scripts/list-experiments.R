@@ -1,12 +1,14 @@
-## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
+## ---- echo = TRUE---------------------------------------------------------------------------------------
 # ----------------
 # List experiments
 # ----------------
 
-## ----file = "scripts_declarations/declaration_16.3.R"---------------------------------------------------------------------------------
+## ----file = "scripts_declarations/declaration_16.3.R"---------------------------------------------------
 
 
-## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------
 diagnosands <- declare_diagnosands(
   bias = mean(estimate - estimand),
   mean_CI_width = mean(conf.high - conf.low)
@@ -14,10 +16,10 @@ diagnosands <- declare_diagnosands(
 diagnosis_16.2 <- diagnose_design(declaration_16.3, diagnosands = diagnosands)
 
 
-## ----file = "scripts_declarations/declaration_16.4.R"---------------------------------------------------------------------------------
+## ----file = "scripts_declarations/declaration_16.4.R"---------------------------------------------------
 
 
-## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------
 diagnosis_16.3 <- 
   declaration_16.4 %>% 
   redesign(proportion_hiding = seq(from = 0, to = 0.3, by = 0.1), 
@@ -25,14 +27,15 @@ diagnosis_16.3 <-
   diagnose_design
 
 
-## ---- echo = TRUE---------------------------------------------------------------------------------------------------------------------
+## ---- echo = TRUE---------------------------------------------------------------------------------------
 # ---------------------------------
 # List experiments :: Exercises {-}
 # ---------------------------------
 
-## ----eval = TRUE----------------------------------------------------------------------------------------------------------------------
+## ----eval = TRUE----------------------------------------------------------------------------------------
 library(rdddr)
-model_rr <-
+
+design_rr <-
   declare_model(
     N = 100,
     U = rnorm(N),
@@ -51,6 +54,14 @@ model_rr <-
     dice = complete_ra(N, prob_each = rep(1/6, 6),
                        conditions = 1:6)) +
   declare_measurement(Y_rr = reveal_outcomes(Y_rr ~ dice)) + 
-  declare_estimator(Y_rr ~ 1, handler = label_estimator(rr_forced_known),
-                    label = "forced_known", inquiry = "proportion")
+  declare_estimator(Y_rr ~ 1, 
+                    p = 2 / 3,
+                    p0 = 1 / 6,
+                    p1 = 1 / 6,
+                    design = "forced-known",
+                    model = rrreg,
+                    model_summary = rr_predict_tidy,
+                    label = "forced_known", 
+                    inquiry = "proportion")
+
 

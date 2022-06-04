@@ -1,3 +1,5 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
 ## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # -------------
 # Mixed methods
@@ -75,5 +77,6 @@ diagnosis <- design %>%
   redesign(N = c(50, 100, 150), 
            strategy = list(c(0,0,0,0), c(10,0,0,10), c(0,0,0,20))) %>% 
   diagnose_design(sims = 2, diagnosands = mixed_diagnosands)
+
 
 

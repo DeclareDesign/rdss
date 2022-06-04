@@ -1,3 +1,5 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
 ## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---------------------
 # Crossover experiments
@@ -39,4 +41,5 @@ design <-
     model = lm_robust, 
     inquiry = "ATE_untreated_before"
   ) 
+
 

@@ -1,3 +1,5 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
 ## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---------------------------------
 # Declaring models in code :: Units
@@ -243,4 +245,5 @@ M3 <-
     latent = rnorm(N), 
     potential_outcomes(Y ~ if_else(latent + 0.2 * Z > 0.5, 1, 0))
   )
+
 

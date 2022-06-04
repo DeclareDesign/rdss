@@ -106,3 +106,16 @@ part_iii_iv_chunk_df %>%
   rowwise() %>%
   group_walk(~ knitr::purl(text = .x$purl_text, output = paste0("tests/book_purl_scripts/", .x$output_file_name, ".R")))
 
+
+tests <- list.files(path = "tests/book_purl_scripts", pattern = c('.R'), recursive = TRUE)
+
+filenm <- paste0("tests/book_purl_scripts/", tests)
+
+tests_files <- map(filenm, read_file)
+
+tests_files %>%
+  set_names(nm = filenm) %>%
+  map_df(as_tibble, .id = "filename") %>%
+  mutate(value = str_c("library(DeclareDesign); library(rdddr); library(tidyverse)\n\n", value)) %>%
+  rowwise() %>%
+  group_walk(~ write_lines(x = .x$value, file =.x$filename))

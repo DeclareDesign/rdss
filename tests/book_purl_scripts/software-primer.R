@@ -1,3 +1,5 @@
+library(DeclareDesign); library(rdddr); library(tidyverse)
+
 ## ---- echo = TRUE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ------------
 # Installing R
@@ -257,4 +259,5 @@ declare_inquiry(
      summarize(city_ATE = mean(Y_Z_1 - Y_Z_0), .groups = "drop")
  }
 )
+
 

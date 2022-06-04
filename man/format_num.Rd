@@ -12,7 +12,7 @@ format_num(x, digits = 3)
 \item{digits}{Number of digits to retain}
 }
 \value{
-a character vector
+a character vector of formatted numbers
 }
 \description{
 Round and pad a number to a specific decimal place

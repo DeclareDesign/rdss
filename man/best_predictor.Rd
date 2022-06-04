@@ -7,9 +7,12 @@
 best_predictor(data, covariates)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data.frame of covariates}
 
 \item{covariates}{A character vector of covariates to assess}
+}
+\value{
+a data.frame of the best predictors
 }
 \description{
 Best predictor function from causal_forest

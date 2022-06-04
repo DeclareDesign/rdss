@@ -11,6 +11,9 @@ conjoint_inquiries(data, levels_list)
 
 \item{levels_list}{List of conjoint levels}
 }
+\value{
+a data.frame of estimand values
+}
 \description{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

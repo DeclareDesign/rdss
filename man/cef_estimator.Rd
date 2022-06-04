@@ -7,8 +7,14 @@
 cef_estimator(data)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data.frame for estimating the conditional expectation function inquiry}
+}
+\value{
+data.frame of predicted values
 }
 \description{
+Estimator for illustrating how to estimate nonstandard inquiries
+}
+\details{
 See Ch. 11 https://book.declaredesign.org/redesign.html
 }

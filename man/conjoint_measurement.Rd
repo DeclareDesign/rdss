@@ -9,6 +9,9 @@ conjoint_measurement(data)
 \arguments{
 \item{data}{A data.frame}
 }
+\value{
+a data.frame with XXX
+}
 \description{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

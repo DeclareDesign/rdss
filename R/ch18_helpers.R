@@ -10,18 +10,19 @@
 #' @param covariates A character vector of covariates to assess
 #' @param ... Options to causal_forest
 #'
+#' @return a data.frame of estimates
+#'
 #' @export
 #'
 #' @importFrom dplyr mutate select all_of `%>%`
 #' @importFrom stats quantile
-#' @importFrom grf causal_forest variable_importance
 causal_forest_helper <- function(data, covariates, ...) {
 
   X <- as.matrix(data %>% select(all_of(covariates)))
   train <- data$train
 
   cf <-
-    causal_forest(X = X[train,],
+    grf::causal_forest(X = X[train,],
                   Y = data$Y[train],
                   W = data$Z[train],
                   ...)
@@ -35,7 +36,7 @@ causal_forest_helper <- function(data, covariates, ...) {
 
   data %>%
     mutate(
-      var_imp = variable_importance(cf) %>% which.max,
+      var_imp = grf::variable_importance(cf) %>% which.max,
       low_test  = (!train &
                      (pred < quantile(pred[!train], .2))),
       high_test = (!train &
@@ -47,8 +48,10 @@ causal_forest_helper <- function(data, covariates, ...) {
 
 #' Best predictor function from causal_forest
 #'
-#' @param data A data.frame
+#' @param data A data.frame of covariates
 #' @param covariates A character vector of covariates to assess
+#'
+#' @return a data.frame of the best predictors
 #'
 #' @export
 #'
@@ -84,6 +87,8 @@ best_predictor <- function(data, covariates) {
 #' See https://book.declaredesign.org/complex-designs.html#meta-analysis
 #'
 #' @param fit Fit object from the rma function in the metafor package
+#'
+#' @return a data.frame of estimates
 #'
 #' @export
 #'
@@ -134,12 +139,13 @@ rma_mu_tau <- function(fit) {
 #' @param sei unquoted variable name of standard errors used in meta-analysis
 #' @param method character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".
 #'
+#' @return a data.frame of estimates
+#'
 #' @export
 #'
 #' @importFrom rlang quo_text enexpr
-#' @importFrom metafor rma
 rma_helper <- function(data, yi, sei, method = "REML"){
-  fit <- try({rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = method)})
+  fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = method)})
   if(inherits(fit, "try-error")) {
     class(fit) <- c("rma.uni", "try-error")
   }

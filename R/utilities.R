@@ -4,6 +4,7 @@
 #' @param digits Number of digits to retain
 #'
 #' @return A character vector with enclosing parentheses
+#'
 #' @export
 #'
 #' @examples
@@ -21,7 +22,8 @@ add_parens <- function(x, digits = 3) {
 #' @param x Numeric vector
 #' @param digits Number of digits to retain
 #'
-#' @return a character vector
+#' @return a character vector of formatted numbers
+#'
 #' @export
 #'
 #' @examples
@@ -39,6 +41,8 @@ format_num <- function(x, digits = 3) {
 #' @param estimate a numeric vector of parameter estimates
 #' @param std.error a numeric vector of standard error estimates
 #' @param digits number of digits to retain
+#'
+#' @return a character vector of formatted estimates and standard errors
 #'
 #' @export
 #'
@@ -60,6 +64,7 @@ make_se_entry <- function(estimate, std.error, digits = 2){
 #' @param digits number of digits to retain
 #'
 #' @return a character vector of intervals
+#'
 #' @export
 #'
 #' @examples

@@ -9,6 +9,12 @@ dip(x)
 \arguments{
 \item{x}{A numeric vector}
 }
+\value{
+a numeric vector
+}
 \description{
+"Dip" shaped functional form for illustration of nonstandard inquiries
+}
+\details{
 See Ch. 11 https://book.declaredesign.org/redesign.html
 }

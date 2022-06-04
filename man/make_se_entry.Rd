@@ -13,6 +13,9 @@ make_se_entry(estimate, std.error, digits = 2)
 
 \item{digits}{number of digits to retain}
 }
+\value{
+a character vector of formatted estimates and standard errors
+}
 \description{
 Format estimates and standard errors for nice printing
 }

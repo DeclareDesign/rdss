@@ -7,7 +7,10 @@
 rr_predict_tidy(fit)
 }
 \arguments{
-\item{fit}{a rrreg fit object}
+\item{fit}{a model fit object from rrreg in the rr package}
+}
+\value{
+a data.frame of predicted values
 }
 \description{
 Runs prediction based on rrreg model fit and returns tidy data frame output

@@ -19,6 +19,9 @@ rdrobust_tidy(data, y, x, c, subset = NULL, term = NULL)
 
 \item{term}{Symbols or literal character vector of term that represent quantities of interest, i.e. Z. If FALSE, return the first non-intercept term; if TRUE return all term. To escape non-standard-evaluation use !!.}
 }
+\value{
+a data.frame of estimates
+}
 \description{
 Runs rdrobust estimation function and returns tidy data frame output
 }

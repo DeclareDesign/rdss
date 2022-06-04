@@ -6,6 +6,8 @@
 #'
 #' @param obs_exposure A numeric vector
 #'
+#' @return a data.frame of observed exposure to a treatment
+#'
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr filter pull everything
 #' @importFrom tidyr pivot_longer
@@ -30,22 +32,23 @@ get_exposure_AS <- function(obs_exposure) {
 #' @param permutatation_matrix a permuatation matrix of random assignments
 #' @param adj_matrix an adjacency matrix
 #'
+#' @return a data.frame of estimates
+#'
 #' @export
 #'
 #' @importFrom tibble tibble
-#' @importFrom interference estimates make_exposure_map_AS make_exposure_prob
 #'
 estimator_AS_tidy <-
   function(data, permutatation_matrix, adj_matrix) {
     out_AS <-
-      estimates(
+      interference::estimates(
         obs_exposure =
-          make_exposure_map_AS(adj_matrix = adj_matrix, tr_vector = data$Z, hop = 1),
+          interference::make_exposure_map_AS(adj_matrix = adj_matrix, tr_vector = data$Z, hop = 1),
         obs_outcome = data$Y,
-        obs_prob_exposure = make_exposure_prob(
+        obs_prob_exposure = interference::make_exposure_prob(
           potential_tr_vector = permutatation_matrix,
           adj_matrix = adj_matrix,
-          exposure_map_fn = make_exposure_map_AS,
+          exposure_map_fn = interference::make_exposure_map_AS,
           exposure_map_fn_add_args = list(hop = 1)
         ),
         n_var_permutations = 30

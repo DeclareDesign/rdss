@@ -9,7 +9,10 @@ conjoint_assignment(data, levels_list)
 \arguments{
 \item{data}{A data.frame}
 
-\item{levels_list}{List of conjoint levels}
+\item{levels_list}{List of conjoint levels to assign}
+}
+\value{
+a data.frame with random assignment added
 }
 \description{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments

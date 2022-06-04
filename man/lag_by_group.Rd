@@ -17,6 +17,9 @@ lag_by_group(x, groups, n = 1, order_by, default = NA)
 
 \item{default}{Value used for non-existent rows. Defaults to NA.}
 }
+\value{
+vector of lagged values
+}
 \description{
 See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 }

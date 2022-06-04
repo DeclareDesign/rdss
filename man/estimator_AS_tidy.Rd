@@ -13,6 +13,9 @@ estimator_AS_tidy(data, permutatation_matrix, adj_matrix)
 
 \item{adj_matrix}{an adjacency matrix}
 }
+\value{
+a data.frame of estimates
+}
 \description{
 Runs estimates estimation function from interference package and returns tidy data frame output
 }

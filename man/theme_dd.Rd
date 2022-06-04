@@ -6,6 +6,9 @@
 \usage{
 theme_dd()
 }
+\value{
+ggplot theme
+}
 \description{
 ggplot Theme used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)
 }

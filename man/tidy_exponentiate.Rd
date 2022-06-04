@@ -9,6 +9,9 @@ tidy_exponentiate(fit)
 \arguments{
 \item{fit}{A stanreg fit from stan_glm}
 }
+\value{
+data.frame of results
+}
 \description{
 Note no standard errors or other summary statistics are provided
 }

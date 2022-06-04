@@ -5,7 +5,9 @@
 #' Please see https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
 #'
 #' @param model_fit a model fit object from, e.g., glmer or lm_robust
-#' @param data a data.frame
+#' @param data a data.frame including state variable ( named`state`) and poststratification weights (named `PS_weight`)
+#'
+#' @return data.frame of post-stratified state-level estimates
 #'
 #' @export
 #'

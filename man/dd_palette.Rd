@@ -11,6 +11,9 @@ dd_palette(name, n)
 
 \item{n}{Number of colors}
 }
+\value{
+character vector of colors
+}
 \description{
 Based on Karthik Ram's wesanderson package (https://github.com/karthik/wesanderson)
 }

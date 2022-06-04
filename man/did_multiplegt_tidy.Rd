@@ -11,6 +11,9 @@ did_multiplegt_tidy(data, ...)
 
 \item{...}{options passed to did_multiplegt}
 }
+\value{
+a data.frame of estimates
+}
 \description{
 Runs did_multiplegt estimation function and returns tidy data frame output
 }

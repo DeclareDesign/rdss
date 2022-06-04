@@ -4,7 +4,9 @@
 #'
 #' See https://draft.declaredesign.org/experimental-descriptive.html#list-experiments
 #'
-#' @param fit a rrreg fit object
+#' @param fit a model fit object from rrreg in the rr package
+#'
+#' @return a data.frame of predicted values
 #'
 #' @export
 rr_predict_tidy <- function(fit) {
@@ -40,33 +42,44 @@ rr_predict_tidy <- function(fit) {
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
 #' @param x an amce fit object from cjoint::amce
+#' @param alpha Confidence level
 #' @param ... Extra arguments to pass to tidy
+#'
+#' @return a data.frame of estimates
 #'
 #' @export
 #'
 #' @importFrom dplyr `%>%` rename select mutate
-#' @importFrom cjoint summary.amce
 #' @importFrom stats qnorm
 #'
 #' @examples
 #'
-#' # data(immigrationconjoint)
-#' # data(immigrationdesign)
+#' \donttest{
+#' library(cjoint)
 #'
-#' # # Run AMCE estimator using all attributes in the design
-#' # results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
-#' #                   `Country of Origin` + Job + `Job Experience` + `Job Plans` +
-#' #                   `Reason for Application` + `Prior Entry`, data = immigrationconjoint,
-#' #                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
+#' data(immigrationconjoint)
+#' data(immigrationdesign)
 #'
-#' # # Print summary
-#' # tidy(results)
+#' # Run AMCE estimator using all attributes in the design
+#' results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
+#'                   `Country of Origin` + Job + `Job Experience` + `Job Plans` +
+#'                   `Reason for Application` + `Prior Entry`, data = immigrationconjoint,
+#'                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
+#'
+#' # Print summary
+#' tidy(results)
+#' }
 #'
 tidy.amce <-
-  function(x, ...) {
-    if(missing("alpha")) alpha <- 0.05
+  function(x, alpha = 0.05, ...) {
+
+    if(!requireNamespace("cjoint")){
+      message("The tidy function for amce objects requires the 'cjoint' package.")
+      return(invisible())
+    }
+
     z_score <- qnorm(1 - ((alpha) / 2))
-    summary_fit <- summary(x)
+    summary_fit <- cjoint::summary.amce(x)
     summary_fit$amce %>%
       rename(
         estimate = Estimate,
@@ -89,9 +102,12 @@ tidy.amce <-
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
 #' @param data A data.frame
-#' @param levels_list List of conjoint levels
+#' @param levels_list List of conjoint levels to assign
+#'
+#' @return a data.frame with random assignment added
 #'
 #' @export
+#'
 #' @importFrom purrr map
 #' @importFrom randomizr complete_ra
 #' @importFrom tibble as_tibble
@@ -112,6 +128,8 @@ conjoint_assignment <-
 #'
 #' @param data A data.frame
 #'
+#' @return a data.frame with XXX
+#'
 #' @export
 #'
 #' @importFrom dplyr group_by mutate ungroup
@@ -131,6 +149,8 @@ conjoint_measurement <-
 #'
 #' @param data A data.frame
 #' @param levels_list List of conjoint levels
+#'
+#' @return a data.frame of estimand values
 #'
 #' @importFrom dplyr filter `%>%` mutate bind_rows
 #' @importFrom rlang `!!` `:=`

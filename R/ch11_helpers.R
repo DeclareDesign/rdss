@@ -1,24 +1,33 @@
 
 #' Dip CEF function
 #'
+#' "Dip" shaped functional form for illustration of nonstandard inquiries
+#'
 #' See Ch. 11 https://book.declaredesign.org/redesign.html
 #'
 #' @param x A numeric vector
 #'
+#' @return a numeric vector
+#'
 #' @export
 dip <- function(x) {
-  (x <= 1) * x + (x > 1) * (x - 2) ^ 2 + .2
+  (x <= 1) * x + (x > 1) * (x - 2) ^ 2 + 0.2
 }
 
 #' Conditional expectation function inquiry
 #'
+#' Constructs a conditional expectation function over the range 0 to 3 for illustration nonstandard inquiries
+#'
 #' See Ch. 11 https://book.declaredesign.org/redesign.html
 #'
-#' @param data A data.frame
+#' @param data A data.frame (ignored)
+#'
+#' @return A tibble (data.frame) with the X value and estimand value for the dip conditional expectation function
 #'
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom dplyr transmute `%>%`
+#'
 cef_inquiry <-
   function(data) {
     tibble(X = seq( from = 0, to = 3, length.out = 50)) %>%
@@ -28,9 +37,13 @@ cef_inquiry <-
 
 #' Conditional expectation function estimator
 #'
+#' Estimator for illustrating how to estimate nonstandard inquiries
+#'
 #' See Ch. 11 https://book.declaredesign.org/redesign.html
 #'
-#' @param data A data.frame
+#' @param data A data.frame for estimating the conditional expectation function inquiry
+#'
+#' @return data.frame of predicted values
 #'
 #' @export
 #' @importFrom tibble tibble

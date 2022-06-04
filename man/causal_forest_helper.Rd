@@ -13,6 +13,9 @@ causal_forest_helper(data, covariates, ...)
 
 \item{...}{Options to causal_forest}
 }
+\value{
+a data.frame of estimates
+}
 \description{
 Runs estimates estimation function from interference package and returns tidy data frame output
 }

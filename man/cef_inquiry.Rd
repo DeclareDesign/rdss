@@ -7,8 +7,14 @@
 cef_inquiry(data)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data.frame (ignored)}
+}
+\value{
+A tibble (data.frame) with the X value and estimand value for the dip conditional expectation function
 }
 \description{
+Constructs a conditional expectation function over the range 0 to 3 for illustration nonstandard inquiries
+}
+\details{
 See Ch. 11 https://book.declaredesign.org/redesign.html
 }

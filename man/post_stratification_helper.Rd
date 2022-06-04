@@ -9,7 +9,10 @@ post_stratification_helper(model_fit, data)
 \arguments{
 \item{model_fit}{a model fit object from, e.g., glmer or lm_robust}
 
-\item{data}{a data.frame}
+\item{data}{a data.frame including state variable ( named\code{state}) and poststratification weights (named \code{PS_weight})}
+}
+\value{
+data.frame of post-stratified state-level estimates
 }
 \description{
 Calculates predicted values from a multilevel regression and the post-stratified state-level estimates

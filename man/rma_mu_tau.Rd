@@ -9,6 +9,9 @@ rma_mu_tau(fit)
 \arguments{
 \item{fit}{Fit object from the rma function in the metafor package}
 }
+\value{
+a data.frame of estimates
+}
 \description{
 See https://book.declaredesign.org/complex-designs.html#meta-analysis
 }

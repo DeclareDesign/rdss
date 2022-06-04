@@ -7,7 +7,8 @@
 #' See https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations
 #'
 #' @param fit A stanreg fit from stan_glm
-#' @importFrom broom.mixed tidy
+#'
+#' @return data.frame of results
 #'
 #' @export
 tidy_exponentiate <- function(fit) {
@@ -16,7 +17,7 @@ tidy_exponentiate <- function(fit) {
     return(invisible())
   }
   stopifnot(inherits(fit, "stanreg"))
-  tidy_fit <- tidy(fit)
+  tidy_fit <- broom.mixed::tidy(fit)
   tidy_fit$estimate <- exp(tidy_fit$estimate)
   tidy_fit$std.error <- NULL
   tidy_fit

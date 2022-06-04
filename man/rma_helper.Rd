@@ -15,6 +15,9 @@ rma_helper(data, yi, sei, method = "REML")
 
 \item{method}{character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".}
 }
+\value{
+a data.frame of estimates
+}
 \description{
 See https://book.declaredesign.org/complex-designs.html#meta-analysis
 }

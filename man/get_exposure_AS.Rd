@@ -10,7 +10,7 @@ get_exposure_AS(obs_exposure)
 \item{obs_exposure}{A numeric vector}
 }
 \value{
-a data.frame of observed exposure to a treatment
+a data.frame of observed exposure to a treatment created using the interference package
 }
 \description{
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks

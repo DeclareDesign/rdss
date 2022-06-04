@@ -6,7 +6,7 @@
 #'
 #' @param obs_exposure A numeric vector
 #'
-#' @return a data.frame of observed exposure to a treatment
+#' @return a data.frame of observed exposure to a treatment created using the interference package
 #'
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr filter pull everything
@@ -40,6 +40,12 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 estimator_AS_tidy <-
   function(data, permutatation_matrix, adj_matrix) {
+
+    if(!requireNamespace("interference")){
+      message("The estimator_AS_tidy function requires the 'interference' package.")
+      return(invisible())
+    }
+
     out_AS <-
       interference::estimates(
         obs_exposure =

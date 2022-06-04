@@ -18,6 +18,11 @@
 #' @importFrom stats quantile
 causal_forest_helper <- function(data, covariates, ...) {
 
+  if(!requireNamespace("grf")){
+    message("The causal_forest_helper function requires the 'grf' package.")
+    return(invisible())
+  }
+
   X <- as.matrix(data %>% select(all_of(covariates)))
   train <- data$train
 
@@ -97,6 +102,7 @@ best_predictor <- function(data, covariates) {
 #' @importFrom stats confint
 #' @importFrom tibble rownames_to_column
 rma_mu_tau <- function(fit) {
+
   if (!inherits(fit, "try-error")) {
     mu <-
       tidy(fit, conf.int = TRUE) %>%
@@ -145,6 +151,10 @@ rma_mu_tau <- function(fit) {
 #'
 #' @importFrom rlang quo_text enexpr
 rma_helper <- function(data, yi, sei, method = "REML"){
+  if(!requireNamespace("metafor")){
+    message("The rma_helper function requires the 'metafor' package.")
+    return(invisible())
+  }
   fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = method)})
   if(inherits(fit, "try-error")) {
     class(fit) <- c("rma.uni", "try-error")

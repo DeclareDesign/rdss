@@ -11,14 +11,18 @@
 #' @return data.frame of results
 #'
 #' @export
-tidy_exponentiate <- function(fit) {
+tidy.stanreg <- function(fit, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...) {
   if(!requireNamespace("broom.mixed")){
     message("The tidy_exponentiate function requires the 'broom.mixed' package.")
     return(invisible())
   }
   stopifnot(inherits(fit, "stanreg"))
-  tidy_fit <- broom.mixed::tidy(fit)
-  tidy_fit$estimate <- exp(tidy_fit$estimate)
-  tidy_fit$std.error <- NULL
-  tidy_fit
+  ret <- broom.mixed::tidy(fit, conf.int = conf.int, conf.level = conf.level, ...)
+
+  if (exponentiate) {
+    ret <- broom:::exponentiate(ret)
+    ret$std.error <- NULL
+  }
+
+  ret
 }

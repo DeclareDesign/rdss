@@ -90,38 +90,43 @@ did_multiplegt_tidy <- function(data, ...) {
 #'
 #' See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs
 #'
-#' @param data a data.frame
-#' @param y is the dependent variable (rdrobust argument)
-#' @param x is the running variable (a.k.a. score or forcing variable) (rdrobust argument)
-#' @param c specifies the RD cutoff in x; default is c = 0 (rdrobust argument)
-#' @param subset An optional bare (unquoted) expression specifying a subset of observations to be used
-#' @param term Symbols or literal character vector of term that represent quantities of interest, i.e. Z. If FALSE, return the first non-intercept term; if TRUE return all term. To escape non-standard-evaluation use !!.
+#' @param fit Model fit object from rdrobust
+#' @param conf.int
 #'
 #' @return a data.frame of estimates
 #'
-#' @importFrom rlang quo_is_null quo
-#' @importFrom dplyr filter pull
-#' @importFrom rlang quo_is_null quo enquo
 #' @export
-rdrobust_tidy <- function(data, y, x, c, subset = NULL, term = NULL){
-
+tidy.rdrobust <- function(fit, ...) {
   if(!requireNamespace("rdrobust")){
     message("The rdrobust_tidy function requires the 'rdrobust' package.")
     return(invisible())
   }
 
+  ret <- data.frame(rownames(fit$coef), fit$coef, fit$se, fit$z, fit$pv, fit$ci, c = fit$c)
+  row.names(ret) <- NULL
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value", "conf.low", "conf.high", "cutoff")
+
+  ret
+}
+
+
+#' Helper function for using rdrobust as a model in `declare_estimator`
+#'
+#' @param data a data.frame
+#' @param y unquoted name of the outcome variable
+#' @param x unquoted name of the running variable
+#' @param subset an optional vector specifying a subset of observations to be used in the fitting process
+#' @param ...
+#'
+#' @importFrom dplyr filter
+#' @importFrom rlang enquo `!!`
+#'
+#' @return rdrobust model fit object
+#'
+#' @export
+rdrobust_helper <- function(data, y, x, subset = NULL, ...) {
   if(!missing(subset))
     data <- filter(data, !!enquo(subset))
-  fit <- try(rdrobust::rdrobust(y = pull(data, {{y}}), x = pull(data, {{x}}), c = c))
-  if(!inherits(fit, "try-error")) {
-    ret <- data.frame(rownames(fit$coef), fit$coef, fit$se, fit$z, fit$pv, fit$ci, c = fit$c)
-    row.names(ret) <- NULL
-    names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value", "conf.low", "conf.high", "cutoff")
-    if(!is.null(term))
-      ret <- ret[ret$term == term, ]
-  } else {
-    ret <- data.frame(term = "Robust", estimate = NA, std.error = NA, statistic = NA, p.value = NA, conf.low = NA, conf.high = NA, cutoff = 0.5, error = as.character(fit))
-  }
-  ret
+  rdrobust::rdrobust(y = pull(data, {{y}}), x = pull(data, {{x}}), ... = ...)
 }
 

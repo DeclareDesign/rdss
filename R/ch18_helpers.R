@@ -143,19 +143,21 @@ rma_mu_tau <- function(fit) {
 #' @param data a data.frame
 #' @param yi unquoted variable name of estimates used in meta-analysis
 #' @param sei unquoted variable name of standard errors used in meta-analysis
-#' @param method character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".
+#' @param type character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".
+#'
+#' Note that because DeclareDesign uses the `method` argument in `declare_estimator`, the type method is renamed from `method` used in `rma`.)
 #'
 #' @return a data.frame of estimates
 #'
 #' @export
 #'
 #' @importFrom rlang quo_text enexpr
-rma_helper <- function(data, yi, sei, method = "REML"){
+rma_helper <- function(data, yi, sei, type = "REML"){
   if(!requireNamespace("metafor")){
     message("The rma_helper function requires the 'metafor' package.")
     return(invisible())
   }
-  fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = method)})
+  fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = type)})
   if(inherits(fit, "try-error")) {
     class(fit) <- c("rma.uni", "try-error")
   }

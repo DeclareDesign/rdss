@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.11c.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 placebo_controlled_design <-
@@ -11,7 +11,7 @@ placebo_controlled_design <-
   declare_estimator(
     Y ~ Z,
     subset = X == 1,
-    model = lm_robust,
+    method = lm_robust,
     inquiry = "CACE",
     label = "OLS among compliers"
   )

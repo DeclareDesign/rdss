@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('diagnosis_15.5.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(DeclareDesign)

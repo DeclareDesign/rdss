@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_15.5.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(rdrobust)
@@ -21,7 +21,7 @@ declaration_15.5 <-
   declare_estimator(
     Y, X, c = 0, 
     term = "Bias-Corrected",
-    handler = label_estimator(rdrobust_tidy),
+    method = rdrobust_helper,
     inquiry = "LATE",
     label = "optimal"
   )

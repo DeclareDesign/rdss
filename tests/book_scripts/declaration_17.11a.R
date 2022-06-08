@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.11a.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 compliance_rate <- 0.2

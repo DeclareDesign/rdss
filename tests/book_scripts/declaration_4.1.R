@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_4.1.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_4.1 <- 
@@ -9,5 +9,5 @@ declaration_4.1 <-
   declare_assignment(Z = complete_ra(N, prob = 0.5)) +
   declare_measurement(Y = reveal_outcomes(Y ~ Z)) +
   declare_estimator(
-    Y ~ Z, model = difference_in_means, inquiry = "PATE"
+    Y ~ Z, method = difference_in_means, inquiry = "PATE"
   )

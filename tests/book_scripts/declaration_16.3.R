@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_16.3.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_16.3 <-
@@ -11,5 +11,5 @@ declaration_16.3 <-
   declare_inquiry(prevalence_rate = mean(Y_star)) +
   declare_assignment(Z = complete_ra(N)) + 
   declare_measurement(Y_list = reveal_outcomes(Y_list ~ Z)) +
-  declare_estimator(Y_list ~ Z, model = difference_in_means, 
+  declare_estimator(Y_list ~ Z, method = difference_in_means, 
                     inquiry = "prevalence_rate")

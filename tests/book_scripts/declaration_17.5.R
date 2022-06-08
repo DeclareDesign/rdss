@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.5.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 prob = 0.5
@@ -14,5 +14,5 @@ declaration_17.5 <-
   declare_assignment(Z = complete_ra(N = N, prob = prob)) + 
   declare_measurement(Y = reveal_outcomes(Y ~ Z)) +
   declare_estimator(Y ~ Z, inquiry = "ATE", label = "DIM") +
-  declare_estimator(Y ~ Z + X, model = lm_robust, inquiry = "ATE", label = "OLS") +
-  declare_estimator(Y ~ Z, covariates = ~X, model = lm_lin, inquiry = "ATE", label = "Lin")
+  declare_estimator(Y ~ Z + X, method = lm_robust, inquiry = "ATE", label = "OLS") +
+  declare_estimator(Y ~ Z, covariates = ~X, method = lm_lin, inquiry = "ATE", label = "Lin")

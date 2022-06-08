@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_2.2.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(modelr) # required for add_predictions
@@ -22,8 +22,8 @@ three_polls <-
   declare_measurement(Y_obs = reveal_outcomes(Y ~ time)) +
   declare_estimator(
     Y_obs ~ time,
-    model = lm_robust,
-    model_summary = ~add_predictions(model = ., 
+    method = lm_robust,
+    summary = ~add_predictions(method = ., 
                                      data = data.frame(time = 4), 
                                      var = "estimate")
   ) 

@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_21.1d.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 answer_strategy <-

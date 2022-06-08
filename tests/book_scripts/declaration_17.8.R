@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.8.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 CATE_Z1_Z2_0 <- 0.2

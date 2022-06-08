@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_14.3_LOGIT.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 tidy_margins <- function(x) {
@@ -18,18 +18,18 @@ declaration_14.3_LOGIT <-
                     label = "OLS") +
   declare_estimator(
     Y ~ Z,
-    model = glm,
+    method = glm,
     family = binomial("logit"),
-    model_summary = tidy_margins,
+    summary = tidy_margins,
     inquiry = "ATE",
     term = "Z",
     label = "logit"
   ) +
   declare_estimator(
     Y ~ Z,
-    model = glm,
+    method = glm,
     family = binomial("probit"),
-    model_summary = tidy_margins,
+    summary = tidy_margins,
     inquiry = "ATE",
     term = "Z",
     label = "probit"

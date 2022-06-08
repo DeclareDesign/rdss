@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_15.2.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(MatchIt)
@@ -21,8 +21,8 @@ declaration_15.2 <-
   declare_measurement(Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(Y ~ D,
                     weights = weights,
-                    model = difference_in_means,
+                    method = difference_in_means,
                     label = "adjusted") +
   declare_estimator(Y ~ D, 
-                    model = difference_in_means, 
+                    method = difference_in_means, 
                     label = "unadjusted")

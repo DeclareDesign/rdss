@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.2.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_17.2 <-
@@ -20,7 +20,7 @@ declaration_17.2 <-
   declare_estimator(
     Y ~ Z,
     covariates = ~ X,
-    model = lm_lin,
+    method = lm_lin,
     weights = ipw,
     label = "Lin"
   )

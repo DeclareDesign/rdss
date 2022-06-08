@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_18.2_NEW.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 N <- 100
@@ -14,4 +14,4 @@ declaration_18.2 <-
   declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0)) +
   declare_assignment(Z = complete_ra(N)) +
   declare_measurement(Y = reveal_outcomes(Y ~ Z)) +
-  declare_estimator(Y~Z, covariates = ~X, model = lm_lin, inquiry = "ATE")
+  declare_estimator(Y~Z, covariates = ~X, method = lm_lin, inquiry = "ATE")

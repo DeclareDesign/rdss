@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('diagnosis_10.1.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 sims <- 3

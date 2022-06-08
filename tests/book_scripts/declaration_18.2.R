@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_18.2.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 f_Y <- function(z, X.1, X.2, X.3, X.4, u) {
@@ -29,11 +29,11 @@ declaration_18.2 <-
     weak_effects = mean(tau[low_test]),
     weak_all = mean(tau[low_all]),
     strong_effects = mean(tau[high_test])) +
-  declare_estimator(Y ~ Z, model = lm_robust, subset = low_test, 
+  declare_estimator(Y ~ Z, method = lm_robust, subset = low_test, 
                     inquiry = c("weak_effects", "worst_effects"), label = "lm_weak") +
-  declare_estimator(Y ~ Z, model = lm_robust, subset = low_all, 
+  declare_estimator(Y ~ Z, method = lm_robust, subset = low_all, 
                     inquiry = "weak_all", label = "lm_weak_all") +
-  declare_estimator(Y ~ Z, model = lm_robust, subset = high_test, 
+  declare_estimator(Y ~ Z, method = lm_robust, subset = high_test, 
                     inquiry = "strong_effects", label = "lm_strong") +
   declare_estimator(handler = label_estimator(get_best_predictor),
                     inquiry = "best_predictor", label = "cf") 

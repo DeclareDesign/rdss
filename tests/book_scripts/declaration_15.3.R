@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_15.3.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(DIDmultiplegt)
@@ -36,7 +36,7 @@ declaration_15.3 <-
   declare_measurement(Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(
     Y ~ D, fixed_effects = ~ units + periods,
-    model = lm_robust,
+    method = lm_robust,
     inquiry = c("ATT", "ATT_switchers"),
     label = "twoway-fe"
   ) +

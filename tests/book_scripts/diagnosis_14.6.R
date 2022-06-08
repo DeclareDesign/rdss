@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('diagnosis_14.6.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(DeclareDesign)
@@ -9,5 +9,5 @@ bootstrap_sims <- 3
 source("../book_scripts/declaration_14.6.R")
 diagnosis_14.6 <- 
   declaration_14.6 %>% 
-  diagnose_designs(sims = sims, bootstrap_sims = bootstrap_sims)
+  diagnose_designs(sims = sims, bootstrap_sims = bootstrap_sims, make_groups = vars(outcome))
 

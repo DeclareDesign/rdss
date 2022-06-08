@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_12.1c.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 n_villages <- 192

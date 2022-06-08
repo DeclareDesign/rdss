@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.11b.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 encouragement_design <-
@@ -8,7 +8,7 @@ encouragement_design <-
                       Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(
     Y ~ D | Z,
-    model = iv_robust,
+    method = iv_robust,
     inquiry = "CACE",
     label = "2SLS among all units"
   )

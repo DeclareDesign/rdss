@@ -1,7 +1,7 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_14.1.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
-set.seed(343)
+set.seed(343) # fix random seed to yield a fixed population of units
 portola <-
   fabricate(
     N = 2100,

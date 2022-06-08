@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.12.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 effect_size <- 0.35

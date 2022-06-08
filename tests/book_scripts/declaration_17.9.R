@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.9.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_17.9 <-
@@ -37,19 +37,19 @@ declaration_17.9 <-
                       Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(
     Y ~ D | Z,
-    model = iv_robust,
+    method = iv_robust,
     inquiry = c("ATE", "CACE"),
     label = "Two stage least squares"
   ) +
   declare_estimator(
     Y ~ D,
-    model = lm_robust,
+    method = lm_robust,
     inquiry = c("ATE", "CACE"),
     label = "As treated"
   ) +
   declare_estimator(
     Y ~ D,
-    model = lm_robust,
+    method = lm_robust,
     inquiry = c("ATE", "CACE"),
     subset = D == Z,
     label = "Per protocol"

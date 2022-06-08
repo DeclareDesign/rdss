@@ -21,6 +21,7 @@ r_files <- map(urls, read_delim, col_names = FALSE, delim = "XT$*%@(442555")
 r_files %>%
   set_names(nm = r_nms) %>%
   map(~bind_rows(tibble(X1 = "library(DeclareDesign); library(rdddr); library(tidyverse)\n\n"), .x)) %>%
+  # map(~bind_rows(tibble(X1 = "context('"), .x)) %>%
   bind_rows(.id = "filename") %>%
   # map_df(as_tibble, .id = "filename") %>%
   separate(filename, into = c("dir", "file"), sep = "/") %>%
@@ -31,6 +32,9 @@ r_files %>%
   mutate(value = if_else(str_detect(value, "write_rds"), "", value)) %>%
   mutate(value = str_replace(value, "scripts_declarations", "..\\/book_scripts")) %>%
   mutate(value = str_replace(value, "scripts_declarations", "..\\/book_scripts")) %>%
+  mutate(value = if_else(value == "library(DeclareDesign); library(rdddr); library(tidyverse)\n\n",
+                         str_c("print('", file, "'); library(DeclareDesign); library(rdddr); library(tidyverse)\n\n"),
+                         value)) %>%
   # mutate(value = str_c("library(DeclareDesign); library(rdddr); library(tidyverse)\n\n", value)) %>%
   group_by(dir, file) %>%
   summarize(

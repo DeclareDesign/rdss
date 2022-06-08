@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.6.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 ICC <- 0.9

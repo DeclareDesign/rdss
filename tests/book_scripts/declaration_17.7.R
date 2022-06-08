@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.7.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 set.seed(343)

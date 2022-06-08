@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_9.4.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 library(rstanarm)
@@ -8,9 +8,9 @@ declaration_9.4 <-
   declare_sampling(S = complete_rs(N = N, n = 3)) +
   declare_estimator(
     age ~ 1,
-    model = stan_glm,
+    method = stan_glm,
     family = gaussian(link = "log"),
     prior_intercept = normal(50, 5),
-    model_summary = tidy_exponentiate,
+    summary = ~tidy(., exponentiate = TRUE),
     inquiry = "mean_age"
   )

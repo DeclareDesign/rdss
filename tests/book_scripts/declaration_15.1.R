@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_15.1.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 # remotes::install_github("macartan/CausalQueries")

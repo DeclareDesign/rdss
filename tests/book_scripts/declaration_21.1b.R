@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_21.1b.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 slope <- function(y, x) { cov(y, x) / var(x) }

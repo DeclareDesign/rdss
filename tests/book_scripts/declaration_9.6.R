@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_9.6.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 MI <-

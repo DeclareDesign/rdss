@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_17.14.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_17.14 <-
@@ -34,6 +34,6 @@ declaration_17.14 <-
     cluster = units,
     fixed_effects = ~units,
     se_type = "stata",
-    model = lm_robust, 
+    method = lm_robust, 
     inquiry = "ATE_untreated_before"
   ) 

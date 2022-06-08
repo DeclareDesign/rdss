@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_11.4.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 N <- 100

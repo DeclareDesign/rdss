@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_5.1.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_5.1 <-
@@ -11,6 +11,6 @@ declaration_5.1 <-
   declare_inquiry(Ybar = mean(Y[X == 1])) +
   declare_sampling(S = simple_rs(N, prob = 0.1)) +
   declare_estimator(Y ~ 1,
-                    model = lm_robust,
+                    method = lm_robust,
                     subset = X == 1,
                     inquiry = "Ybar")

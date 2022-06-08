@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_14.6.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_14.6 <-
@@ -23,30 +23,10 @@ declaration_14.6 <-
     Y_first_factor  = princomp( ~ Y_1 + Y_2 + Y_2, cor = TRUE)$scores[, 1]
   ) +
   declare_estimator(
-    Y_avg ~ 1,
-    model = lm_robust,
+    cbind(Y_avg, Y_avg_adjusted, Y_avg_rescaled, Y_first_factor) ~ 1,
+    method = lm_robust,
     inquiry = "Y_bar_X1",
     subset = X == 1,
+    term = TRUE,
     label = "Average"
-  ) +
-  declare_estimator(
-    Y_avg_adjusted ~ 1,
-    model = lm_robust,
-    inquiry = "Y_bar_X1",
-    subset = X == 1,
-    label = "Average (adjusted)"
-  ) +
-  declare_estimator(
-    Y_avg_rescaled ~ 1,
-    model = lm_robust,
-    inquiry = "Y_bar_X1",
-    subset = X == 1,
-    label = "Average (rescaled)"
-  ) +
-  declare_estimator(
-    Y_first_factor ~ 1,
-    model = lm_robust,
-    inquiry = "Y_bar_X1",
-    subset = X == 1,
-    label = "Principal Components"
   )

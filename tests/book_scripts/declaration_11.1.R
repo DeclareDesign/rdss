@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_11.1.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 declaration_11.1 <-

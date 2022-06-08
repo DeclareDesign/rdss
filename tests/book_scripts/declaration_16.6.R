@@ -1,4 +1,4 @@
-library(DeclareDesign); library(rdddr); library(tidyverse)
+print('declaration_16.6.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
 returned <- function(x1, a_2 = 1 / 3) {
@@ -37,16 +37,16 @@ declaration_16.6 <-
   declare_measurement(invested = invested(a_1, a_2),
                       returned = returned(invested, a_2)) +
   declare_estimator(invested ~ 1,
-                    model = lm_robust,
+                    method = lm_robust,
                     inquiry = "mean_invested",
                     label = "mean_invested") +
   declare_estimator(returned ~ 1,
-                    model = lm_robust,
+                    method = lm_robust,
                     inquiry = "mean_returned",
                     label = "mean_returned") +
   declare_estimator(
     returned ~ 1,
-    model = lm_robust,
+    method = lm_robust,
     subset = invested == 1,
     inquiry = "return_from_1",
     label = "return_from_1"

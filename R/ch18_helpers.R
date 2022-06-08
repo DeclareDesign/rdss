@@ -144,6 +144,7 @@ rma_mu_tau <- function(fit) {
 #' @param yi unquoted variable name of estimates used in meta-analysis
 #' @param sei unquoted variable name of standard errors used in meta-analysis
 #' @param type character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".
+#' @param ... Further options to be passed to rma
 #'
 #' Note that because DeclareDesign uses the `method` argument in `declare_estimator`, the type method is renamed from `method` used in `rma`.)
 #'
@@ -152,14 +153,43 @@ rma_mu_tau <- function(fit) {
 #' @export
 #'
 #' @importFrom rlang quo_text enexpr
-rma_helper <- function(data, yi, sei, type = "REML"){
+rma_helper <- function(data, yi, sei, type = "REML", ...){
   if(!requireNamespace("metafor")){
     message("The rma_helper function requires the 'metafor' package.")
     return(invisible())
   }
-  fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = type)})
+  fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = type, ... = ...)})
   if(inherits(fit, "try-error")) {
     class(fit) <- c("rma.uni", "try-error")
+  }
+  fit
+}
+
+#' Helper function for mle2 function in bbmle package
+#'
+#' See https://draft.declaredesign.org/experimental-descriptive.html#behavioral-games
+#'
+#' See ?mle2 for further details
+#'
+#' @param data a data.frame
+#' @param optimization_method Optimization method to use. See optim.
+#' @param ... Further arguments to pass to mle2
+#'
+#' Note that because DeclareDesign uses the `optimization_method` argument in `declare_estimator`, the type method is renamed from `method` used in `rma`.)
+#'
+#' @return an mle2 object
+#'
+#' @export
+#'
+#' @importFrom rlang quo_text enexpr
+mle2_helper <- function(data, optimization_method, ...){
+  if(!requireNamespace("mle2")){
+    message("The mle2_helper function requires the 'bbmle' package.")
+    return(invisible())
+  }
+  fit <- try({bbmle::mle2(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = type, ... = ...)})
+  if(inherits(fit, "try-error")) {
+    class(fit) <- c("mle2", "try-error")
   }
   fit
 }

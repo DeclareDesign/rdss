@@ -16,6 +16,7 @@
 #' @importFrom prediction prediction
 #' @importFrom dplyr group_by summarize
 #' @importFrom stats weighted.mean
+#' @importFrom rlang `!!` enquo
 #'
 post_stratification_helper <- function(model_fit, data, group, weights) {
   prediction(

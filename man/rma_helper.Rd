@@ -4,7 +4,7 @@
 \alias{rma_helper}
 \title{Helper function for rma function in metafor package}
 \usage{
-rma_helper(data, yi, sei, type = "REML", ...)
+rma_helper(data, yi, sei, method = "REML", ...)
 }
 \arguments{
 \item{data}{a data.frame}
@@ -13,11 +13,9 @@ rma_helper(data, yi, sei, type = "REML", ...)
 
 \item{sei}{unquoted variable name of standard errors used in meta-analysis}
 
-\item{type}{character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".}
+\item{method}{character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".}
 
-\item{...}{Further options to be passed to rma
-
-Note that because DeclareDesign uses the \code{method} argument in \code{declare_estimator}, the type method is renamed from \code{method} used in \code{rma}.)}
+\item{...}{Further options to be passed to rma}
 }
 \value{
 a data.frame of estimates

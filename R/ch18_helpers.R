@@ -163,28 +163,3 @@ rma_helper <- function(data, yi, sei, method = "REML", ...){
   fit
 }
 
-#' Helper function for mle2 function in bbmle package
-#'
-#' See https://draft.declaredesign.org/experimental-descriptive.html#behavioral-games
-#'
-#' See ?mle2 for further details
-#'
-#' @param data a data.frame
-#' @param ... Further arguments to pass to mle2
-#'
-#' @return an mle2 object
-#'
-#' @export
-#'
-#' @importFrom rlang quo_text enexpr
-mle2_helper <- function(data, ...){
-  if(!requireNamespace("mle2")){
-    message("The mle2_helper function requires the 'bbmle' package.")
-    return(invisible())
-  }
-  fit <- try({bbmle::mle2(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], ... = ...)})
-  if(inherits(fit, "try-error")) {
-    class(fit) <- c("mle2", "try-error")
-  }
-  fit
-}

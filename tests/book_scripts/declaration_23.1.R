@@ -16,11 +16,11 @@ declaration_23.1 <-
   declare_assignment(Z = complete_ra(N)) +
   declare_measurement(Y = reveal_outcomes(Y ~ Z)) +
   declare_estimator(Y ~ Z,
-                    method = difference_in_means,
+                    .method = difference_in_means,
                     inquiry = "ATE",
                     label = "dim") +
   declare_estimator(Y ~ Z,
-                    method = lh_robust,
+                    .method = lh_robust,
                     linear_hypothesis = "Z - 0.05 = 0",
                     inquiry = "alternative_better_than_sq",
                     label = "decision")

@@ -28,7 +28,7 @@ declaration_17.15 <-
   declare_measurement(Y = reveal_outcomes(Y ~ Z + S)) +
   declare_estimator(
     Y ~ S,
-    method = difference_in_means,
+    .method = difference_in_means,
     subset = Z == 0,
     term = "Shigh",
     clusters = group,
@@ -37,7 +37,7 @@ declaration_17.15 <-
   ) +
   declare_estimator(
     Y ~ Z,
-    method = difference_in_means,
+    .method = difference_in_means,
     subset = S == "low",
     blocks = group,
     inquiry = "CATE_Z_S_low",

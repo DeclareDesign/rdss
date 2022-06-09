@@ -8,9 +8,9 @@ declaration_9.4 <-
   declare_sampling(S = complete_rs(N = N, n = 3)) +
   declare_estimator(
     age ~ 1,
-    method = stan_glm,
+    .method = stan_glm,
     family = gaussian(link = "log"),
     prior_intercept = normal(50, 5),
-    summary = ~tidy(., exponentiate = TRUE),
+    .summary = ~tidy(., exponentiate = TRUE),
     inquiry = "mean_age"
   )

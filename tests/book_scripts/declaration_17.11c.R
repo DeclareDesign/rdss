@@ -11,7 +11,7 @@ placebo_controlled_design <-
   declare_estimator(
     Y ~ Z,
     subset = X == 1,
-    method = lm_robust,
+    .method = lm_robust,
     inquiry = "CACE",
     label = "OLS among compliers"
   )

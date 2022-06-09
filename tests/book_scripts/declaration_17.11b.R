@@ -8,7 +8,7 @@ encouragement_design <-
                       Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(
     Y ~ D | Z,
-    method = iv_robust,
+    .method = iv_robust,
     inquiry = "CACE",
     label = "2SLS among all units"
   )

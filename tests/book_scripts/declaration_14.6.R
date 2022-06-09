@@ -24,7 +24,7 @@ declaration_14.6 <-
   ) +
   declare_estimator(
     cbind(Y_avg, Y_avg_adjusted, Y_avg_rescaled, Y_first_factor) ~ 1,
-    method = lm_robust,
+    .method = lm_robust,
     inquiry = "Y_bar_X1",
     subset = X == 1,
     term = TRUE,

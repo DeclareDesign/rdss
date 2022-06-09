@@ -22,9 +22,9 @@ three_polls <-
   declare_measurement(Y_obs = reveal_outcomes(Y ~ time)) +
   declare_estimator(
     Y_obs ~ time,
-    method = lm_robust,
-    summary = ~add_predictions(method = ., 
-                                     data = data.frame(time = 4), 
-                                     var = "estimate")
+    .method = lm_robust,
+    .summary = ~add_predictions(method = ., 
+                                data = data.frame(time = 4), 
+                                var = "estimate")
   ) 
 declaration_2.2 <- october_surprise + three_polls

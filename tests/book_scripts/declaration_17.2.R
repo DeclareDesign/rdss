@@ -20,7 +20,7 @@ declaration_17.2 <-
   declare_estimator(
     Y ~ Z,
     covariates = ~ X,
-    method = lm_lin,
+    .method = lm_lin,
     weights = ipw,
     label = "Lin"
   )

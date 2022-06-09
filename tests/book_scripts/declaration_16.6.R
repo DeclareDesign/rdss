@@ -19,15 +19,14 @@ rho     <- 0.8
 n_pairs <- 200
 declaration_16.6 <-
   declare_model(N = 2 * n_pairs,
-                a = runif(N),
-                arrival = rank(correlate(given = a, rho = rho, runif))) +
+                a = runif(N)) +
   declare_inquiries(
     mean_invested = mean(sapply(a, average_invested)),
     mean_returned = mean(sapply(a, average_returned)),
     return_from_1 = mean(returned(1, a))
   ) +
-  declare_assignment(pair = (arrival - 1) %% n_pairs,
-                     role = 1 + (arrival > n_pairs)) +
+  declare_assignment(pair = complete_ra(N = N, num_arms = n_pairs),
+                     role = 1 + block_ra(blocks = pair))) + 
   declare_step(
     id_cols = pair,
     names_from = role,
@@ -37,16 +36,16 @@ declaration_16.6 <-
   declare_measurement(invested = invested(a_1, a_2),
                       returned = returned(invested, a_2)) +
   declare_estimator(invested ~ 1,
-                    method = lm_robust,
+                    .method = lm_robust,
                     inquiry = "mean_invested",
                     label = "mean_invested") +
   declare_estimator(returned ~ 1,
-                    method = lm_robust,
+                    .method = lm_robust,
                     inquiry = "mean_returned",
                     label = "mean_returned") +
   declare_estimator(
     returned ~ 1,
-    method = lm_robust,
+    .method = lm_robust,
     subset = invested == 1,
     inquiry = "return_from_1",
     label = "return_from_1"

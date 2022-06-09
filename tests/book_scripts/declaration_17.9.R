@@ -37,19 +37,19 @@ declaration_17.9 <-
                       Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(
     Y ~ D | Z,
-    method = iv_robust,
+    .method = iv_robust,
     inquiry = c("ATE", "CACE"),
     label = "Two stage least squares"
   ) +
   declare_estimator(
     Y ~ D,
-    method = lm_robust,
+    .method = lm_robust,
     inquiry = c("ATE", "CACE"),
     label = "As treated"
   ) +
   declare_estimator(
     Y ~ D,
-    method = lm_robust,
+    .method = lm_robust,
     inquiry = c("ATE", "CACE"),
     subset = D == Z,
     label = "Per protocol"

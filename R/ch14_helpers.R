@@ -5,9 +5,11 @@
 #' Please see https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
 #'
 #' @param model_fit a model fit object from, e.g., glmer or lm_robust
-#' @param data a data.frame including state variable ( named`state`) and poststratification weights (named `PS_weight`)
+#' @param data a data.frame
+#' @param group unquoted name of the group variable to construct estimates for
+#' @param weights unquoted name of post-stratification weights variable
 #'
-#' @return data.frame of post-stratified state-level estimates
+#' @return data.frame of post-stratified group-level estimates
 #'
 #' @export
 #'
@@ -15,13 +17,13 @@
 #' @importFrom dplyr group_by summarize
 #' @importFrom stats weighted.mean
 #'
-post_stratification_helper <- function(model_fit, data) {
+post_stratification_helper <- function(model_fit, data, group, weights) {
   prediction(
     model_fit,
     data = data,
     allow.new.levels = TRUE,
     type = "response"
   ) %>%
-    group_by(state) %>%
-    summarize(estimate = weighted.mean(fitted, PS_weight))
+    group_by({{group}}) %>%
+    summarize(estimate = weighted.mean(fitted, !!enquo(weights)), .groups = "drop")
 }

@@ -21,7 +21,7 @@ declaration_15.5 <-
   declare_estimator(
     Y, X, c = 0, 
     term = "Bias-Corrected",
-    method = rdrobust_helper,
+    .method = rdrobust_helper,
     inquiry = "LATE",
     label = "optimal"
   )

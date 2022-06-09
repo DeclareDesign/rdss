@@ -34,6 +34,6 @@ declaration_17.14 <-
     cluster = units,
     fixed_effects = ~units,
     se_type = "stata",
-    method = lm_robust, 
+    .method = lm_robust, 
     inquiry = "ATE_untreated_before"
   ) 

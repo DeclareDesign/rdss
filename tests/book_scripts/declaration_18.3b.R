@@ -22,7 +22,7 @@ declaration_18.3 <-
     # Actual payoff (stochastic)
     y = rbeta(N, pi*kappa, (1-pi)*kappa)) +
   # Estimation via maximum likelihood
-  declare_estimator(model = bbmle::mle2,
+  declare_estimator(.method = bbmle::mle2,
                     minuslogl =  likelihood(n),
                     start = list(k = 2,    d = 0.50,  a = 0.50),
                     lower = list(k = .1,   d = 0.01,  a = 0.01),
@@ -30,5 +30,4 @@ declaration_18.3 <-
                     method = "L-BFGS-B",
                     term = c("k", "d", "a"),
                     inquiry = c("kappa","delta", "alpha"), 
-                    label = "Structural model",
-                    model_summary = broom::tidy) 
+                    label = "Structural model") 

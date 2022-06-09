@@ -37,4 +37,4 @@ declaration_17.3_CONJOINT <-
   declare_measurement(handler = conjoint_measurement) +
   declare_estimator(formula = choice ~ gender + party + region,
                     respondent.id = "subject",
-                    method = amce)
+                    .method = amce)

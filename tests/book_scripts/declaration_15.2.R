@@ -4,7 +4,7 @@ print('declaration_15.2.R'); library(DeclareDesign); library(rdddr); library(tid
 library(MatchIt)
 exact_matching <- 
   function(data) { 
-    matched <- matchit(D ~ X, method = "exact", data = data) 
+    matched <- matchit(D ~ X, .method = "exact", data = data) 
     match.data(matched) 
   }
 declaration_15.2 <-
@@ -21,8 +21,8 @@ declaration_15.2 <-
   declare_measurement(Y = reveal_outcomes(Y ~ D)) +
   declare_estimator(Y ~ D,
                     weights = weights,
-                    method = difference_in_means,
+                    .method = difference_in_means,
                     label = "adjusted") +
   declare_estimator(Y ~ D, 
-                    method = difference_in_means, 
+                    .method = difference_in_means, 
                     label = "unadjusted")

@@ -18,18 +18,18 @@ declaration_14.3_LOGIT <-
                     label = "OLS") +
   declare_estimator(
     Y ~ Z,
-    method = glm,
+    .method = glm,
     family = binomial("logit"),
-    summary = tidy_margins,
+    .summary = tidy_margins,
     inquiry = "ATE",
     term = "Z",
     label = "logit"
   ) +
   declare_estimator(
     Y ~ Z,
-    method = glm,
+    .method = glm,
     family = binomial("probit"),
-    summary = tidy_margins,
+    .summary = tidy_margins,
     inquiry = "ATE",
     term = "Z",
     label = "probit"

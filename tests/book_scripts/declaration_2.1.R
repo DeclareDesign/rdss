@@ -18,6 +18,6 @@ steady_race <-
 # declaring the data and answer strategies
 single_poll <-
   declare_measurement(Y_obs = Y_time_1) +
-  declare_estimator(Y_obs ~ 1, method = lm_robust)
+  declare_estimator(Y_obs ~ 1, .method = lm_robust)
 # declaring the full design
 declaration_2.1 <- steady_race + single_poll

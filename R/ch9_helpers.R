@@ -16,7 +16,7 @@ tidy.stanreg <- function(fit, conf.int = FALSE, conf.level = 0.95, exponentiate 
     message("The tidy_exponentiate function requires the 'broom.mixed' package.")
     return(invisible())
   }
-  stopifnot(inherits(fit, "stanreg"))
+
   ret <- broom.mixed::tidy(fit, conf.int = conf.int, conf.level = conf.level, ...)
 
   if (exponentiate) {

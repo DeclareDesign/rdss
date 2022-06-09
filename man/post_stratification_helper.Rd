@@ -4,15 +4,19 @@
 \alias{post_stratification_helper}
 \title{Post stratification estimator helper}
 \usage{
-post_stratification_helper(model_fit, data)
+post_stratification_helper(model_fit, data, group, weights)
 }
 \arguments{
 \item{model_fit}{a model fit object from, e.g., glmer or lm_robust}
 
-\item{data}{a data.frame including state variable ( named\code{state}) and poststratification weights (named \code{PS_weight})}
+\item{data}{a data.frame}
+
+\item{group}{unquoted name of the group variable to construct estimates for}
+
+\item{weights}{unquoted name of post-stratification weights variable}
 }
 \value{
-data.frame of post-stratified state-level estimates
+data.frame of post-stratified group-level estimates
 }
 \description{
 Calculates predicted values from a multilevel regression and the post-stratified state-level estimates

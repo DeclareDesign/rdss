@@ -135,9 +135,9 @@ conjoint_assignment <-
 #' @importFrom dplyr group_by mutate ungroup
 #'
 conjoint_measurement <-
-  function(data) {
+  function(data, utility_fn) {
     data %>%
-      conjoint_utility %>%
+      utility_fn %>%
       group_by(subject, task) %>%
       mutate(choice = as.numeric(c(U[1] > U[2], U[1] <= U[2]))) %>%
       ungroup()

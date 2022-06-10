@@ -17,6 +17,18 @@
 #'
 #' @importFrom dplyr mutate select all_of `%>%`
 #' @importFrom stats quantile
+#' @example
+#'
+#' fabricate(
+#' N = 1000,
+#' A = rnorm(N),
+#' B = rnorm(N),
+#' Z = complete_rs(N),
+#' Y = A*Z + rnorm(N)) %>%
+#' causal_forest_handler(covariate_names = c("A", "B")) %>%
+#' ggplot(aes(A, pred)) + geom_point()
+#'
+
 
 causal_forest_handler <- function(data, covariate_names, share_train = .5, ...) {
 

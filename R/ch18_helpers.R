@@ -7,7 +7,8 @@
 #' See ?causal_forest for further details
 #'
 #' @param data A data.frame
-#' @param covariates A character vector of covariates to assess
+#' @param covariate_names Names of covariates
+#' @param share_train Share of units to be used for training
 #' @param ... Options to causal_forest
 #'
 #' @return a data.frame of estimates
@@ -16,15 +17,17 @@
 #'
 #' @importFrom dplyr mutate select all_of `%>%`
 #' @importFrom stats quantile
-causal_forest_helper <- function(data, covariates, ...) {
+
+causal_forest_handler <- function(data, covariate_names, share_train = .5, ...) {
 
   if(!requireNamespace("grf")){
     message("The causal_forest_helper function requires the 'grf' package.")
     return(invisible())
   }
 
-  X <- as.matrix(data %>% select(all_of(covariates)))
-  train <- data$train
+  X <- as.matrix(data %>% select(all_of(covariate_names)))
+
+  train <- complete_rs(nrow(data), prob = share_train) == 1
 
   cf <-
     grf::causal_forest(X = X[train,],
@@ -40,14 +43,9 @@ causal_forest_helper <- function(data, covariates, ...) {
     predict(cf, newdata = X[!train, ], estimate.variance = FALSE)$predictions
 
   data %>%
-    mutate(
-      var_imp = grf::variable_importance(cf) %>% which.max,
-      low_test  = (!train &
-                     (pred < quantile(pred[!train], .2))),
-      high_test = (!train &
-                     (pred > quantile(pred[!train], .8))),
-      low_all = pred < quantile(pred, .2)
-    )
+    mutate(var_imp = grf::variable_importance(cf) %>% which.max,
+           train = train,
+           test = !train)
 }
 
 
@@ -61,11 +59,11 @@ causal_forest_helper <- function(data, covariates, ...) {
 #' @export
 #'
 #' @importFrom estimatr lm_robust
-best_predictor <- function(data, covariates) {
+best_predictor <- function(data, covariate_names, cuts = 20) {
   data.frame(
     inquiry = "best_predictor",
-    estimand = lapply(covariates, function(j) {
-      lm_robust(tau ~ cut(data[[j]], 20), data = data)$r.squared
+    estimand = lapply(covariate_names, function(j) {
+      lm_robust(tau ~ cut(data[[j]], cuts), data = data)$r.squared
     }) %>%
       unlist %>% which.max
   )

@@ -4,7 +4,7 @@
 \alias{conjoint_measurement}
 \title{Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels}
 \usage{
-conjoint_measurement(data)
+conjoint_measurement(data, utility_fn)
 }
 \arguments{
 \item{data}{A data.frame}

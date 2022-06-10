@@ -4,7 +4,7 @@
 \alias{best_predictor}
 \title{Best predictor function from causal_forest}
 \usage{
-best_predictor(data, covariates)
+best_predictor(data, covariate_names, cuts = 20)
 }
 \arguments{
 \item{data}{A data.frame of covariates}

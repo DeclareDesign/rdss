@@ -29,15 +29,15 @@ declaration_17.8 <-
                      Z2 = block_ra(Z1)) +
   declare_measurement(Y = reveal_outcomes(Y ~ Z1 + Z2)) +
   declare_estimator(Y ~ Z1, subset = (Z2 == 0), 
-                    inquiry = "CATE_Z1_Z2_0", label = 1) +
+                    inquiry = "CATE_Z1_Z2_0", label = "1") +
   declare_estimator(Y ~ Z1, subset = (Z2 == 1), 
-                    inquiry = "CATE_Z1_Z2_1", label = 2) +
+                    inquiry = "CATE_Z1_Z2_1", label = '2') +
   declare_estimator(Y ~ Z2, subset = (Z1 == 0), 
-                    inquiry = "CATE_Z2_Z1_0", label = 3) +
+                    inquiry = "CATE_Z2_Z1_0", label = "3") +
   declare_estimator(Y ~ Z2, subset = (Z1 == 1),
-                    inquiry = "CATE_Z2_Z1_1", label = 4) +
+                    inquiry = "CATE_Z2_Z1_1", label = "4") +
   declare_estimator(Y ~ Z1 + Z2, term = c("Z1", "Z2"), 
-                    inquiry = c("ATE_Z1", "ATE_Z2"), label = 5) +
+                    inquiry = c("ATE_Z1", "ATE_Z2"), label = "5") +
   declare_estimator(Y ~ Z1 + Z2 + Z1*Z2, term = "Z1:Z2", 
                     inquiry = c("diff_in_CATEs_Z1", "diff_in_CATEs_Z2"), 
-                    label = 6) 
+                    label = "6") 

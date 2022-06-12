@@ -9,7 +9,7 @@ designer_17.1 <-
         mu = c(mean_Y0, mean_Y1),
         Sigma = matrix(c(var_Y0, cov_Y0_Y1, cov_Y0_Y1, var_Y1), nrow = 2),
         empirical = TRUE # this line makes the means and variances "exact" in the sample data
-      ) %>%
+      ) |>
       magrittr::set_colnames(c("Y_Z_0", "Y_Z_1"))
     declare_model(data = fixed_sample) +
       declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0)) +

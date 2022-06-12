@@ -4,17 +4,17 @@ print('declaration_17.16.R'); library(DeclareDesign); library(rdddr); library(ti
 library(rdddr) # for helper functions
 library(spdep)
 library(interference)
-# Here we obtain the adjacency matrix.
+# Here we obtain the adjacency matrix
 adj_matrix <-
-  fairfax %>%
-  as("Spatial") %>%
-  poly2nb(queen = TRUE) %>%
+  fairfax |>
+  as("Spatial") |>
+  poly2nb(queen = TRUE) |>
   nb2mat(style = "B", zero.policy = TRUE)
 # Here we create a permutation matrix of possible random assignments
 ra_declaration <- declare_ra(N = 238, prob = 0.1)
 permutatation_matrix <- 
-  ra_declaration %>%
-  obtain_permutation_matrix(maximum_permutations = 10000) %>%
+  ra_declaration |>
+  obtain_permutation_matrix(maximum_permutations = 10000) |>
   t()
 declaration_17.16 <-
   declare_model(

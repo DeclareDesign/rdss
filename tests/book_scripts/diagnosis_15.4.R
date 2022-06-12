@@ -10,10 +10,10 @@ bootstrap_sims <- 3
 lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
   x_nm <- enexpr(x)
   grp_nm <- enexpr(groups)
-  tibble(!!x_nm := x, !!grp_nm := groups, order_by___ = order_by) %>% 
-    group_by(!!grp_nm) %>% 
-    mutate(!!x_nm := lag(!!x_nm, n = n, default = NA, order_by = order_by___)) %>% 
-    ungroup %>% 
+  tibble(!!x_nm := x, !!grp_nm := groups, order_by___ = order_by) |> 
+    group_by(!!grp_nm) |> 
+    mutate(!!x_nm := lag(!!x_nm, n = n, default = NA, order_by = order_by___)) |> 
+    ungroup |> 
     pull(!!x_nm)
 }
 did_multiplegt_tidy <- function(data, ...) {

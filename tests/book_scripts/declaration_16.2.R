@@ -8,7 +8,9 @@ declaration_16.2 <-
     type_D_0 = sample(
       size = N,
       replace = TRUE,
-      x = c("Always-Responder","Anti-Latino Discriminator","Never-Responder"),
+      x = c("Always-Responder",
+            "Anti-Latino Discriminator",
+            "Never-Responder"),
       prob = c(0.30, 0.05, 0.65)
     ),
     type_tau_i = rbinom(N, 1, 0.5),
@@ -19,9 +21,10 @@ declaration_16.2 <-
       type_D_0
     )
   ) +
-  declare_inquiry(ATE = mean((type_D_1 == "Anti-Latino Discriminator") -
-                               (type_D_0 == "Anti-Latino Discriminator")
-  )) +
+  declare_inquiry(
+    ATE = mean((type_D_1 == "Anti-Latino Discriminator") -
+                 (type_D_0 == "Anti-Latino Discriminator"))
+  ) +
   declare_assignment(D = complete_ra(N)) +
   declare_measurement(type = reveal_outcomes(type ~ D)) +
   # This part is about descriptive inference in each condition!

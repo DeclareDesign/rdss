@@ -19,9 +19,9 @@ diagnosands <- declare_diagnosands(
   cost = mean(10 * n_villages + 1 * n_villages * citizens_per_village)
 )
 diagnosis_12.2 <-
-  declaration_12.1 %>%
+  declaration_12.1 |>
   redesign(n_villages = c(192, 500),
-           citizens_per_village = c(25, 50, 75, 100)) %>%
+           citizens_per_village = c(25, 50, 75, 100)) |>
   diagnose_designs(diagnosands = diagnosands,
                    sims = sims,
                    bootstrap_sims = bootstrap_sims)

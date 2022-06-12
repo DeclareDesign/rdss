@@ -22,6 +22,6 @@ diagnosis_17.1 <-
                 var_Y1 = 2,
                 cov_Y0_Y1 = 0.5,
                 mean_Y0 = 1.0,
-                mean_Y1 = 1.75) %>% 
+                mean_Y1 = 1.75) |> 
   diagnose_designs(diagnosands = diagnosands, sims = sims, bootstrap_sims = bootstrap_sims)
 

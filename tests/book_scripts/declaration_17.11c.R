@@ -3,8 +3,8 @@ print('declaration_17.11c.R'); library(DeclareDesign); library(rdddr); library(t
 
 placebo_controlled_design <-
   MI +
-  declare_sampling(S = complete_rs(N)) +
-  declare_assignment(Z = conduct_ra(N = N)) +
+  declare_sampling(S = complete_rs(N, n = 200)) +
+  declare_assignment(Z = complete_ra(N)) +
   declare_measurement(X = if_else(type == "Complier", 1, 0),
                       D = reveal_outcomes(D ~ Z),
                       Y = reveal_outcomes(Y ~ D)) +

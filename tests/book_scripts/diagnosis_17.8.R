@@ -8,7 +8,7 @@ sims <- 3
 bootstrap_sims <- 3
 source("../book_scripts/declaration_17.8.R")
 diagnosis_17.8 <-
-  declaration_17.8 %>% 
-  redesign(N = seq(500, 3000, 500)) %>% 
+  declaration_17.8 |> 
+  redesign(N = seq(500, 3000, 500)) |> 
   diagnose_designs(sims = sims, bootstrap_sims = bootstrap_sims)
 

@@ -3,7 +3,7 @@ print('declaration_14.4.R'); library(DeclareDesign); library(rdddr); library(tid
 
 library(lme4)
 states <- 
-  as_tibble(state.x77) %>%
+  as_tibble(state.x77) |>
   transmute(
     state = rownames(state.x77),
     prop_of_US = Population / sum(Population),
@@ -26,7 +26,7 @@ declaration_14.4 <-
   ) +
   declare_inquiry(
     handler = function(data) {
-      states %>% transmute(
+      states |> transmute(
         state, 
         inquiry = "mean_policy_support", 
         estimand = state_mean
@@ -39,7 +39,7 @@ declaration_14.4 <-
       data = data,
       family = binomial(link = "logit")
     )
-    post_stratification_helper(model_fit, data = data)
+    post_stratification_helper(model_fit, data = data, group = state, weights = PS_weight)
   }),
   label = "Partial pooling",
   inquiry = "mean_policy_support")

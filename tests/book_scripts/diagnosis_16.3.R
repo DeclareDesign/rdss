@@ -8,8 +8,8 @@ sims <- 3
 bootstrap_sims <- 3
 source("../book_scripts/declaration_16.4.R")
 diagnosis_16.3 <- 
-  declaration_16.4 %>% 
+  declaration_16.4 |> 
   redesign(proportion_hiding = seq(from = 0, to = 0.3, by = 0.1), 
-           N = seq(from = 500, to = 2500, by = 500)) %>% 
+           N = seq(from = 500, to = 2500, by = 500)) |> 
   diagnose_design(sims = sims, bootstrap_sims = bootstrap_sims)
 

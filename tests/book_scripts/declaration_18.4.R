@@ -1,28 +1,25 @@
 print('declaration_18.4.R'); library(DeclareDesign); library(rdddr); library(tidyverse)
 
 
-type <- "fixed-effects"
+mu <- 0.2 # true PATE
+tau <- 0.0 # true SD of site-level ATEs
 design <-
   declare_model(
     N = 100,
     site = 1:N,
-    mu = 0.2,
-    tau = case_when(type == "random-effects" ~ 1,
-                    type == "fixed-effects" ~ 0),
     std.error = pmax(0.1, abs(rnorm(N, mean = 0.8, sd = 0.5))),
-    eta = rnorm(N),
-    theta = mu + tau * eta, # note when tau = 0, theta = mu 
+    theta = rnorm(N, mean = mu, sd = tau), # when tau = 0, theta = mu 
     estimate = rnorm(N, mean = theta, sd = std.error)
   ) + 
-  declare_inquiry(mu = first(mu), tau_sq = first(tau^2)) + 
+  declare_inquiry(mu = mu, tau_sq = tau^2) + 
   declare_estimator(
-    yi = estimate, sei = std.error, type = "REML",
+    yi = estimate, sei = std.error, method = "REML",
     .method = rma_helper, .summary = rma_mu_tau,
     term = c("mu", "tau_sq"), inquiry = c("mu", "tau_sq"),
     label = "random-effects") + 
   declare_estimator(
-    yi = estimate, sei = std.error, type = "FE",
+    yi = estimate, sei = std.error, method = "FE",
     .method = rma_helper, .summary = rma_mu_tau,
     term = c("mu", "tau_sq"), inquiry = c("mu", "tau_sq"),
     label = "fixed-effects")
-declaration_18.4 <- redesign(design, type = c("random-effects", "fixed-effects"))
+declaration_18.4 <- redesign(design, tau = c(0, 1))

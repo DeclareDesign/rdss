@@ -16,7 +16,7 @@ levels_list =
 # Conjectured utility function
 conjoint_utility <-
   function(data){
-    data %>%
+    data |>
       mutate(U = 0.25*(gender == "Woman")*(region %in% c("North", "East")) +
                0.5*(party == "Right")*(region %in% c("North", "South")) + uij)
   }
@@ -34,7 +34,8 @@ declaration_17.3_CONJOINT <-
                   levels_list = levels_list) +
   declare_assignment(handler = conjoint_assignment,
                      levels_list = levels_list) +
-  declare_measurement(handler = conjoint_measurement) +
-  declare_estimator(formula = choice ~ gender + party + region,
+  declare_measurement(handler = conjoint_measurement,
+                      utility_fn = conjoint_utility) +
+  declare_estimator(choice ~ gender + party + region,
                     respondent.id = "subject",
                     .method = amce)

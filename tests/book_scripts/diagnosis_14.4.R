@@ -9,6 +9,6 @@ bootstrap_sims <- 3
 source("../book_scripts/declaration_14.4.R")
 source("../book_scripts/declaration_14.5.R")
 diagnosis_14.4 <- 
-  declaration_14.5 %>% 
+  declaration_14.5 |> 
   diagnose_designs(sims = sims, bootstrap_sims = bootstrap_sims)
 

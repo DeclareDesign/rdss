@@ -9,7 +9,7 @@ declaration_14.5 <-
         formula = policy_support ~ HS + state,
         data = data
       )
-      post_stratification_helper(model_fit, data = data)
+      post_stratification_helper(model_fit, data = data, group = state, weights = PS_weight)
     }),
     label = "No pooling",
     inquiry = "mean_policy_support") +
@@ -19,7 +19,7 @@ declaration_14.5 <-
         formula = policy_support ~ HS,
         data = data
       )
-      post_stratification_helper(model_fit, data = data)
+      post_stratification_helper(model_fit, data = data, group = state, weights = PS_weight)
     }),
     label = "Full pooling",
     inquiry = "mean_policy_support")

@@ -24,4 +24,7 @@ MI <-
       conditions = list(Z = c(0, 1))
     )
   ) +
-  declare_inquiry(CACE = mean(Y_D_1[type == "Complier"] - Y_D_0[type == "Complier"]))
+  declare_inquiry(
+    CACE = mean(Y_D_1[type == "Complier"] - 
+                  Y_D_0[type == "Complier"])
+  )

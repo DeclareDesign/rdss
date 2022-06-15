@@ -24,7 +24,13 @@
 #' @format A data.frame
 "bonilla_tillery"
 
+#' Replication data for Foos, John, Muller, and Cunningham (2021), Journal of Politics (derived from from Dataverse 10.7910/DVN/NDPXND)
+#'
+#' @format A data.frame
+"foos_etal"
+
 #' Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133–1170
 #'
 #' @format A data.frame
 "clingingsmith_etal"
+

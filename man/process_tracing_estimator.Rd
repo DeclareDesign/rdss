@@ -13,7 +13,7 @@ process_tracing_estimator(causal_model, query, data, strategies)
 
 \item{data}{a single row dataset with data on nodes in the model}
 
-\item{strategies}{a list of sets of nodes examined}
+\item{strategies}{a vector describing sets of nodes to be examined e.g. c("X", "X-Y")}
 }
 \value{
 a data.frame of estimates
@@ -23,4 +23,13 @@ Draw conclusions from a model given a query, data, and process tracing strategie
 }
 \details{
 See https://book.declaredesign.org/observational-causal.html#process-tracing
+}
+\examples{
+
+process_tracing_estimator(
+  CausalQueries::make_model("X -> Y"),
+  "Y[X=1] > Y[X=0]",
+  data.frame(X=1, Y = 1),
+  "X-Y")
+
 }

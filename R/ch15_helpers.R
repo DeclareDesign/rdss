@@ -12,7 +12,7 @@
 #' @return a data.frame of estimates
 #'
 #' @export
-#' @example
+#' @examples
 #'
 #' process_tracing_estimator(
 #'   CausalQueries::make_model("X -> Y"),

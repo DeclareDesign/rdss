@@ -17,7 +17,7 @@ tidy.stanreg <- function(fit, conf.int = FALSE, conf.level = 0.95, exponentiate 
     return(invisible())
   }
 
-  ret <- broom.mixed::tidy(fit, conf.int = conf.int, conf.level = conf.level, ...)
+  ret <- broom.mixed:::tidy.stanreg(fit, conf.int = conf.int, conf.level = conf.level, ...)
 
   if (exponentiate) {
     ret <- broom:::exponentiate(ret)

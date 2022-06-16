@@ -11,7 +11,7 @@
 #' @return data.frame of results
 #'
 #' @export
-tidy.stanreg <- function(fit, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...) {
+tidy_stan <- function(fit, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...) {
   if(!requireNamespace("broom.mixed")){
     message("The tidy_exponentiate function requires the 'broom.mixed' package.")
     return(invisible())

@@ -158,12 +158,12 @@ conjoint_measurement <-
 #'
 #' @export
 conjoint_inquiries <-
-  function(data, levels_list) {
+  function(data, levels_list, utility_fn) {
 
     # AMCE helper: AMCE for a change of attribute from reference to level
 
     calculate_amce <-
-      function(data, levels_list, attribute, reference, level) {
+      function(data, levels_list, attribute, reference, level, utility_fn) {
 
         # A random draw of the other conjoint levels
         data <- conjoint_assignment(data, levels_list)
@@ -174,13 +174,13 @@ conjoint_inquiries <-
         # Is second_profile chosen when attribute = reference?
         A <- first_profiles %>%
           bind_rows(mutate(second_profiles,!!attribute := factor(reference))) %>%
-          conjoint_measurement() %>%
+          conjoint_measurement(utility_fn = utility_fn) %>%
           filter(profile == 2)
 
         # Is second_profile chosen when attribute = level?
         B <- first_profiles %>%
           bind_rows(mutate(second_profiles,!!attribute := factor(level))) %>%
-          conjoint_measurement()%>%
+          conjoint_measurement(utility_fn = utility_fn)%>%
           filter(profile == 2)
 
         # Average difference
@@ -201,7 +201,7 @@ conjoint_inquiries <-
       mutate(
         inquiry = paste0(attribute, level),
         estimand = pmap_dbl(inquiries_df, partial(
-          calculate_amce, data = data, levels_list = levels_list
+          calculate_amce, data = data, levels_list = levels_list, utility_fn = utility_fn
         ))
       )
   }

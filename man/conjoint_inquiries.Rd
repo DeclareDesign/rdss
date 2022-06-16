@@ -4,7 +4,7 @@
 \alias{conjoint_inquiries}
 \title{Conjoint experiment inquiries handler}
 \usage{
-conjoint_inquiries(data, levels_list)
+conjoint_inquiries(data, levels_list, utility_fn)
 }
 \arguments{
 \item{data}{A data.frame}

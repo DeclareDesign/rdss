@@ -17,6 +17,7 @@
 #'
 #' @importFrom dplyr mutate select all_of `%>%`
 #' @importFrom stats quantile
+#' @importFrom randomizr complete_rs
 #'
 #' @examples
 #'

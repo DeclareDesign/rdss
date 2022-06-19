@@ -28,3 +28,4 @@ Depends:
 Remotes:
     szonszein/interference,
     macartan/CausalQueries
+Config/testthat/edition: 3

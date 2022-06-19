@@ -1,74 +1,207 @@
-
-
-#' Helper function to obtain the observed exposure for the Aronow and Samii estimator
+#' Tidy predictions from rrreg
 #'
-#' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
+#' Runs prediction based on rrreg model fit and returns tidy data frame output
 #'
-#' @param obs_exposure A numeric vector
+#' See https://draft.declaredesign.org/experimental-descriptive.html#list-experiments
 #'
-#' @return a data.frame of observed exposure to a treatment created using the interference package
+#' @param fit a model fit object from rrreg in the rr package
 #'
-#' @importFrom tibble as_tibble
-#' @importFrom dplyr filter pull everything
-#' @importFrom tidyr pivot_longer
+#' @return a data.frame of predicted values
 #'
 #' @export
-#'
-get_exposure_AS <- function(obs_exposure) {
-  obs_exposure %>%
-    as_tibble() %>%
-    pivot_longer(everything()) %>%
-    filter(value == 1) %>%
-    pull(name)
+rr_predict_tidy <- function(fit) {
+
+  if(!requireNamespace("rr")){
+    message("The rr_forced_known function requires the 'rr' package.")
+    return(invisible())
+  }
+  pred <-
+    try(as.data.frame(predict(fit, avg = TRUE, quasi.bayes = TRUE)))
+  if (class(fit) != "try-error" & class(pred) != "try-error") {
+    names(pred) <- c("estimate", "std.error", "conf.low", "conf.high")
+    pred$p.value <-
+      with(pred, 2 * pnorm(-abs(estimate / std.error)))
+  } else {
+    pred <-
+      data.frame(
+        estimate = NA,
+        std.error = NA,
+        conf.low = NA,
+        conf.high = NA,
+        p.value = NA,
+        error = TRUE
+      )
+  }
+  pred
 }
 
-#' Tidy helper function for estimator_AS function
+#' Tidy estimates from the amce estimator
 #'
-#' Runs estimates estimation function from interference package and returns tidy data frame output
+#' Runs amce estimation function and returns tidy data frame output
 #'
-#' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @param data a data.frame
-#' @param permutatation_matrix a permuatation matrix of random assignments
-#' @param adj_matrix an adjacency matrix
+#' @param x an amce fit object from cjoint::amce
+#' @param alpha Confidence level
+#' @param ... Extra arguments to pass to tidy
 #'
 #' @return a data.frame of estimates
 #'
 #' @export
 #'
-#' @importFrom tibble tibble
+#' @importFrom dplyr `%>%` rename select mutate
+#' @importFrom stats qnorm
 #'
-estimator_AS_tidy <-
-  function(data, permutatation_matrix, adj_matrix) {
+#' @examples
+#'
+#' \donttest{
+#' library(cjoint)
+#'
+#' data(immigrationconjoint)
+#' data(immigrationdesign)
+#'
+#' # Run AMCE estimator using all attributes in the design
+#' results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
+#'                   `Country of Origin` + Job + `Job Experience` + `Job Plans` +
+#'                   `Reason for Application` + `Prior Entry`, data = immigrationconjoint,
+#'                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
+#'
+#' # Print summary
+#' tidy(results)
+#' }
+#'
+tidy.amce <-
+  function(x, alpha = 0.05, ...) {
 
-    if(!requireNamespace("interference")){
-      message("The estimator_AS_tidy function requires the 'interference' package.")
+    if(!requireNamespace("cjoint")){
+      message("The tidy function for amce objects requires the 'cjoint' package.")
       return(invisible())
     }
 
-    out_AS <-
-      interference::estimates(
-        obs_exposure =
-          interference::make_exposure_map_AS(adj_matrix = adj_matrix, tr_vector = data$Z, hop = 1),
-        obs_outcome = data$Y,
-        obs_prob_exposure = interference::make_exposure_prob(
-          potential_tr_vector = permutatation_matrix,
-          adj_matrix = adj_matrix,
-          exposure_map_fn = interference::make_exposure_map_AS,
-          exposure_map_fn_add_args = list(hop = 1)
-        ),
-        n_var_permutations = 30
+    z_score <- qnorm(1 - ((alpha) / 2))
+    summary_fit <- cjoint::summary.amce(x)
+    summary_fit$amce %>%
+      rename(
+        estimate = Estimate,
+        std.error = `Std. Err`,
+        statistic = `z value`,
+        p.value = `Pr(>|z|)`,
+        attribute = Attribute,
+        level = Level
+      ) %>%
+      select(-" ") %>%
+      mutate(
+        conf.low = estimate - z_score * std.error,
+        conf.high = estimate + z_score * std.error,
       )
-    tibble(
-      term = c(names(out_AS$tau_ht), names(out_AS$tau_h)),
-      inquiry = rep(c("total_ATE", "direct_ATE", "indirect_ATE"), 2),
-      estimator = rep(c("Horvitz-Thompson", "Hajek"), each = 3),
-      estimate = c(out_AS$tau_ht, out_AS$tau_h)
-      # something appears to have changed in the interference package;
-      # for the moment, only returning estimates, not variance estimates (2022-10-30)
-      #  variance = c(out_AS$var_tau_ht, out_AS$var_tau_h),
-      #  std.error = sqrt(variance),
-      #  conf.low = estimate - 1.96 * std.error,
-      #  conf.high = estimate + 1.96 * std.error
-    )
+  }
+
+
+#' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+#'
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+#'
+#' @param data A data.frame
+#' @param levels_list List of conjoint levels to assign
+#'
+#' @return a data.frame with random assignment added
+#'
+#' @export
+#'
+#' @importFrom purrr map
+#' @importFrom randomizr complete_ra
+#' @importFrom tibble as_tibble
+#'
+conjoint_assignment <-
+  function(data, levels_list) {
+    assignment_df <-
+      levels_list %>%
+      map( ~ complete_ra(N = nrow(data), conditions = .)) %>%
+      as_tibble()
+    data[,names(assignment_df)] <- assignment_df
+    data
+  }
+
+#' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+#'
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+#'
+#' @param data A data.frame
+#'
+#' @return a data.frame with XXX
+#'
+#' @export
+#'
+#' @importFrom dplyr group_by mutate ungroup
+#'
+conjoint_measurement <-
+  function(data, utility_fn) {
+    data %>%
+      utility_fn %>%
+      group_by(subject, task) %>%
+      mutate(choice = as.numeric(c(U[1] > U[2], U[1] <= U[2]))) %>%
+      ungroup()
+  }
+
+#' Conjoint experiment inquiries handler
+#'
+#' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+#'
+#' @param data A data.frame
+#' @param levels_list List of conjoint levels
+#'
+#' @return a data.frame of estimand values
+#'
+#' @importFrom dplyr filter `%>%` mutate bind_rows
+#' @importFrom rlang `!!` `:=`
+#' @importFrom purrr map_dbl map_chr map pmap_dbl as_vector
+#'
+#' @export
+conjoint_inquiries <-
+  function(data, levels_list, utility_fn) {
+
+    # AMCE helper: AMCE for a change of attribute from reference to level
+
+    calculate_amce <-
+      function(data, levels_list, attribute, reference, level, utility_fn) {
+
+        # A random draw of the other conjoint levels
+        data <- conjoint_assignment(data, levels_list)
+
+        first_profiles <- data %>% filter(profile == 1)
+        second_profiles <- data %>% filter(profile == 2)
+
+        # Is second_profile chosen when attribute = reference?
+        A <- first_profiles %>%
+          bind_rows(mutate(second_profiles,!!attribute := factor(reference))) %>%
+          conjoint_measurement(utility_fn = utility_fn) %>%
+          filter(profile == 2)
+
+        # Is second_profile chosen when attribute = level?
+        B <- first_profiles %>%
+          bind_rows(mutate(second_profiles,!!attribute := factor(level))) %>%
+          conjoint_measurement(utility_fn = utility_fn)%>%
+          filter(profile == 2)
+
+        # Average difference
+        mean(B$choice - A$choice)
+      }
+
+
+    repetitions <- levels_list %>% map_dbl(length) - 1
+
+    inquiries_df <-
+      tibble(
+        attribute = rep(names(levels_list), repetitions),
+        reference = rep(map_chr(levels_list, ~ .[1]), repetitions),
+        level = map(levels_list, ~ as.character(.[-1])) %>% as_vector()
+      )
+
+    inquiries_df %>%
+      mutate(
+        inquiry = paste0(attribute, level),
+        estimand = pmap_dbl(inquiries_df, partial(
+          calculate_amce, data = data, levels_list = levels_list, utility_fn = utility_fn
+        ))
+      )
   }

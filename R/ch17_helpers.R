@@ -127,8 +127,9 @@ conjoint_assignment <-
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
 #' @param data A data.frame
+#' @param utility_fn a function that takes data and returns an additional column called U, which represents the utility of the choice
 #'
-#' @return a data.frame with XXX
+#' @return a data.frame
 #'
 #' @export
 #'
@@ -149,6 +150,7 @@ conjoint_measurement <-
 #'
 #' @param data A data.frame
 #' @param levels_list List of conjoint levels
+#' @param utility_fn a function that takes data and returns an additional column called U, which represents the utility of the choice
 #'
 #' @return a data.frame of estimand values
 #'

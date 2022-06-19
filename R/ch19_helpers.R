@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @importFrom dplyr mutate select all_of `%>%`
-#' @importFrom stats quantile
+#' @importFrom stats quantile predict
 #' @importFrom randomizr complete_rs
 #'
 #' @examples
@@ -30,9 +30,7 @@
 #'  causal_forest_handler(covariate_names = c("A", "B")) %>%
 #'  ggplot(aes(A, pred)) + geom_point()
 #'
-
-
-causal_forest_handler <- function(data, covariate_names, share_train = .5, ...) {
+causal_forest_handler <- function(data, covariate_names, share_train = 0.5, ...) {
 
   if(!requireNamespace("grf")){
     message("The causal_forest_helper function requires the 'grf' package.")
@@ -66,7 +64,8 @@ causal_forest_handler <- function(data, covariate_names, share_train = .5, ...) 
 #' Best predictor function from causal_forest
 #'
 #' @param data A data.frame of covariates
-#' @param covariates A character vector of covariates to assess
+#' @param covariate_names A character vector of covariates to assess
+#' @param cuts Either a numeric vector of two or more unique cut points or a single number (greater than or equal to 2) giving the number of intervals into which each covariate is to be cut.
 #'
 #' @return a data.frame of the best predictors
 #'

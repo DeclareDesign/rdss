@@ -8,11 +8,11 @@ conjoint_measurement(data, utility_fn)
 }
 \arguments{
 \item{data}{A data.frame}
+
+\item{utility_fn}{a function that takes data and returns an additional column called U, which represents the utility of the choice}
 }
 \value{
 a data.frame
-
-utility_fn a function that takes data and returns an additional column called U, which represents the utility of the choice
 }
 \description{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments

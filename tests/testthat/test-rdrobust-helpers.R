@@ -3,7 +3,7 @@ test_that("tidy.rdrobust and rdrobust_helper work", {
 
   skip_if_not_installed("rdrobust")
 
-  library(tidyverse)
+  library(dplyr)
   library(DeclareDesign)
   library(rdrobust)
 

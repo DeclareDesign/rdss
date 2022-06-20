@@ -3,7 +3,7 @@ test_that("conjoint helpers work", {
 
   skip_if_not_installed("cjoint")
 
-  library(tidyverse)
+  library(dplyr)
   library(DeclareDesign)
   library(cjoint) # for the amce regression model
 

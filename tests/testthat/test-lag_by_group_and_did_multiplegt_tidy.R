@@ -3,7 +3,7 @@ test_that("lag_by_group and did_multiplegt_tidy work", {
 
   skip_if_not_installed("DIDmultiplegt")
 
-  library(tidyverse)
+  library(dplyr)
   library(DeclareDesign)
   library(DIDmultiplegt)
 

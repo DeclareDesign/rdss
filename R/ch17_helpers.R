@@ -119,7 +119,7 @@ conjoint_measurement <-
 #'
 #' @importFrom dplyr filter `%>%` mutate bind_rows
 #' @importFrom rlang `!!` `:=`
-#' @importFrom purrr map_dbl map_chr map pmap_dbl as_vector
+#' @importFrom purrr map_dbl map_chr map pmap_dbl as_vector partial
 #'
 #' @export
 conjoint_inquiries <-

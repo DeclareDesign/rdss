@@ -3,7 +3,7 @@ test_that("causal forest helpers work", {
 
   skip_if_not_installed("grf")
 
-  library(tidyverse)
+  library(dplyr)
   library(DeclareDesign)
   library(grf)
 

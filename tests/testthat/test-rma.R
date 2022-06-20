@@ -3,7 +3,7 @@ test_that("rma helpers work", {
 
   skip_if_not_installed("metafor")
 
-  library(tidyverse)
+  library(dplyr)
   library(DeclareDesign)
   library(metafor)
 

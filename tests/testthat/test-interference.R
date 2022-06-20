@@ -5,7 +5,7 @@ test_that("interference helpers work", {
   skip_if_not_installed("interference") # https://github.com/szonszein/interference
   skip_on_cran()
 
-  library(tidyverse)
+  library(dplyr)
   library(DeclareDesign)
   library(spdep)
   library(interference)

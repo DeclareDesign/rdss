@@ -6,7 +6,7 @@ Authors@R:
              person("Alexander", "Coppock", email = "acoppock@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-5733-2386")),
              person("Macartan", "Humphreys", email = "macartan@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7029-2326")))
 Description: The package is a companion to the book "Research Design: Declare, Diagnose, Redesign" (book.declaredesign.org). rdddr includes datasets, helper functions, and plotting components to enable use and replication of the book. 
-Imports: dplyr, rlang (>= 1.0.0), generics, ggplot2, tibble, tidyr, dataverse, readr, prediction, broom, purrr, estimatr, randomizr, DeclareDesign
+Imports: dplyr, rlang (>= 1.0.0), generics, ggplot2, tibble, tidyr, dataverse, readr, prediction, broom, purrr, fabricatr, estimatr, randomizr, DeclareDesign
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -21,8 +21,11 @@ Suggests:
     interference, 
     CausalQueries, 
     metafor, 
-    cjoint, 
-    rr
+    cjoint,
+    lme4,
+    rstanarm,
+    spdep, 
+    dplyr
 Depends: 
     R (>= 2.10)
 Remotes:

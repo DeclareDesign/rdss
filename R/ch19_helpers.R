@@ -21,14 +21,19 @@
 #'
 #' @examples
 #'
-#' fabricate(
+#' library(DeclareDesign)
+#' library(ggplot2)
+#'
+#' dat <- fabricate(
 #'    N = 1000,
 #'    A = rnorm(N),
 #'    B = rnorm(N),
 #'    Z = complete_rs(N),
-#'    Y = A*Z + rnorm(N)) %>%
-#'  causal_forest_handler(covariate_names = c("A", "B")) %>%
-#'  ggplot(aes(A, pred)) + geom_point()
+#'    Y = A*Z + rnorm(N))
+#'
+#' estimates <- causal_forest_handler(data = dat, covariate_names = c("A", "B"))
+#'
+#' ggplot(data = estimates, aes(A, pred)) + geom_point()
 #'
 causal_forest_handler <- function(data, covariate_names, share_train = 0.5, ...) {
 

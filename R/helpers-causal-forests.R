@@ -31,7 +31,8 @@
 #'    Z = complete_rs(N),
 #'    Y = A*Z + rnorm(N))
 #'
-#' estimates <- causal_forest_handler(data = dat, covariate_names = c("A", "B"))
+#' # note: remove num.threads = 1 to use more processors
+#' estimates <- causal_forest_handler(data = dat, covariate_names = c("A", "B"), num.threads = 1)
 #'
 #' ggplot(data = estimates, aes(A, pred)) + geom_point()
 #'

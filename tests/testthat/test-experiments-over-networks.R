@@ -4,6 +4,7 @@ test_that("interference helpers work", {
   skip_if_not_installed("spdep")
   skip_if_not_installed("interference") # https://github.com/szonszein/interference
   skip_on_cran()
+  skip("Skipped because interference not yet available on CRAN")
 
   library(dplyr)
   library(DeclareDesign)

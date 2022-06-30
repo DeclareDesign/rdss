@@ -20,5 +20,13 @@ a data.frame of estimates
 Runs estimates estimation function from interference package and returns tidy data frame output
 }
 \details{
+The estimator_AS_tidy function requires the 'interference' package, which is not yet available on CRAN.
+
+To use this function:
+\enumerate{
+\item install the developer version of interference via remotes::install_github('szonszein/interference') and
+\item install the developer version of rdddr via remotes::install_github('DeclareDesign/rdddr@remotes')
+}
+
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 }

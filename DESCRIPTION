@@ -18,7 +18,6 @@ Suggests:
     DIDmultiplegt, 
     broom.mixed, 
     grf, 
-    interference, 
     CausalQueries, 
     metafor, 
     cjoint,
@@ -27,6 +26,4 @@ Suggests:
     spdep
 Depends: 
     R (>= 2.10)
-Remotes:
-    szonszein/interference
 Config/testthat/edition: 3

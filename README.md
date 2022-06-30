@@ -1,2 +1,4 @@
-# DeclareDesignHelpers
-Helper functions for using DeclareDesign with common estimation and data management packages
+# rdddr 
+
+Helper functions for using the book *Research Design: Declaration, Diagnosis, Redesign* by Blair, Coppock, and Humphreys (forthcoming, Princeton University Press). 
+

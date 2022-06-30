@@ -1,6 +1,8 @@
 ## Submission
 
-Thanks for reviewing this first version.
+Thanks for reviewing this first version. 
+
+This is a resubmission. We fixed the DESCRIPTION and have reduced the number of cores used in tests (a dependency was unbeknownst to us using more than one).
 
 ## Test environments
 

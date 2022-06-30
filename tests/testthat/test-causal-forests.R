@@ -32,7 +32,8 @@ test_that("causal forest helpers work", {
     declare_measurement(
       handler = causal_forest_handler,
       covariate_names = covariate_names,
-      share_train = 0.5
+      share_train = 0.5,
+      num.threads = 1
     ) +
     declare_measurement(
       handler = fabricate,

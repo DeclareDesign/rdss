@@ -9,7 +9,7 @@ estimator_AS_tidy(data, permutatation_matrix, adj_matrix)
 \arguments{
 \item{data}{a data.frame}
 
-\item{permutatation_matrix}{a permuatation matrix of random assignments}
+\item{permutatation_matrix}{a permutation matrix of random assignments}
 
 \item{adj_matrix}{an adjacency matrix}
 }

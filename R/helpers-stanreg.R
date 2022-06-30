@@ -1,6 +1,6 @@
 
 
-#' Tidy results from a stanreg regresion and exponentiate the estimated coefficient
+#' Tidy results from a stanreg regression and exponentiate the estimated coefficient
 #'
 #' Note no standard errors or other summary statistics are provided
 #'

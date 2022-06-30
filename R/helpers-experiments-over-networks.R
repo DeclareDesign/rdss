@@ -35,7 +35,7 @@ get_exposure_AS <- function(obs_exposure) {
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
 #' @param data a data.frame
-#' @param permutatation_matrix a permuatation matrix of random assignments
+#' @param permutatation_matrix a permutation matrix of random assignments
 #' @param adj_matrix an adjacency matrix
 #'
 #' @return a data.frame of estimates

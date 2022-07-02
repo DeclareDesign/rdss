@@ -2,7 +2,7 @@
 
 Thanks for reviewing this first version. 
 
-This is a resubmission. We fixed DESCRIPTION per Victoria's email. 
+This is a second resubmission. We fixed DESCRIPTION per Victoria's email. 
 
 ## Test environments
 

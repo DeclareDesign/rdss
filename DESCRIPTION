@@ -1,5 +1,5 @@
 Package: rdddr
-Title: Companion Datasets and Functions for Blair, Coppock, and Humphreys (2022) "Research Design: Declare, Diagnose, Redesign" <https://book.declaredesign.org>
+Title: Companion Datasets and Functions for Blair, Coppock, and Humphreys (2022) "Research Design: Declare, Diagnose, Redesign"
 Version: 1.0.0
 Authors@R: 
     c(person("Graeme", "Blair", email = "graeme.blair@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9164-2102")),

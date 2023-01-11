@@ -25,7 +25,7 @@ The estimator_AS_tidy function requires the 'interference' package, which is not
 To use this function:
 \enumerate{
 \item install the developer version of interference via remotes::install_github('szonszein/interference') and
-\item install the developer version of rdddr via remotes::install_github('DeclareDesign/rdddr@remotes')
+\item install the developer version of rdss via remotes::install_github('DeclareDesign/rdss@remotes')
 }
 
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks

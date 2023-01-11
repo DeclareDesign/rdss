@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(rdddr)
+library(rdss)
 
-test_check("rdddr")
+test_check("rdss")

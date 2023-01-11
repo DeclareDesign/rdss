@@ -14,12 +14,12 @@
 #' @examples
 #'
 #'  \dontrun{
-#'  diagnosis_2.1 <- get_rdddr_file("diagnosis_2.1")
+#'  diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
 #'  diagnosis_2.1
 #'  }
 #'
 #'
-get_rdddr_file <- function(name) {
+get_rdss_file <- function(name) {
   get_dataframe_by_name(
     filename = paste0(name, ".rds"),
     .f = read_rds,

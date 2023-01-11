@@ -1,3 +1,3 @@
-# rdddr 1.0.0
+# rdss 1.0.0
 
 * First release to CRAN

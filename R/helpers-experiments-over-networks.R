@@ -30,7 +30,7 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 #' To use this function:
 #' 1) install the developer version of interference via remotes::install_github('szonszein/interference') and
-#' 2) install the developer version of rdddr via remotes::install_github('DeclareDesign/rdddr@remotes')
+#' 2) install the developer version of rdss via remotes::install_github('DeclareDesign/rdss@remotes')
 #'
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
@@ -46,6 +46,6 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 estimator_AS_tidy <-
   function(data, permutatation_matrix, adj_matrix) {
-    message("The estimator_AS_tidy function requires the 'interference' package, which is not yet available on CRAN. To use this function, install the developer version of interference via remotes::install_github('szonszein/interference') and then install the developer version of rdddr via remotes::install_github('DeclareDesign/rdddr@remotes')")
+    message("The estimator_AS_tidy function requires the 'interference' package, which is not yet available on CRAN. To use this function, install the developer version of interference via remotes::install_github('szonszein/interference') and then install the developer version of rdss via remotes::install_github('DeclareDesign/rdss@remotes')")
     return(invisible())
   }

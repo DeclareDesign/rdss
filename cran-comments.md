@@ -2,7 +2,7 @@
 
 We are submitting this package, with our very sincere apologies, in order to rename the package from rdddr (currently on CRAN) to rdss. 
 
-The package is a book package, and in the middle of the publication process the title of the book changed. In order to avoid significant confusion of users, we request the archiving of rdddr and the submission of rdss to CRAN. 
+The package is a book package, and in the middle of the publication process the title of the book changed. In order to avoid significant confusion of users, we request the archiving of rdddr and the submission of rdss to CRAN. There are currently few users of the package, because the book has not been released; we expect little effect on users as a result.
 
 We recognize this adds work for the CRAN team, which we appreciate, and hope you can understand the reasons. Thank you.
 

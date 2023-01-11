@@ -6,12 +6,12 @@ Authors@R:
              person("Alexander", "Coppock", email = "acoppock@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-5733-2386")),
              person("Macartan", "Humphreys", email = "macartan@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7029-2326")))
 Description: Helper functions to accompany the Blair, Coppock, and Humphreys (2022) "Research Design: Declare, Diagnose, Redesign" <https://book.declaredesign.org>. 'rdddr' includes datasets, helper functions, and plotting components to enable use and replication of the book. 
-Imports: dplyr, rlang (>= 1.0.0), generics, ggplot2, tibble, tidyr, dataverse, readr, prediction, broom, purrr, fabricatr, estimatr, randomizr, DeclareDesign
+Imports: dplyr, rlang (>= 1.0.0), generics, ggplot2, tibble, tidyr, dataverse, readr, prediction, broom, purrr, estimatr, randomizr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 3.0.0),
     rdrobust, 
@@ -23,7 +23,8 @@ Suggests:
     cjoint,
     lme4,
     rstanarm,
-    spdep
+    spdep,
+    DeclareDesign
 Depends: 
     R (>= 2.10)
 Config/testthat/edition: 3

@@ -1,8 +1,10 @@
 ## Submission
 
-Thanks for reviewing this first version. 
+We are submitting this package, with our very sincere apologies, in order to rename the package from rdddr (currently on CRAN) to rdss. 
 
-This is a third resubmission. We fixed the title in DESCRIPTION per Uwe's email. 
+The package is a book package, and in the middle of the publication process the title of the book changed. In order to avoid significant confusion of users, we request the archiving of rdddr and the submission of rdss to CRAN. 
+
+We recognize this adds work for the CRAN team, which we appreciate, and hope you can understand the reasons. Thank you.
 
 ## Test environments
 

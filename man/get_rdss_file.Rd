@@ -17,7 +17,7 @@ See https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HYV
 }
 \examples{
 
- \dontrun{
+ \donttest{
  diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
  diagnosis_2.1
  }

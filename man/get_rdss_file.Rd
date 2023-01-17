@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_replication_file.R
 \name{get_rdss_file}
 \alias{get_rdss_file}
-\title{Download a replication file from the dataverse archive for Research Design: Declare, Diagnose, Redesign}
+\title{Download a replication file from the dataverse archive for Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign}
 \usage{
 get_rdss_file(name)
 }
@@ -17,10 +17,8 @@ See https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HYV
 }
 \examples{
 
- \donttest{
- diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
- diagnosis_2.1
- }
-
-
+\donttest{
+diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
+diagnosis_2.1
+}
 }

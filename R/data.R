@@ -34,3 +34,10 @@
 #' @format A data.frame
 "clingingsmith_etal"
 
+#' Data used in student exercises for RDSS from LAPOP survey of Brazil in 2018
+#'
+#' See https://www.vanderbilt.edu/lapop/core-surveys.php for survey questionnaire
+#'
+#' @format A data.frame
+"lapop_brazil"
+

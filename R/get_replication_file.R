@@ -1,5 +1,5 @@
 
-#' Download a replication file from the dataverse archive for Research Design: Declare, Diagnose, Redesign
+#' Download a replication file from the dataverse archive for Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign
 #'
 #' See https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HYVPO5 for a full list of available files
 #'
@@ -13,13 +13,11 @@
 #'
 #' @examples
 #'
-#'  \dontrun{
-#'  diagnosis_2.1 <- get_rdddr_file("diagnosis_2.1")
-#'  diagnosis_2.1
-#'  }
-#'
-#'
-get_rdddr_file <- function(name) {
+#' \donttest{
+#' diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
+#' diagnosis_2.1
+#' }
+get_rdss_file <- function(name) {
   get_dataframe_by_name(
     filename = paste0(name, ".rds"),
     .f = read_rds,

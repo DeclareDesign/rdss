@@ -1,9 +1,9 @@
-#' rdddr package
+#' rdss package
 #'
-#' Companion datasets and functions for the book "Research Design: Declare, Diagnose, Redesign" (book.declaredesign.org)
+#' Companion datasets and functions for the book "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" (book.declaredesign.org)
 #'
 #' @docType package
-#' @name rdddr
+#' @name rdss
 NULL
 
 #' @importFrom generics tidy

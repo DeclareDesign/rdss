@@ -1,8 +1,6 @@
 ## Submission
 
-Thanks for reviewing this first version. 
-
-This is a third resubmission. We fixed the title in DESCRIPTION per Uwe's email. 
+We are resubmitting this after initial submission per the request of Beni Altmann, replacing \dontrun -> \donttest and shortening the title.
 
 ## Test environments
 

@@ -1,6 +1,6 @@
 ## Submission
 
-Thank you for revieweing this small patch which includes a new dataset.
+Thank you for reviewing this submission after rdss was taken off CRAN. A file was renamed on a third-party data host, which has now been resolved. This submission includes no changes to the package at all from the last version.
 
 ## Test environments
 

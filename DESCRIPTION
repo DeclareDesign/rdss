@@ -1,6 +1,6 @@
 Package: rdss
 Title: Companion Datasets and Functions for Research Design in the Social Sciences
-Version: 1.0.5
+Version: 1.0.6
 Authors@R: 
     c(person("Graeme", "Blair", email = "graeme.blair@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9164-2102")),
              person("Alexander", "Coppock", email = "acoppock@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-5733-2386")),

@@ -82,11 +82,27 @@
 #' diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
 #' diagnosis_2.1
 #' }
-get_rdss_file <- function(name) {
-  get_dataframe_by_name(
-    filename = paste0(name, ".rds"),
-    .f = read_rds,
-    dataset = "10.7910/DVN/HYVPO5",
-    server = "dataverse.harvard.edu"
-  )
+get_rdss_file <- function(name, verbose = TRUE) {
+  if(substr(name, 1, 9) == "diagnosis") {
+    return(get_dataframe_by_name(
+      filename = paste0(name, ".rds"),
+      .f = read_rds,
+      dataset = "10.7910/DVN/HYVPO5",
+      server = "dataverse.harvard.edu"
+    ))
+  } else if(substr(name, 1, 11) == "declaration") {
+    file_bin <- get_file_by_name(
+      filename = paste0(name, ".R"),
+      dataset = "10.7910/DVN/HYVPO5",
+      server = "dataverse.harvard.edu"
+    )
+    file_text <- rawToChar(file_bin)
+    file_lines <- strsplit(file_text, split = "\n")[[1]]
+    if(verbose) cat("\nDesign declaration:", name, "\n\n", file_text, "\n\n")
+    require(DeclareDesign)
+    new_env <- new.env()
+    return(eval(parse(text = file_lines), envir = new_env))
+  } else {
+    stop("Only declarations and diagnosis objects are currently supported.")
+  }
 }

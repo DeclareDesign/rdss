@@ -29,7 +29,7 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
 
   strategy_elements <- strategies %>% lapply(function(x) strsplit(x, "-")[[1]])
 
-  given <- CausalQueries::strategy_statements(data, strategy_elements)
+  given <- strategy_statements(data, strategy_elements)
 
   causal_model %>%
     CausalQueries::query_model(query = query, given = given) %>%
@@ -39,4 +39,36 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
 }
 
 
+#' Generate strategy statements given data
+#'
+#' Helper to generate statements of the form "X = 1 & Y = 0"
+#' from realized data on one observation
+#'
+#' @param data A data frame with one row
+#' @param strategies A list of strategies where each strategy
+#'   is a set of nodes to be observed
+#' @keywords helper
+#' @export
+#' @return A string
+#' @examples
+#'  data.frame(X = 1, M = 0, Y = NA) %>%
+#'  strategy_statements(list(c("X", "M", "Y"), "X", "Y"))
+#'
+strategy_statements <- function(data, strategies){
+
+  if(nrow(data) !=1) {
+    stop("strategy_statements is designed for single row datasets")
+  }
+
+  if(!is.list(strategies)) {
+    stop("please provide strategies within a list (e.g.(list(c('X', 'Y'))")
+  }
+
+  lapply(strategies, function(s)
+    (sapply(s, function(x)
+      paste(x, "==", data[x]))[sapply(s, function(x)
+        ! is.na(data[x]))]) %>%
+      paste(collapse = " & "))
+
+}
 

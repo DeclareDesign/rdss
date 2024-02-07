@@ -27,13 +27,13 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
     return(invisible())
   }
 
-  strategy_elements <- strategies %>% lapply(function(x) strsplit(x, "-")[[1]])
+  strategy_elements <- lapply(strategies, function(x) strsplit(x, "-")[[1]])
 
   given <- strategy_statements(data, strategy_elements)
 
-  causal_model %>%
-    CausalQueries::query_model(query = query, given = given) %>%
-    mutate(term = strategies, XY = paste0("X", data$X, "Y", data$Y)) %>%
+  causal_model |>
+    CausalQueries::query_model(query = query, given = given) |>
+    mutate(term = strategies, XY = paste0("X", data$X, "Y", data$Y)) |>
     select(term, XY, estimate = mean)
 
 }
@@ -51,7 +51,7 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
 #' @export
 #' @return A string
 #' @examples
-#'  data.frame(X = 1, M = 0, Y = NA) %>%
+#'  data.frame(X = 1, M = 0, Y = NA) |>
 #'  strategy_statements(list(c("X", "M", "Y"), "X", "Y"))
 #'
 strategy_statements <- function(data, strategies){
@@ -65,10 +65,9 @@ strategy_statements <- function(data, strategies){
   }
 
   lapply(strategies, function(s)
-    (sapply(s, function(x)
+    paste((sapply(s, function(x)
       paste(x, "==", data[x]))[sapply(s, function(x)
-        ! is.na(data[x]))]) %>%
-      paste(collapse = " & "))
+        ! is.na(data[x]))]), collapse = " & "))
 
 }
 

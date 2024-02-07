@@ -13,13 +13,22 @@
 #'
 #' @export
 #' @examples
-#'
+#' # Simple example showing ambiguity in attribution
 #' process_tracing_estimator(
-#'   CausalQueries::make_model("X -> Y"),
-#'   "Y[X=1] > Y[X=0]",
-#'   data.frame(X=1, Y = 1),
-#'   "X-Y")
+#'   causal_model = CausalQueries::make_model("X -> Y"),
+#'   query = "Y[X=1] > Y[X=0]",
+#'   data = data.frame(X=1, Y = 1),
+#'   strategies = "X-Y")
 #'
+#'# Example where M=1 acts as a hoop test
+#' process_tracing_estimator(
+#'   causal_model = CausalQueries::make_model("X -> M -> Y") |>
+#'    set_restrictions("Y[M=1] < Y[M=0]") |>
+#'    set_restrictions("M[X=1] < M[X=0]"),
+#'   query = "Y[X=1] > Y[X=0]",
+#'   data = data.frame(X=1, Y = 1, M = 0),
+#'   strategies = c("Y", "X-Y", "X-M-Y"))
+
 process_tracing_estimator <- function(causal_model, query, data, strategies) {
 
   if(!requireNamespace("CausalQueries")){
@@ -27,9 +36,16 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
     return(invisible())
   }
 
-  strategy_elements <- lapply(strategies, function(x) strsplit(x, "-")[[1]])
+  if(nrow(data) !=1) {
+    stop("please provide a single row dataset")
+  }
 
-  given <- strategy_statements(data, strategy_elements)
+  given <-
+    lapply(strategies, function(x) strsplit(x, "-")[[1]]) |>
+    lapply(function(s)
+      paste((sapply(s, function(x)
+      paste(x, "==", data[x]))[sapply(s, function(x)
+        ! is.na(data[x]))]), collapse = " & "))
 
   causal_model |>
     CausalQueries::query_model(query = query, given = given) |>
@@ -39,35 +55,4 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
 }
 
 
-#' Generate strategy statements given data
-#'
-#' Helper to generate statements of the form "X = 1 & Y = 0"
-#' from realized data on one observation
-#'
-#' @param data A data frame with one row
-#' @param strategies A list of strategies where each strategy
-#'   is a set of nodes to be observed
-#' @keywords helper
-#' @export
-#' @return A string
-#' @examples
-#'  data.frame(X = 1, M = 0, Y = NA) |>
-#'  strategy_statements(list(c("X", "M", "Y"), "X", "Y"))
-#'
-strategy_statements <- function(data, strategies){
-
-  if(nrow(data) !=1) {
-    stop("strategy_statements is designed for single row datasets")
-  }
-
-  if(!is.list(strategies)) {
-    stop("please provide strategies within a list (e.g.(list(c('X', 'Y'))")
-  }
-
-  lapply(strategies, function(s)
-    paste((sapply(s, function(x)
-      paste(x, "==", data[x]))[sapply(s, function(x)
-        ! is.na(data[x]))]), collapse = " & "))
-
-}
 

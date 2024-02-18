@@ -23,8 +23,8 @@
 #'# Example where M=1 acts as a hoop test
 #' process_tracing_estimator(
 #'   causal_model = CausalQueries::make_model("X -> M -> Y") |>
-#'    set_restrictions("Y[M=1] < Y[M=0]") |>
-#'    set_restrictions("M[X=1] < M[X=0]"),
+#'    CausalQueries::set_restrictions("Y[M=1] < Y[M=0]") |>
+#'    CausalQueries::set_restrictions("M[X=1] < M[X=0]"),
 #'   query = "Y[X=1] > Y[X=0]",
 #'   data = data.frame(X=1, Y = 1, M = 0),
 #'   strategies = c("Y", "X-Y", "X-M-Y"))

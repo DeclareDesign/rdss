@@ -37,7 +37,7 @@ results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
 
 # Print summary
-tidy(results)
+# tidy(results)
 }
 
 }

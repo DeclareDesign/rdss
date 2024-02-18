@@ -30,7 +30,7 @@
 #'                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
 #'
 #' # Print summary
-#' tidy(results)
+#' # tidy(results)
 #' }
 #'
 tidy.amce <-

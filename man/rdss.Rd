@@ -2,8 +2,19 @@
 % Please edit documentation in R/rdss.R
 \docType{package}
 \name{rdss}
+\alias{rdss-package}
 \alias{rdss}
 \title{rdss package}
 \description{
 Companion datasets and functions for the book "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" (book.declaredesign.org)
+}
+\author{
+\strong{Maintainer}: Graeme Blair \email{graeme.blair@gmail.com} (\href{https://orcid.org/0000-0001-9164-2102}{ORCID})
+
+Authors:
+\itemize{
+  \item Alexander Coppock \email{acoppock@gmail.com} (\href{https://orcid.org/0000-0002-5733-2386}{ORCID})
+  \item Macartan Humphreys \email{macartan@gmail.com} (\href{https://orcid.org/0000-0001-7029-2326}{ORCID})
+}
+
 }

@@ -25,11 +25,19 @@ Draw conclusions from a model given a query, data, and process tracing strategie
 See https://book.declaredesign.org/observational-causal.html#process-tracing
 }
 \examples{
-
+# Simple example showing ambiguity in attribution
 process_tracing_estimator(
-  CausalQueries::make_model("X -> Y"),
-  "Y[X=1] > Y[X=0]",
-  data.frame(X=1, Y = 1),
-  "X-Y")
+  causal_model = CausalQueries::make_model("X -> Y"),
+  query = "Y[X=1] > Y[X=0]",
+  data = data.frame(X=1, Y = 1),
+  strategies = "X-Y")
 
+# Example where M=1 acts as a hoop test
+process_tracing_estimator(
+  causal_model = CausalQueries::make_model("X -> M -> Y") |>
+   CausalQueries::set_restrictions("Y[M=1] < Y[M=0]") |>
+   CausalQueries::set_restrictions("M[X=1] < M[X=0]"),
+  query = "Y[X=1] > Y[X=0]",
+  data = data.frame(X=1, Y = 1, M = 0),
+  strategies = c("Y", "X-Y", "X-M-Y"))
 }

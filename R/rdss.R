@@ -2,9 +2,8 @@
 #'
 #' Companion datasets and functions for the book "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" (book.declaredesign.org)
 #'
-#' @docType package
 #' @name rdss
-NULL
+"_PACKAGE"
 
 #' @importFrom generics tidy
 #' @export

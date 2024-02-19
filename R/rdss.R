@@ -3,12 +3,7 @@
 #' Companion datasets and functions for the book "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" (book.declaredesign.org)
 #'
 #' @name rdss
-#' @keywords internal
 "_PACKAGE"
-
-## usethis namespace: start
-## usethis namespace: end
-NULL
 
 #' @importFrom generics tidy
 #' @export

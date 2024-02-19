@@ -13,13 +13,22 @@
 #'
 #' @export
 #' @examples
-#'
+#' # Simple example showing ambiguity in attribution
 #' process_tracing_estimator(
-#'   CausalQueries::make_model("X -> Y"),
-#'   "Y[X=1] > Y[X=0]",
-#'   data.frame(X=1, Y = 1),
-#'   "X-Y")
+#'   causal_model = CausalQueries::make_model("X -> Y"),
+#'   query = "Y[X=1] > Y[X=0]",
+#'   data = data.frame(X=1, Y = 1),
+#'   strategies = "X-Y")
 #'
+#'# Example where M=1 acts as a hoop test
+#' process_tracing_estimator(
+#'   causal_model = CausalQueries::make_model("X -> M -> Y") |>
+#'    CausalQueries::set_restrictions("Y[M=1] < Y[M=0]") |>
+#'    CausalQueries::set_restrictions("M[X=1] < M[X=0]"),
+#'   query = "Y[X=1] > Y[X=0]",
+#'   data = data.frame(X=1, Y = 1, M = 0),
+#'   strategies = c("Y", "X-Y", "X-M-Y"))
+
 process_tracing_estimator <- function(causal_model, query, data, strategies) {
 
   if(!requireNamespace("CausalQueries")){
@@ -27,13 +36,20 @@ process_tracing_estimator <- function(causal_model, query, data, strategies) {
     return(invisible())
   }
 
-  strategy_elements <- strategies %>% lapply(function(x) strsplit(x, "-")[[1]])
+  if(nrow(data) !=1) {
+    stop("please provide a single row dataset")
+  }
 
-  given <- CausalQueries::strategy_statements(data, strategy_elements)
+  given <-
+    lapply(strategies, function(x) strsplit(x, "-")[[1]]) |>
+    lapply(function(s)
+      paste((sapply(s, function(x)
+      paste(x, "==", data[x]))[sapply(s, function(x)
+        ! is.na(data[x]))]), collapse = " & "))
 
-  causal_model %>%
-    CausalQueries::query_model(query = query, given = given) %>%
-    mutate(term = strategies, XY = paste0("X", data$X, "Y", data$Y)) %>%
+  causal_model |>
+    CausalQueries::query_model(query = query, given = given) |>
+    mutate(term = strategies, XY = paste0("X", data$X, "Y", data$Y)) |>
     select(term, XY, estimate = mean)
 
 }

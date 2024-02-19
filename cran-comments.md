@@ -1,6 +1,6 @@
 ## Submission
 
-Submission to resolve roxygen issues wrt Kurt email, and a small feature change to one function.
+Submission to resolve roxygen issues wrt Kurt email, a small feature change to one function, and resubmitting after a dependency (DIDmultiplegt) was put back on CRAN. We implement it it conditionally on availability now.
 
 ## Test environments
 

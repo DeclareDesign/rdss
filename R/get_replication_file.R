@@ -158,12 +158,18 @@
 #' @examples
 #'
 #' \donttest{
-#' diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
-#' diagnosis_2.1
+#' # Requires internet access
+#' if(curl::has_internet()) {
+#'   diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
+#'   diagnosis_2.1
+#' }
 #' }
 get_rdss_file <- function(name, verbose = TRUE) {
   if(!"DeclareDesign" %in% loadedNamespaces()){
     stop("Please load DeclareDesign before running this function via library(DeclareDesign).")
+  }
+  if(!curl::has_internet()) {
+    stop("This function requires internet access.")
   }
   if(substr(name, 1, 9) == "diagnosis") {
     return(get_dataframe_by_name(

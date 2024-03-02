@@ -1,3 +1,8 @@
+# rdss 1.0.6
+
+* Update to new roxygen and R package documentation standards for CRAN.
+* Add ability to obtain declarations with get_rdss_file.
+
 # rdss 1.0.4
 
 * No changes (resubmission after CRAN archiving)

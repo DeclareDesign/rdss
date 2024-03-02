@@ -1,6 +1,6 @@
 ## Submission
 
-Thank you for reviewing this submission after rdss was taken off CRAN. A file was renamed on a third-party data host, which has now been resolved. This submission includes no changes to the package at all from the last version.
+Submission to resolve roxygen issues wrt Kurt email, a small feature change to one function, and resubmitting after a dependency (DIDmultiplegt) was put back on CRAN. We implement it it conditionally on availability now.
 
 ## Test environments
 

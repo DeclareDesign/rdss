@@ -1,3 +1,7 @@
+# rdss 1.0.8
+
+* switch from prediction to marginaleffects
+
 # rdss 1.0.6
 
 * Update to new roxygen and R package documentation standards for CRAN.

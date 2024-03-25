@@ -13,18 +13,17 @@
 #'
 #' @export
 #'
-#' @importFrom prediction prediction
+#' @importFrom marginaleffects predictions
 #' @importFrom dplyr group_by summarize
 #' @importFrom stats weighted.mean
 #' @importFrom rlang `!!` enquo
 #'
 post_stratification_helper <- function(model_fit, data, group, weights) {
-  prediction(
+  predictions(
     model_fit,
-    data = data,
-    allow.new.levels = TRUE,
+    newdata = data,
     type = "response"
   ) %>%
     group_by({{group}}) %>%
-    summarize(estimate = weighted.mean(fitted, !!enquo(weights)), .groups = "drop")
+    summarize(estimate = weighted.mean(estimate, !!enquo(weights)), .groups = "drop")
 }

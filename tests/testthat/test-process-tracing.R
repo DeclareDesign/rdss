@@ -2,7 +2,6 @@
 test_that("process_tracing_estimator works", {
 
   skip_if_not_installed("CausalQueries")
-  skip_on_cran()
 
   library(DeclareDesign)
   library(CausalQueries)

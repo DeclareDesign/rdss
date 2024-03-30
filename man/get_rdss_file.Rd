@@ -164,7 +164,10 @@ diagnosis_23a \cr
 \examples{
 
 \donttest{
-diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
-diagnosis_2.1
+# Requires internet access
+if(curl::has_internet()) {
+  diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")
+  diagnosis_2.1
+}
 }
 }

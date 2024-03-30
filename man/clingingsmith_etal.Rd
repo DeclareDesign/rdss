@@ -3,7 +3,7 @@
 \docType{data}
 \name{clingingsmith_etal}
 \alias{clingingsmith_etal}
-\title{Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133–1170}
+\title{Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133-1170}
 \format{
 A data.frame
 }
@@ -11,6 +11,6 @@ A data.frame
 clingingsmith_etal
 }
 \description{
-Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133–1170
+Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133-1170
 }
 \keyword{datasets}

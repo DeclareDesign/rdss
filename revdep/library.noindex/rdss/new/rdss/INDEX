@@ -1,0 +1,63 @@
+add_parens              Add parentheses around standard error estimates
+best_predictor          Best predictor function from causal_forest
+bonilla_tillery         Replication data for Bonilla and Tillery
+                        (2020), American Political Science Review
+                        (obtained from Dataverse 10.7910/DVN/IUZDQI)
+causal_forest_handler   Tidy helper function for causal_forest function
+clingingsmith_etal      Replication data for David Clingingsmith, Asim
+                        Ijaz Khwaja, Michael Kremer (2020): Estimating
+                        the Impact of The Hajj: Religion and Tolerance
+                        in Islam's Global Gathering. The Quarterly
+                        Journal of Economics, Volume 124, Issue 3,
+                        August 2009, Pages 1133–1170
+conjoint_assignment     Conjoint experiment assignment handler:
+                        conducts complete random assignment of all
+                        attribute levels
+conjoint_inquiries      Conjoint experiment inquiries handler
+conjoint_measurement    Conjoint experiment assignment handler:
+                        conducts complete random assignment of all
+                        attribute levels
+dd_palette              Access color palette used in the book "Research
+                        Design: Declare, Diagnose, Redesign" (Blair,
+                        Coppock, Humphreys)
+did_multiplegt_tidy     Tidy helper function for did_multiplegt
+estimator_AS_tidy       Tidy helper function for estimator_AS function
+fairfax                 Shapefile of Fairfax County, Virginia, voting
+                        precincts
+foos_etal               Replication data for Foos, John, Muller, and
+                        Cunningham (2021), Journal of Politics (derived
+                        from from Dataverse 10.7910/DVN/NDPXND)
+format_num              Round and pad a number to a specific decimal
+                        place
+get_exposure_AS         Helper function to obtain the observed exposure
+                        for the Aronow and Samii estimator
+get_rdss_file           Download a replication file from the dataverse
+                        archive for Research Design in the Social
+                        Sciences: Declaration, Diagnosis, and Redesign
+hex_add_alpha           Add alpha transparency to a color defined in
+                        hexadecimal
+la_voter_file           Voter file sample for Los Angeles County
+lag_by_group            Generate lags in grouped data
+lapop_brazil            Data used in student exercises for RDSS based
+                        on LAPOP survey of Brazil in 2018
+make_interval_entry     Format confidence intervals for nice printing
+make_se_entry           Format estimates and standard errors for nice
+                        printing
+post_stratification_helper
+                        Post stratification estimator helper
+process_tracing_estimator
+                        Process tracing estimator
+rdrobust_helper         Helper function for using rdrobust as a model
+                        in 'declare_estimator'
+rdss                    rdss package
+rma_helper              Helper function for rma function in metafor
+                        package
+rma_mu_tau              Extract mu and tau parameters from rma model
+                        fit
+theme_dd                ggplot Theme used in the book "Research Design:
+                        Declare, Diagnose, Redesign" (Blair, Coppock,
+                        Humphreys)
+tidy.amce               Tidy estimates from the amce estimator
+tidy.rdrobust           Tidy helper function for rdrobust function
+tidy_stan               Tidy results from a stanreg regresion and
+                        exponentiate the estimated coefficient

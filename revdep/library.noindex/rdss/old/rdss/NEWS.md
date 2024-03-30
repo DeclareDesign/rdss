@@ -1,6 +1,6 @@
-# rdss 1.0.10
+# rdss 1.0.8
 
-* Switch from prediction to marginaleffects
+* Documentation updates for CRAN.
 
 # rdss 1.0.6
 

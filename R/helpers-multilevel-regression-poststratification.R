@@ -22,7 +22,11 @@ post_stratification_helper <- function(model_fit, data, group, weights) {
   predictions(
     model_fit,
     newdata = data,
-    type = "response"
+    type = "response",
+    re.form = NA
+    # For this model type, `marginaleffects` only takes into account the
+    # uncertainty in fixed-effect parameters. You can use the `re.form=NA`
+    # argument to acknowledge this explicitly and silence this warning.
   ) %>%
     group_by({{group}}) %>%
     summarize(estimate = weighted.mean(estimate, !!enquo(weights)), .groups = "drop")

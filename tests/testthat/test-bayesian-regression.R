@@ -19,6 +19,6 @@ test_that("tidy_stan works", {
       inquiry = "mean_age"
     )
 
-  expect_error(simulate_design(declaration_9.3, sims = 1), NA)
+  expect_error(simulate_design(declaration_9.3, sims = 1, future.seed = FALSE), NA)
 
 })

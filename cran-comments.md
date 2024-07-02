@@ -1,6 +1,6 @@
 ## Submission
 
-Submission to resolve internet connection-required example. 
+rdss 1.0.10 was archived off CRAN, principally because the `prediction` package was archived. This version switches to the `marginaleffects` package.
 
 ## Test environments
 

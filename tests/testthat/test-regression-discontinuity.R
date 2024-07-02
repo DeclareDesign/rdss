@@ -33,6 +33,6 @@ test_that("tidy.rdrobust and rdrobust_helper work", {
       inquiry = "LATE",
       label = "optimal"
     )
-  expect_error(simulate_design(declaration_16.5, sims = 1), NA)
+  expect_error(simulate_design(declaration_16.5, sims = 1, future.seed = FALSE), NA)
 
 })

@@ -56,6 +56,6 @@ test_that("causal forest helpers work", {
     declare_estimator(handler = label_estimator(get_best_predictor),
                       inquiry = "best_predictor", label = "cf")
 
-  expect_error(simulate_design(declaration_19.1, sims = 1), NA)
+  expect_error(simulate_design(declaration_19.1, sims = 1, future.seed = FALSE), NA)
 
 })

@@ -48,6 +48,6 @@ test_that("conjoint helpers work", {
                       respondent.id = "subject",
                       .method = amce)
 
-  expect_error(simulate_design(declaration_17.5, sims = 1), NA)
+  expect_error(simulate_design(declaration_17.5, sims = 1, future.seed = FALSE), NA)
 
 })

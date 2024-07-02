@@ -34,6 +34,6 @@ test_that("rma helpers work", {
 
   declaration_19.3 <- redesign(design, tau = c(0, 1))
 
-  expect_error(simulate_design(declaration_19.3, sims = 1), NA)
+  expect_error(simulate_design(declaration_19.3, sims = 1, future.seed = FALSE), NA)
 
 })

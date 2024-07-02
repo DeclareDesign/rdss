@@ -49,6 +49,6 @@ test_that("post_stratification_helper works", {
     label = "Partial pooling",
     inquiry = "mean_policy_support")
 
-  expect_error(simulate_design(declaration_15.4, sims = 1), NA)
+  expect_error(simulate_design(declaration_15.4, sims = 1, future.seed = FALSE), NA)
 
 })

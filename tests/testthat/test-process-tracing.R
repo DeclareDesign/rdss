@@ -29,6 +29,6 @@ test_that("process_tracing_estimator works", {
       query = "Y[X=1] - Y[X=0]",
       strategies = strategies)
 
-  expect_error(simulate_design(declaration_16.1, sims = 1), NA)
+  expect_error(simulate_design(declaration_16.1, sims = 1, future.seed = FALSE), NA)
 
 })

@@ -1,6 +1,6 @@
 ## Submission
 
-Addresses possible CRAN deletion of the package `prediction` package. This version switches to the `marginaleffects` package.
+rdss 1.0.1 was archived off CRAN, principally because the `prediction` package was archived. This version switches to the `marginaleffects` package.
 
 ## Test environments
 

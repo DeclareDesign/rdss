@@ -13,18 +13,21 @@
 #'
 #' @export
 #'
-#' @importFrom prediction prediction
+#' @importFrom marginaleffects predictions
 #' @importFrom dplyr group_by summarize
 #' @importFrom stats weighted.mean
 #' @importFrom rlang `!!` enquo
 #'
 post_stratification_helper <- function(model_fit, data, group, weights) {
-  prediction(
+  predictions(
     model_fit,
-    data = data,
-    allow.new.levels = TRUE,
-    type = "response"
+    newdata = data,
+    type = "response",
+    re.form = NA
+    # For this model type, `marginaleffects` only takes into account the
+    # uncertainty in fixed-effect parameters. You can use the `re.form=NA`
+    # argument to acknowledge this explicitly and silence this warning.
   ) %>%
     group_by({{group}}) %>%
-    summarize(estimate = weighted.mean(fitted, !!enquo(weights)), .groups = "drop")
+    summarize(estimate = weighted.mean(estimate, !!enquo(weights)), .groups = "drop")
 }

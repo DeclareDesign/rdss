@@ -1,3 +1,11 @@
+# rdss 1.0.12
+
+* address bugs with future package
+
+# rdss 1.0.10
+
+* Switch from prediction to marginaleffects.
+
 # rdss 1.0.8
 
 * Documentation updates for CRAN.

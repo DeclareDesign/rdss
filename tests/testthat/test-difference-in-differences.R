@@ -51,11 +51,12 @@ test_that("lag_by_group and did_multiplegt_tidy work", {
       G = "units",
       T = "periods",
       D = "D",
+      mode = "old",
       handler = label_estimator(did_multiplegt_tidy),
       inquiry = c("ATT", "ATT_switchers"),
       label = "chaisemartin"
     )
 
-  expect_error(suppressWarnings(simulate_design(declaration_16.3, sims = 1)), NA)
+  expect_error(suppressWarnings(simulate_design(declaration_16.3, sims = 1, future.seed = FALSE)), NA)
 
 })

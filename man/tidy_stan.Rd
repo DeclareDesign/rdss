@@ -16,7 +16,7 @@ tidy_stan(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 
 \item{conf.level}{The confidence level to use for the confidence interval if conf.int = TRUE. Must be strictly greater than 0 and less than 1. Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{exponentiate}{Logical indicating whether or not to exponentiate the the coefficient estimates. Defaults to FALSE. Note that standard errors are not included when \code{exponentiate = TRUE}.}
+\item{exponentiate}{Logical indicating whether or not to exponentiate the the coefficient estimates. Defaults to FALSE.}
 
 \item{...}{Other arguments to broom.mixed::tidy}
 }
@@ -28,7 +28,7 @@ data.frame of results
 \description{
 Note no standard errors or other summary statistics are provided
 
-Note no standard errors or other summary statistics are provided
+This function is deprecated. Please use the 'tidy' function from the 'broom.mixed' package.
 }
 \details{
 See https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations

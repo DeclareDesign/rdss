@@ -163,7 +163,7 @@ diagnosis_23a \cr
 }
 \examples{
 
-\donttest{
+\dontrun{
 # Requires internet access
 if(curl::has_internet()) {
   diagnosis_2.1 <- get_rdss_file("diagnosis_2.1")

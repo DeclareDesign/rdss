@@ -1,3 +1,7 @@
+# rdss 1.0.14
+
+* deprecates tidy_stan in favor of new broom.mixed::tidy function
+
 # rdss 1.0.12
 
 * address bugs with future package

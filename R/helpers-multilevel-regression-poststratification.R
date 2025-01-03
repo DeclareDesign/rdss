@@ -24,7 +24,7 @@ post_stratification_helper <- function(model_fit, data, group, weights) {
     return(invisible())
   }
 
-  predictions(
+  marginaleffects::predictions(
     model_fit,
     newdata = data,
     type = "response",

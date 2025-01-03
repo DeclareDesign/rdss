@@ -1,13 +1,13 @@
 ## Submission
 
-rdss 1.0.10 was archived off CRAN, principally because the `prediction` package was archived. This version switches to the `marginaleffects` package.
+rdss 1.0.12 was archived off CRAN, due to an issue which was intermittent in the Additional_issues on CRAN. This has been fixed. 
 
 ## Test environments
 
 * local OS X install (release)
 * ubuntu on github actions (devel, release, oldrel)
-* windows on github actions (devel, release, oldrel)
-* OS X on Github actions (devel, release, oldrel)
+* windows on github actions (release)
+* OS X on Github actions (release)
 * win-builder (devel, release, oldrel)
 
 ## R CMD check results

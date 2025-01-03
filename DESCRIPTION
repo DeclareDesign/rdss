@@ -6,7 +6,7 @@ Authors@R:
              person("Alexander", "Coppock", email = "acoppock@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-5733-2386")),
              person("Macartan", "Humphreys", email = "macartan@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7029-2326")))
 Description: Helper functions to accompany the Blair, Coppock, and Humphreys (2022) "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" <https://book.declaredesign.org>. 'rdss' includes datasets, helper functions, and plotting components to enable use and replication of the book. 
-Imports: dplyr, rlang (>= 1.0.0), generics, ggplot2, tibble, tidyr, dataverse, readr, marginaleffects, broom, purrr, estimatr, randomizr
+Imports: dplyr, rlang (>= 1.0.0), generics, ggplot2, tibble, tidyr, dataverse, readr, broom, purrr, estimatr, randomizr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -17,6 +17,7 @@ Suggests:
     rdrobust, 
     DIDmultiplegt, 
     broom.mixed, 
+    marginaleffects,
     grf, 
     CausalQueries, 
     metafor, 

@@ -13,13 +13,18 @@
 #'
 #' @export
 #'
-#' @importFrom marginaleffects predictions
 #' @importFrom dplyr group_by summarize
 #' @importFrom stats weighted.mean
 #' @importFrom rlang `!!` enquo
 #'
 post_stratification_helper <- function(model_fit, data, group, weights) {
-  predictions(
+
+  if(!requireNamespace("marginaleffects")){
+    message("The post_stratification_helper function requires the 'marginaleffects' package.")
+    return(invisible())
+  }
+
+  marginaleffects::predictions(
     model_fit,
     newdata = data,
     type = "response",

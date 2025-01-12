@@ -1,3 +1,8 @@
+# rdss 1.0.14
+
+* fixes issue with intermittent test failure
+* deprecates tidy_stan in favor of new broom.mixed::tidy function
+
 # rdss 1.0.12
 
 * address bugs with future package

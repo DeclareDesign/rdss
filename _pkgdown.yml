@@ -35,6 +35,10 @@ navbar:
     href: reference/index.html
 
 reference:
+- title: Package
+  contents:
+  - rdss
+
 - title: Replication tools
   contents:
   - get_rdss_file
@@ -45,16 +49,26 @@ reference:
   - causal_forest_handler
   - rma_helper
   - rdrobust_helper
-  - poststratification_helper
+  - post_stratification_helper
   - did_multiplegt_tidy
   - estimator_AS_tidy
+  - process_tracing_estimator
+  - rma_mu_tau
 
-- title: Tidy helpers
+- title: Helpers
+  contents:
+  - best_predictor
+  - conjoint_assignment
+  - conjoint_inquiries
+  - conjoint_measurement
+  - get_exposure_AS
+  - lag_by_group
+
+- title: Tidiers
   description: These functions declare research design steps
   contents:
-  - tidy_stan
-  - tidy(<amce>)
-  - tidy(<rdrobust>)
+  - tidy.amce
+  - tidy.rdrobust
 
 - title: Data
   description: These functions operate on declared designs
@@ -65,3 +79,15 @@ reference:
   - foos_etal
   - la_voter_file
   - lapop_brazil
+
+- title: Utilities
+  description: These functions operate on declared designs
+  contents:
+  - add_parens
+  - format_num
+  - make_interval_entry
+  - make_se_entry
+  - theme_dd
+  - dd_palette
+  - hex_add_alpha
+  - tidy_stan

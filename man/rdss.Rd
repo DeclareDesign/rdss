@@ -8,6 +8,13 @@
 \description{
 Companion datasets and functions for the book "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" (book.declaredesign.org)
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://declaredesign.org/r/rdss}
+}
+
+}
 \author{
 \strong{Maintainer}: Graeme Blair \email{graeme.blair@gmail.com} (\href{https://orcid.org/0000-0001-9164-2102}{ORCID})
 

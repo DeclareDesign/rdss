@@ -1,6 +1,6 @@
 ---
 output: github_document
-title: "randomizr: Tools for random assignment and random sampling"
+title: "rdss: Helper functions for Research Design in the Social Sciences book"
 ---
 
 [![CRAN status](https://www.r-pkg.org/badges/version/rdss)](https://cran.r-project.org/package=rdss)

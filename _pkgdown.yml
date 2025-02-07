@@ -1,0 +1,67 @@
+url: https://declaredesign.org/r/rdss
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#0054AD"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
+
+development:
+  mode: auto
+
+navbar:
+  right:
+  - text: "Software"
+    menu:
+      - text: DeclareDesign
+        href: http://declaredesign.org/r/declaredesign/
+      - text: randomizr
+        href: https://declaredesign.org/r/randomizr/
+      - text: fabricatr
+        href: https://declaredesign.org/r/fabricatr/
+      - text: estimatr
+        href: https://declaredesign.org/r/estimatr/
+      - text: rdss
+        href: https://declaredesign.org/r/rdss/
+      - text: DesignLibrary
+        href: https://declaredesign.org/r/designlibrary/
+      - text: DesignWizard
+        href: https://eos.wzb.eu/ipi/DDWizard/
+  - text: declaredesign.org
+    href: https://declaredesign.org
+  left:
+  - text: Reference
+    href: reference/index.html
+
+reference:
+- title: Replication tools
+  contents:
+  - get_rdss_file
+
+- title: Tidy helpers
+  description: These functions declare research design steps
+  contents:
+  - causal_forest_handler
+  - rma_helper
+  - rdrobust_helper
+  - poststratification_helper
+  - did_multiplegt_tidy
+  - estimator_AS_tidy
+
+- title: Tidy helpers
+  description: These functions declare research design steps
+  contents:
+  - tidy_stan
+  - tidy(<amce>)
+  - tidy(<rdrobust>)
+
+- title: Data
+  description: These functions operate on declared designs
+  contents:
+  - bonilla_tillery
+  - clingingsmith_etal
+  - fairfax
+  - foos_etal
+  - la_voter_file
+  - lapop_brazil

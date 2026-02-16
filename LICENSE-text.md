@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2021
+    COPYRIGHT HOLDER: Graeme Blair, Alexander Coppock, and Macartan Humphreys

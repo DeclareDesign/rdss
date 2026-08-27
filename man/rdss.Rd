@@ -11,7 +11,9 @@ Companion datasets and functions for the book "Research Design in the Social Sci
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://declaredesign.org/r/rdss}
+  \item \url{https://declaredesign.org/r/rdss/}
+  \item \url{https://github.com/DeclareDesign/rdss}
+  \item Report bugs at \url{https://github.com/DeclareDesign/rdss/issues}
 }
 
 }
@@ -20,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Graeme Blair \email{graeme.blair@gmail.com} (\href{https://orcid.org/0000-0001-9164-2102}{ORCID})
   \item Alexander Coppock \email{acoppock@gmail.com} (\href{https://orcid.org/0000-0002-5733-2386}{ORCID})
   \item Macartan Humphreys \email{macartan@gmail.com} (\href{https://orcid.org/0000-0001-7029-2326}{ORCID})
 }

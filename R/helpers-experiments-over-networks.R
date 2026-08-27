@@ -37,7 +37,7 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 #' @param data A `data.frame` containing the observed data.
 #'
-#' @param permutation_matrix A matrix of random treatment assignments. Each row
+#' @param p_matrix A matrix of random treatment assignments. Each row
 #'   corresponds to one permutation of the treatment vector.
 #'
 #' @param adj_matrix An adjacency matrix defining the network structure. This

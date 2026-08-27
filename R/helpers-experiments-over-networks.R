@@ -27,18 +27,22 @@ get_exposure_AS <- function(obs_exposure) {
 #' Runs estimates estimation function from interference package and returns tidy data frame output
 #'
 #'
-#' The estimator_AS_tidy function requires the 'interference' package, which is not yet available on CRAN.
+#' The estimator_AS_tidy function requires the 'interference' package, which is not available on CRAN.
 #'
-#' To use this function:
-#' 1) install the developer version of interference via remotes::install_github('szonszein/interference') and
-#' 2) install the developer version of rdss via remotes::install_github('DeclareDesign/rdss@remotes')
+#' To use this function, install it with
+#' remotes::install_github('szonszein/interference')
+#'
+#' Without it the function returns nothing and explains why, so a design that
+#' includes it still declares and diagnoses.
 #'
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
 #' @param data A `data.frame` containing the observed data.
 #'
-#' @param p_matrix A matrix of random treatment assignments. Each row
-#'   corresponds to one permutation of the treatment vector.
+#' @param permutatation_matrix A matrix of random treatment assignments. Each
+#'   column corresponds to one permutation of the treatment vector, as returned
+#'   by `t(obtain_permutation_matrix(declaration))`. The exposure probabilities
+#'   are computed from it.
 #'
 #' @param adj_matrix An adjacency matrix defining the network structure. This
 #'   can be created, for example, as follows:
@@ -49,17 +53,6 @@ get_exposure_AS <- function(obs_exposure) {
 #'     spdep::nb2mat(style = "B", zero.policy = TRUE)
 #'   }
 #'
-#' @param obs_prob_exposure A set of exposure probabilities. These can be
-#'   generated, for example, using:
-#'   \preformatted{
-#'   prob_exposure <- interference::make_exposure_prob(
-#'     potential_tr_vector = permutations,
-#'     adj_matrix = adjacency,
-#'     exposure_map_fn = interference::make_exposure_map_AS,
-#'     exposure_map_fn_add_args = list(hop = 1)
-#'   )
-#'   }
-#'
 #' @return a data.frame of estimates
 #'
 #' @export
@@ -67,20 +60,33 @@ get_exposure_AS <- function(obs_exposure) {
 #' @importFrom tibble tibble
 #'
 estimator_AS_tidy <-
-  function(data, p_matrix, adj_matrix, obs_prob_exposure) {
+  function(data, permutatation_matrix, adj_matrix) {
 
-    obs_exposure <-
-      interference::make_exposure_map_AS(
-        adj_matrix = adj_matrix,
-        tr_vector = data$Z,
-        hop = 1
+    if (!requireNamespace("interference", quietly = TRUE)) {
+      message(
+        "The estimator_AS_tidy function requires the 'interference' package, ",
+        "which is not available on CRAN. Install it with ",
+        "remotes::install_github('szonszein/interference')"
       )
+      return(invisible())
+    }
 
     out_AS <-
       interference::estimates(
-        obs_exposure = obs_exposure,
+        obs_exposure =
+          interference::make_exposure_map_AS(
+            adj_matrix = adj_matrix,
+            tr_vector = data$Z,
+            hop = 1
+          ),
         obs_outcome = data$Y,
-        obs_prob_exposure = obs_prob_exposure,
+        obs_prob_exposure =
+          interference::make_exposure_prob(
+            potential_tr_vector = permutatation_matrix,
+            adj_matrix = adj_matrix,
+            exposure_map_fn = interference::make_exposure_map_AS,
+            exposure_map_fn_add_args = list(hop = 1)
+          ),
         n_var_permutations = 30
       )
 
@@ -91,4 +97,3 @@ estimator_AS_tidy <-
       estimate = c(out_AS$tau_ht, out_AS$tau_h)
     )
   }
-

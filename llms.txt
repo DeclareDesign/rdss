@@ -8,7 +8,6 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/rdss?color=green)](http
 status](https://github.com/DeclareDesign/rdss/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DeclareDesign/rdss/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/DeclareDesign/rdss/graph/badge.svg)](https://app.codecov.io/gh/DeclareDesign/rdss)
-[![Replications](https://softwarecite.com/badge/rdss)](https://softwarecite.com/package/rdss)
 
 Helper functions for using the book [*Research Design in the Social
 Sciences: Declaration, Diagnosis,

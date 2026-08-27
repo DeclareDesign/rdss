@@ -20,6 +20,7 @@ estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
   An adjacency matrix defining the network structure. This can be
   created, for example, as follows:
 
+
         adjacency <- fairfax |>
           as("Spatial") |>
           spdep::poly2nb(queen = TRUE) |>
@@ -30,6 +31,7 @@ estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
 
   A set of exposure probabilities. These can be generated, for example,
   using:
+
 
         prob_exposure <- interference::make_exposure_prob(
           potential_tr_vector = permutations,

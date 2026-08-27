@@ -172,6 +172,7 @@ diagnosis_23a
 ## Examples
 
 ``` r
+
 if (FALSE) { # \dontrun{
 # Requires internet access
 if(curl::has_internet()) {

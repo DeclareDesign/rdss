@@ -25,6 +25,7 @@ A character vector with enclosing parentheses
 ## Examples
 
 ``` r
+
 std.error <- c(0.12, 0.001, 1.2)
 add_parens(std.error)
 #> [1] "(0.120)" "(0.001)" "(1.200)"

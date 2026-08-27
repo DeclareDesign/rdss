@@ -40,6 +40,7 @@ See ?causal_forest for further details
 ## Examples
 
 ``` r
+
 library(DeclareDesign)
 #> Loading required package: randomizr
 #> Loading required package: fabricatr

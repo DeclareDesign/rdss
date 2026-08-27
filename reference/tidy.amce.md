@@ -35,6 +35,7 @@ https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiment
 ## Examples
 
 ``` r
+
 # \donttest{
 library(cjoint)
 #> Loading required package: sandwich
@@ -55,8 +56,14 @@ library(cjoint)
 #> 
 #>     dotchart
 #> cjoint: AMCE Estimator for Conjoint Experiments
-#> Version: 2.1.1
-#> Authors: Soubhik Barari, Elissa Berwick, Jens Hainmueller, Daniel Hopkins, Sean Liu, Anton Strezhnev, Teppei Yamamoto
+#> Version: 2.1.3
+#> Authors: Soubhik Barari [aut],
+#>   Elissa Berwick [aut],
+#>   Jens Hainmueller [aut],
+#>   Daniel Hopkins [aut],
+#>   Sean Liu [aut],
+#>   Anton Strezhnev [aut, cre],
+#>   Teppei Yamamoto [aut]
 
 data(immigrationconjoint)
 data(immigrationdesign)

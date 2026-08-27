@@ -29,6 +29,7 @@ a character vector of formatted estimates and standard errors
 ## Examples
 
 ``` r
+
 estimate <- c(0.07, 0.005, -4)
 std.error <- c(0.12, 0.001, 1.2)
 

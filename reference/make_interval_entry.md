@@ -29,6 +29,7 @@ a character vector of intervals
 ## Examples
 
 ``` r
+
 conf.low <- c(-0.1652, 0.00304, -6.352)
 conf.high <- c(0.3052, 0.00696, -1.648)
 

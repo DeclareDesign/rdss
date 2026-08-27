@@ -25,6 +25,7 @@ a character vector of formatted numbers
 ## Examples
 
 ``` r
+
 std.error <- c(0.12, 0.001, 1.2)
 format_num(std.error)
 #> [1] "0.120" "0.001" "1.200"

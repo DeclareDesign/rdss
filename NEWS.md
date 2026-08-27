@@ -8,6 +8,8 @@
 * `estimator_AS_tidy()` returns its explanatory message instead of erroring when
   'interference' is absent.
 * `estimator_AS_tidy()`'s documented argument now matches its signature.
+* Declare the R >= 4.1.0 dependency the code already has, through its use of
+  the native pipe. CRAN has noted this on all 13 flavors.
 * Point `URL` and `BugReports` at the GitHub repository.
 * Drop a stray zero-byte `_pkgdown 2.yml`, and stop shipping `README.Rmd`, from
   the source tarball.

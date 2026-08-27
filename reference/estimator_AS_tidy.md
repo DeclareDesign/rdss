@@ -15,17 +15,21 @@ estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
 
   A `data.frame` containing the observed data.
 
+- p_matrix:
+
+  A matrix of random treatment assignments. Each row corresponds to one
+  permutation of the treatment vector.
+
 - adj_matrix:
 
   An adjacency matrix defining the network structure. This can be
   created, for example, as follows:
 
 
-        adjacency <- fairfax |>
-          as("Spatial") |>
-          spdep::poly2nb(queen = TRUE) |>
-          spdep::nb2mat(style = "B", zero.policy = TRUE)
-        
+      adjacency <- fairfax |>
+        as("Spatial") |>
+        spdep::poly2nb(queen = TRUE) |>
+        spdep::nb2mat(style = "B", zero.policy = TRUE)
 
 - obs_prob_exposure:
 
@@ -33,18 +37,12 @@ estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
   using:
 
 
-        prob_exposure <- interference::make_exposure_prob(
-          potential_tr_vector = permutations,
-          adj_matrix = adjacency,
-          exposure_map_fn = interference::make_exposure_map_AS,
-          exposure_map_fn_add_args = list(hop = 1)
-        )
-        
-
-- permutation_matrix:
-
-  A matrix of random treatment assignments. Each row corresponds to one
-  permutation of the treatment vector.
+      prob_exposure <- interference::make_exposure_prob(
+        potential_tr_vector = permutations,
+        adj_matrix = adjacency,
+        exposure_map_fn = interference::make_exposure_map_AS,
+        exposure_map_fn_add_args = list(hop = 1)
+      )
 
 ## Value
 

@@ -36,7 +36,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Tidy helper function for estimator_AS function</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/DeclareDesign/rdss/blob/main/R/helpers-experiments-over-networks.R" class="external-link"><code>R/helpers-experiments-over-networks.R</code></a></small>
       <div class="d-none name"><code>estimator_AS_tidy.Rd</code></div>
     </div>
 
@@ -57,31 +57,29 @@
 <dd><p>A <code>data.frame</code> containing the observed data.</p></dd>
 
 
+<dt id="arg-p-matrix">p_matrix<a class="anchor" aria-label="anchor" href="#arg-p-matrix"></a></dt>
+<dd><p>A matrix of random treatment assignments. Each row
+corresponds to one permutation of the treatment vector.</p></dd>
+
+
 <dt id="arg-adj-matrix">adj_matrix<a class="anchor" aria-label="anchor" href="#arg-adj-matrix"></a></dt>
 <dd><p>An adjacency matrix defining the network structure. This
 can be created, for example, as follows:</p><div class="sourceCode"><pre><code><span></span>
-<span>  <span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="va">fairfax</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">as</span><span class="op">(</span><span class="st">"Spatial"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/poly2nb.html" class="external-link">poly2nb</a></span><span class="op">(</span>queen <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/nb2mat.html" class="external-link">nb2mat</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"B"</span>, zero.policy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>  </span></code></pre></div></dd>
+<span><span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="va">fairfax</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">as</span><span class="op">(</span><span class="st">"Spatial"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/poly2nb.html" class="external-link">poly2nb</a></span><span class="op">(</span>queen <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/nb2mat.html" class="external-link">nb2mat</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"B"</span>, zero.policy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div></dd>
 
 
 <dt id="arg-obs-prob-exposure">obs_prob_exposure<a class="anchor" aria-label="anchor" href="#arg-obs-prob-exposure"></a></dt>
 <dd><p>A set of exposure probabilities. These can be
 generated, for example, using:</p><div class="sourceCode"><pre><code><span></span>
-<span>  <span class="va">prob_exposure</span> <span class="op">&lt;-</span> <span class="fu">interference</span><span class="fu">::</span><span class="fu">make_exposure_prob</span><span class="op">(</span></span>
-<span>    potential_tr_vector <span class="op">=</span> <span class="va">permutations</span>,</span>
-<span>    adj_matrix <span class="op">=</span> <span class="va">adjacency</span>,</span>
-<span>    exposure_map_fn <span class="op">=</span> <span class="fu">interference</span><span class="fu">::</span><span class="va">make_exposure_map_AS</span>,</span>
-<span>    exposure_map_fn_add_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hop <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span>  </span></code></pre></div></dd>
-
-
-<dt id="arg-permutation-matrix">permutation_matrix<a class="anchor" aria-label="anchor" href="#arg-permutation-matrix"></a></dt>
-<dd><p>A matrix of random treatment assignments. Each row
-corresponds to one permutation of the treatment vector.</p></dd>
+<span><span class="va">prob_exposure</span> <span class="op">&lt;-</span> <span class="fu">interference</span><span class="fu">::</span><span class="fu">make_exposure_prob</span><span class="op">(</span></span>
+<span>  potential_tr_vector <span class="op">=</span> <span class="va">permutations</span>,</span>
+<span>  adj_matrix <span class="op">=</span> <span class="va">adjacency</span>,</span>
+<span>  exposure_map_fn <span class="op">=</span> <span class="fu">interference</span><span class="fu">::</span><span class="va">make_exposure_map_AS</span>,</span>
+<span>  exposure_map_fn_add_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hop <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div></dd>
 
 </dl></div>
     <div class="section level2">

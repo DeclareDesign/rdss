@@ -8,7 +8,11 @@ Social Sciences: Declaration, Diagnosis, and Redesign"
 
 Useful links:
 
-- <https://declaredesign.org/r/rdss>
+- <https://declaredesign.org/r/rdss/>
+
+- <https://github.com/DeclareDesign/rdss>
+
+- Report bugs at <https://github.com/DeclareDesign/rdss/issues>
 
 ## Author
 
@@ -16,6 +20,9 @@ Useful links:
 ([ORCID](https://orcid.org/0000-0001-9164-2102))
 
 Authors:
+
+- Graeme Blair <graeme.blair@gmail.com>
+  ([ORCID](https://orcid.org/0000-0001-9164-2102))
 
 - Alexander Coppock <acoppock@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-5733-2386))

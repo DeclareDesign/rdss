@@ -13,14 +13,17 @@
 
 ## Citation
 
+Source:
+[`DESCRIPTION`](https://github.com/DeclareDesign/rdss/blob/main/DESCRIPTION)
+
 Blair G, Coppock A, Humphreys M (2026). *rdss: Companion Datasets and
 Functions for Research Design in the Social Sciences*. R package version
-1.0.14, <https://declaredesign.org/r/rdss>.
+1.0.14, <https://declaredesign.org/r/rdss/>.
 
     @Manual{,
       title = {rdss: Companion Datasets and Functions for Research Design in the Social Sciences},
       author = {Graeme Blair and Alexander Coppock and Macartan Humphreys},
       year = {2026},
       note = {R package version 1.0.14},
-      url = {https://declaredesign.org/r/rdss},
+      url = {https://declaredesign.org/r/rdss/},
     }

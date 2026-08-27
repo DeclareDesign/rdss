@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rdss</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.16</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,17 @@
       <small>Source: <a href="https://github.com/DeclareDesign/rdss/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.16" id="rdss-1016">rdss 1.0.16<a class="anchor" aria-label="anchor" href="#rdss-1016"></a></h2>
+<ul><li>
+<code><a href="../reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code> computes exposure probabilities from <code>permutatation_matrix</code> again, so the book’s chapter 18 declaration produces estimates rather than nothing. Its argument list returns to the one 1.0.14 shipped; the version on the main branch had renamed the argument and moved the computation out to the caller, which no published code passed.</li>
+<li>
+<code><a href="../reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code> returns its explanatory message instead of erroring when ‘interference’ is absent.</li>
+<li>
+<code><a href="../reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code>’s documented argument now matches its signature.</li>
+<li>Point <code>URL</code> and <code>BugReports</code> at the GitHub repository.</li>
+<li>Drop a stray zero-byte <code>_pkgdown 2.yml</code>, and stop shipping <code>README.Rmd</code>, from the source tarball.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.14" id="rdss-1014">rdss 1.0.14<a class="anchor" aria-label="anchor" href="#rdss-1014"></a></h2><p class="text-muted">CRAN release: 2025-01-09</p>
 <ul><li>fixes issue with intermittent test failure</li>

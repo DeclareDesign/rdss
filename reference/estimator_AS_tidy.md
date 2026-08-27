@@ -6,7 +6,7 @@ tidy data frame output
 ## Usage
 
 ``` r
-estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
+estimator_AS_tidy(data, permutatation_matrix, adj_matrix)
 ```
 
 ## Arguments
@@ -15,10 +15,12 @@ estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
 
   A `data.frame` containing the observed data.
 
-- p_matrix:
+- permutatation_matrix:
 
-  A matrix of random treatment assignments. Each row corresponds to one
-  permutation of the treatment vector.
+  A matrix of random treatment assignments. Each column corresponds to
+  one permutation of the treatment vector, as returned by
+  `t(obtain_permutation_matrix(declaration))`. The exposure
+  probabilities are computed from it.
 
 - adj_matrix:
 
@@ -31,19 +33,6 @@ estimator_AS_tidy(data, p_matrix, adj_matrix, obs_prob_exposure)
         spdep::poly2nb(queen = TRUE) |>
         spdep::nb2mat(style = "B", zero.policy = TRUE)
 
-- obs_prob_exposure:
-
-  A set of exposure probabilities. These can be generated, for example,
-  using:
-
-
-      prob_exposure <- interference::make_exposure_prob(
-        potential_tr_vector = permutations,
-        adj_matrix = adjacency,
-        exposure_map_fn = interference::make_exposure_map_AS,
-        exposure_map_fn_add_args = list(hop = 1)
-      )
-
 ## Value
 
 a data.frame of estimates
@@ -51,15 +40,13 @@ a data.frame of estimates
 ## Details
 
 The estimator_AS_tidy function requires the 'interference' package,
-which is not yet available on CRAN.
+which is not available on CRAN.
 
-To use this function:
+To use this function, install it with
+remotes::install_github('szonszein/interference')
 
-1.  install the developer version of interference via
-    remotes::install_github('szonszein/interference') and
-
-2.  install the developer version of rdss via
-    remotes::install_github('DeclareDesign/rdss@remotes')
+Without it the function returns nothing and explains why, so a design
+that includes it still declares and diagnoses.
 
 See
 https://book.declaredesign.org/experimental-causal.html#experiments-over-networks

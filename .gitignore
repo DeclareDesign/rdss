@@ -39,3 +39,6 @@ vignettes/*.pdf
 .Renviron
 .Rproj.user
 docs
+
+# Private development log (mirrored to claude_control/logs/rdss.md)
+notes/

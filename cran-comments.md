@@ -12,9 +12,9 @@ estimates, and corrects package metadata.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 2 notes
 
-The note is:
+The notes are:
 
     Suggests or Enhances not in mainstream repositories:
       interference
@@ -27,3 +27,13 @@ used conditionally: it calls `requireNamespace("interference")` first and, when
 the package is absent, returns invisibly after a message naming the install
 command. Nothing else in the package depends on it, no example or test requires
 it, and the package's own tests skip that file when it is not installed.
+
+The second note is:
+
+    Unknown, possibly misspelled, fields in DESCRIPTION:
+      'Remotes'
+
+'Remotes' is present so that the package's own continuous integration, and
+anyone installing from GitHub, can resolve the suggested 'interference'
+package. Without it the dependency solve fails before any check runs. It is
+inert for a CRAN installation, which never reads the field.

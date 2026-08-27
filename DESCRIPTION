@@ -32,4 +32,6 @@ Depends:
 Config/testthat/edition: 3
 URL: https://declaredesign.org/r/rdss/, https://github.com/DeclareDesign/rdss
 BugReports: https://github.com/DeclareDesign/rdss/issues
+Remotes:
+    szonszein/interference
 Config/roxygen2/version: 8.0.0

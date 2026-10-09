@@ -5,6 +5,10 @@
   nothing. Its argument list returns to the one 1.0.14 shipped; the version on
   the main branch had renamed the argument and moved the computation out to the
   caller, which no published code passed.
+* `estimator_AS_tidy()` takes optional precomputed exposure probabilities,
+  `obs_prob_exposure`. They do not change across simulations, so computing
+  them once and passing them in avoids recomputing them on every draw. Without
+  it the function computes them from `permutatation_matrix` as before.
 * `estimator_AS_tidy()` returns its explanatory message instead of erroring when
   'interference' is absent.
 * `estimator_AS_tidy()`'s documented argument now matches its signature.

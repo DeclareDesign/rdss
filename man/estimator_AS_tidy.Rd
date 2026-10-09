@@ -4,7 +4,12 @@
 \alias{estimator_AS_tidy}
 \title{Tidy helper function for estimator_AS function}
 \usage{
-estimator_AS_tidy(data, permutatation_matrix, adj_matrix)
+estimator_AS_tidy(
+  data,
+  permutatation_matrix = NULL,
+  adj_matrix,
+  obs_prob_exposure = NULL
+)
 }
 \arguments{
 \item{data}{A \code{data.frame} containing the observed data.}
@@ -12,7 +17,7 @@ estimator_AS_tidy(data, permutatation_matrix, adj_matrix)
 \item{permutatation_matrix}{A matrix of random treatment assignments. Each
 column corresponds to one permutation of the treatment vector, as returned
 by \code{t(obtain_permutation_matrix(declaration))}. The exposure probabilities
-are computed from it.}
+are computed from it unless \code{obs_prob_exposure} is supplied.}
 
 \item{adj_matrix}{An adjacency matrix defining the network structure. This
 can be created, for example, as follows:
@@ -22,6 +27,20 @@ adjacency <- fairfax |>
   spdep::poly2nb(queen = TRUE) |>
   spdep::nb2mat(style = "B", zero.policy = TRUE)
 }}
+
+\item{obs_prob_exposure}{Optional exposure probabilities. They depend only
+on the permutation matrix and the network, so in a simulation they are the
+same on every draw; computing them once and passing them here avoids
+recomputing them each time. For example:
+\preformatted{
+prob_exposure <- interference::make_exposure_prob(
+  potential_tr_vector = permutatation_matrix,
+  adj_matrix = adjacency,
+  exposure_map_fn = interference::make_exposure_map_AS,
+  exposure_map_fn_add_args = list(hop = 1)
+)
+}
+When \code{NULL}, the default, they are computed from \code{permutatation_matrix}.}
 }
 \value{
 a data.frame of estimates

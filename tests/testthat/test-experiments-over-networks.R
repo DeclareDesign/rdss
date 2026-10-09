@@ -56,4 +56,23 @@ test_that("interference helpers work", {
 
   expect_error(simulate_once(declaration_18.13), NA)
 
+  # Precomputed exposure probabilities give the same estimates as computing them
+  # from the permutation matrix
+  prob_exposure <-
+    make_exposure_prob(
+      potential_tr_vector = permutatation_matrix,
+      adj_matrix = adj_matrix,
+      exposure_map_fn = make_exposure_map_AS,
+      exposure_map_fn_add_args = list(hop = 1)
+    )
+  set.seed(343)
+  dat <- draw_data(declaration_18.13)
+  set.seed(343)
+  from_matrix <- estimator_AS_tidy(dat, permutatation_matrix = permutatation_matrix, adj_matrix = adj_matrix)
+  set.seed(343)
+  precomputed <- estimator_AS_tidy(dat, adj_matrix = adj_matrix, obs_prob_exposure = prob_exposure)
+  expect_equal(precomputed, from_matrix)
+
+  expect_error(estimator_AS_tidy(dat, adj_matrix = adj_matrix), "Supply either")
+
 })

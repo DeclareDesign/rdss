@@ -54,6 +54,6 @@ test_that("interference helpers work", {
                       permutatation_matrix = permutatation_matrix,
                       adj_matrix = adj_matrix)
 
-  expect_error(simulate_design(declaration_18.13, sims = 1, future.seed = FALSE), NA)
+  expect_error(simulate_once(declaration_18.13), NA)
 
 })

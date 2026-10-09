@@ -57,6 +57,6 @@ test_that("lag_by_group and did_multiplegt_tidy work", {
       label = "chaisemartin"
     )
 
-  expect_error(suppressWarnings(simulate_design(declaration_16.3, sims = 1, future.seed = FALSE)), NA)
+  expect_error(suppressWarnings(simulate_once(declaration_16.3)), NA)
 
 })

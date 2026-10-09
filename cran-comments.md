@@ -1,14 +1,17 @@
 ## Submission
 
-rdss 1.0.16 restores `estimator_AS_tidy()`, which had stopped returning
-estimates, and corrects package metadata.
+rdss 1.0.16 declares `Depends: R (>= 4.1.0)`, which clears the "Missing
+dependency on R >= 4.1.0" issue reported on all 13 check flavors for 1.0.14
+(the package code uses the native pipe). It also restores
+`estimator_AS_tidy()`, which had stopped returning estimates, and corrects
+package metadata.
 
 ## Test environments
 
-* local macOS install (R release)
-* ubuntu on GitHub Actions (devel, release, oldrel-1)
-* windows on GitHub Actions (release)
-* macOS on GitHub Actions (release)
+* ubuntu on GitHub Actions (devel, release, oldrel-1): OK
+* windows on GitHub Actions (release): OK
+* macOS on GitHub Actions (release): OK
+* win-builder (devel): to be added before submission
 
 ## R CMD check results
 

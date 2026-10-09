@@ -9,6 +9,12 @@
   version on the main branch had renamed the argument and moved the
   computation out to the caller, which no published code passed.
 - [`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md)
+  takes optional precomputed exposure probabilities,
+  `obs_prob_exposure`. They do not change across simulations, so
+  computing them once and passing them in avoids recomputing them on
+  every draw. Without it the function computes them from
+  `permutatation_matrix` as before.
+- [`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md)
   returns its explanatory message instead of erroring when
   ‘interference’ is absent.
 - [`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md)’s

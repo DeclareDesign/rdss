@@ -26,7 +26,7 @@ lag_by_group(x, groups, n = 1, order_by, default = NA)
 
 - order_by:
 
-  Ordering variable withing group (e.g., time)
+  Ordering variable within group (e.g., time)
 
 - default:
 

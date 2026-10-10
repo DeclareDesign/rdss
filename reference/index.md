@@ -14,7 +14,8 @@
 
 ## Tidy helpers
 
-These functions declare research design steps
+Wrap estimators from other packages for use in design steps such as
+`declare_estimator()`
 
 - [`causal_forest_handler()`](https://declaredesign.org/r/rdss/reference/causal_forest_handler.md)
   : Tidy helper function for causal_forest function
@@ -52,8 +53,8 @@ These functions declare research design steps
 - [`conjoint_inquiries()`](https://declaredesign.org/r/rdss/reference/conjoint_inquiries.md)
   : Conjoint experiment inquiries handler
 - [`conjoint_measurement()`](https://declaredesign.org/r/rdss/reference/conjoint_measurement.md)
-  : Conjoint experiment assignment handler: conducts complete random
-  assignment of all attribute levels
+  : Conjoint experiment measurement handler: records which profile in
+  each task is chosen
 - [`get_exposure_AS()`](https://declaredesign.org/r/rdss/reference/get_exposure_AS.md)
   : Helper function to obtain the observed exposure for the Aronow and
   Samii estimator
@@ -62,16 +63,19 @@ These functions declare research design steps
 
 ## Tidiers
 
-These functions declare research design steps
+Return model fits from other packages as tidy data frames
 
 - [`tidy(`*`<amce>`*`)`](https://declaredesign.org/r/rdss/reference/tidy.amce.md)
   : Tidy estimates from the amce estimator
 - [`tidy(`*`<rdrobust>`*`)`](https://declaredesign.org/r/rdss/reference/tidy.rdrobust.md)
   : Tidy helper function for rdrobust function
+- [`tidy_stan()`](https://declaredesign.org/r/rdss/reference/tidy_stan.md)
+  : Tidy results from a stanreg regression, optionally exponentiating
+  the coefficients
 
 ## Data
 
-These functions operate on declared designs
+Datasets used in the book’s examples and exercises
 
 - [`bonilla_tillery`](https://declaredesign.org/r/rdss/reference/bonilla_tillery.md)
   : Replication data for Bonilla and Tillery (2020), American Political
@@ -85,7 +89,7 @@ These functions operate on declared designs
   Shapefile of Fairfax County, Virginia, voting precincts
 - [`foos_etal`](https://declaredesign.org/r/rdss/reference/foos_etal.md)
   : Replication data for Foos, John, Muller, and Cunningham (2021),
-  Journal of Politics (derived from from Dataverse 10.7910/DVN/NDPXND)
+  Journal of Politics (derived from Dataverse 10.7910/DVN/NDPXND)
 - [`la_voter_file`](https://declaredesign.org/r/rdss/reference/la_voter_file.md)
   : Voter file sample for Los Angeles County
 - [`lapop_brazil`](https://declaredesign.org/r/rdss/reference/lapop_brazil.md)
@@ -94,7 +98,7 @@ These functions operate on declared designs
 
 ## Utilities
 
-These functions operate on declared designs
+Format numbers for tables, and the book’s ggplot theme and palette
 
 - [`add_parens()`](https://declaredesign.org/r/rdss/reference/add_parens.md)
   : Add parentheses around standard error estimates
@@ -112,6 +116,3 @@ These functions operate on declared designs
   Diagnose, Redesign" (Blair, Coppock, Humphreys)
 - [`hex_add_alpha()`](https://declaredesign.org/r/rdss/reference/hex_add_alpha.md)
   : Add alpha transparency to a color defined in hexadecimal
-- [`tidy_stan()`](https://declaredesign.org/r/rdss/reference/tidy_stan.md)
-  : Tidy results from a stanreg regresion and exponentiate the estimated
-  coefficient

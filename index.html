@@ -55,10 +55,50 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="randomizr-tools-for-random-assignment-and-random-sampling">randomizr: Tools for random assignment and random sampling<a class="anchor" aria-label="anchor" href="#randomizr-tools-for-random-assignment-and-random-sampling"></a>
+<div class="page-header"><h1 id="rdss-helper-functions-for-research-design-in-the-social-sciences-book">rdss: Helper functions for Research Design in the Social Sciences book<a class="anchor" aria-label="anchor" href="#rdss-helper-functions-for-research-design-in-the-social-sciences-book"></a>
 </h1></div>
 <p><a href="https://cran.r-project.org/package=rdss" class="external-link"><img src="https://www.r-pkg.org/badges/version/rdss" alt="CRAN status"></a> <a href="https://r-pkg.org/pkg/rdss" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rdss?color=green" alt="CRAN RStudio mirror downloads"></a> <a href="https://github.com/DeclareDesign/rdss/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/DeclareDesign/rdss/actions/workflows/R-CMD-check.yaml/badge.svg" alt="Build status"></a> <a href="https://app.codecov.io/gh/DeclareDesign/rdss" class="external-link"><img src="https://codecov.io/gh/DeclareDesign/rdss/graph/badge.svg" alt="Codecov test coverage"></a></p>
 <p>Helper functions for using the book <a href="https://book.declaredesign.org/" class="external-link"><em>Research Design in the Social Sciences: Declaration, Diagnosis, Redesign</em></a> by Blair, Coppock, and Humphreys 2023 (Princeton University Press).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>Install the released version from CRAN:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rdss"</span><span class="op">)</span></span></code></pre></div>
+<p>or the development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"DeclareDesign/rdss"</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code>, used in the book’s section on experiments over networks, also needs the ‘interference’ package, which is not on CRAN:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szonszein/interference"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>Each helper fills one step of a declaration in the book, and its help page links to the section that uses it. <code><a href="reference/lag_by_group.html">lag_by_group()</a></code>, for instance, builds the lagged treatment indicator in the difference-in-differences design:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://declaredesign.org/r/rdss/">rdss</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">panel</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>    unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, times <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>D_lag <span class="op">=</span> <span class="fu"><a href="reference/lag_by_group.html">lag_by_group</a></span><span class="op">(</span><span class="va">D</span>, groups <span class="op">=</span> <span class="va">unit</span>, n <span class="op">=</span> <span class="fl">1</span>, order_by <span class="op">=</span> <span class="va">period</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">panel</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## # A tibble: 6 × 4</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">##   unit  period     D D_lag</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">## 1 a          1     0    NA</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">## 2 a          2     1     0</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">## 3 a          3     1     1</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">## 4 b          1     0    NA</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">## 5 b          2     0     0</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">## 6 b          3     1     0</span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>

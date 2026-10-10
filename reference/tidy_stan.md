@@ -1,4 +1,4 @@
-# Tidy results from a stanreg regresion and exponentiate the estimated coefficient
+# Tidy results from a stanreg regression, optionally exponentiating the coefficients
 
 Note no standard errors or other summary statistics are provided
 

@@ -1,7 +1,8 @@
-# Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
+# Conjoint experiment measurement handler: records which profile in each task is chosen
 
-See
-https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+Applies `utility_fn` and, within each subject and task, compares the two
+profiles and sets `choice` to 1 for the one with the higher utility `U`
+(the second profile on a tie).
 
 ## Usage
 
@@ -23,3 +24,8 @@ conjoint_measurement(data, utility_fn)
 ## Value
 
 a data.frame
+
+## Details
+
+See
+https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments

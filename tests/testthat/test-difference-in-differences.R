@@ -2,10 +2,11 @@
 test_that("lag_by_group and did_multiplegt_tidy work", {
 
   skip_if_not_installed("DIDmultiplegt")
+  skip_if_not_installed("polars")
 
   library(dplyr)
   library(DeclareDesign)
-  library(DIDmultiplegt)
+  library(polars)
 
   N_units <- 20
   N_time_periods <- 20
@@ -47,16 +48,20 @@ test_that("lag_by_group and did_multiplegt_tidy work", {
       label = "twoway-fe"
     ) +
     declare_estimator(
-      Y = "Y",
-      G = "units",
-      T = "periods",
-      D = "D",
-      mode = "old",
+      mode = "dyn",
+      outcome = "Y",
+      group = "units",
+      time = "periods",
+      treatment = "D",
+      effects = 1,
       handler = label_estimator(did_multiplegt_tidy),
-      inquiry = c("ATT", "ATT_switchers"),
+      inquiry = "ATT_switchers",
       label = "chaisemartin"
     )
 
-  expect_error(suppressWarnings(simulate_once(declaration_16.3)), NA)
+  simulations <- suppressWarnings(simulate_once(declaration_16.3))
+  chaisemartin <- simulations[simulations$estimator == "chaisemartin", ]
+  expect_equal(nrow(chaisemartin), 1)
+  expect_true(is.finite(chaisemartin$estimate))
 
 })

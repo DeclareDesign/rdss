@@ -36,6 +36,14 @@ networks, also needs the ‘interference’ package, which is not on CRAN:
 remotes::install_github("szonszein/interference")
 ```
 
+`did_multiplegt_tidy()`, used in the book’s section on
+difference-in-differences, needs the ‘polars’ package, which is also not
+on CRAN:
+
+``` r
+install.packages("polars", repos = "https://rpolars.r-universe.dev")
+```
+
 ## Example
 
 Each helper fills one step of a declaration in the book, and its help

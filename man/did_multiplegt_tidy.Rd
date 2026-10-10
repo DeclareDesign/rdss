@@ -9,14 +9,38 @@ did_multiplegt_tidy(data, ...)
 \arguments{
 \item{data}{A data frame, passed to \code{did_multiplegt()} as \code{df}.}
 
-\item{...}{Further arguments to \code{did_multiplegt()}, which must include the column names of the outcome (\code{Y}), group (\code{G}), time period (\code{T}), and treatment (\code{D}), as strings.}
+\item{...}{Further arguments to \code{did_multiplegt()}. These must include \code{mode} and, for \code{mode = "dyn"}, the column names of the outcome (\code{outcome}), group (\code{group}), time period (\code{time}), and treatment (\code{treatment}), as strings, and the number of effects to estimate (\code{effects}). \code{graph_off} defaults to \code{TRUE}, so that no plot is drawn.}
 }
 \value{
-A data frame with one column, \code{estimate}.
+For \code{mode = "dyn"}, a data frame with one row per effect and columns \code{term} (\code{"Effect_1"}, \code{"Effect_2"}, ...), \code{estimate}, \code{std.error}, \code{conf.low}, \code{conf.high}, \code{n} (the number of group-period cells used), and \code{n_switchers} (the number of switching groups). For \code{mode = "old"}, a data frame with one column, \code{estimate}.
 }
 \description{
-Runs \code{\link[DIDmultiplegt:did_multiplegt]{DIDmultiplegt::did_multiplegt()}}, the de Chaisemartin and D'Haultfoeuille estimator, and returns its estimate as a one-row data frame.
+Runs \code{\link[DIDmultiplegt:did_multiplegt]{DIDmultiplegt::did_multiplegt()}}, the de Chaisemartin and D'Haultfoeuille estimator, and returns its estimates as a data frame.
 }
 \details{
+Use \code{mode = "dyn"}. It estimates the effect \code{l} periods after a group first switches treatment, for \code{l} from 1 to \code{effects}; \code{effects = 1} is the effect in the period of the switch. This mode runs \code{did_multiplegt_dyn()} from the 'DIDmultiplegtDYN' package, which also needs the 'polars' package. polars is not on CRAN; install it with
+\code{install.packages("polars", repos = "https://rpolars.r-universe.dev")}
+and attach it with \code{library(polars)}.
+
+\code{mode = "old"} is still passed through, but in 'DIDmultiplegt' 2.1.0 it returns \code{NaN}: it takes first differences with \code{stats::lag()}, which does not shift the data, so no group is ever seen to switch. The function warns when that happens.
+
 See https://book.declaredesign.org/observational-causal.html#difference-in-differences
+}
+\examples{
+\dontshow{if (requireNamespace("DIDmultiplegt", quietly = TRUE) && requireNamespace("polars", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+library(polars)
+
+set.seed(343)
+# 20 units in 10 periods; units switch into treatment at different times
+panel <- data.frame(unit = rep(1:20, times = 10), period = rep(1:10, each = 20))
+panel$D <- as.numeric(panel$period > (panel$unit \%\% 5) + 4)
+panel$Y <- 0.5 * panel$D + rnorm(nrow(panel))
+
+did_multiplegt_tidy(
+  panel, mode = "dyn",
+  outcome = "Y", group = "unit", time = "period", treatment = "D",
+  effects = 2
+)
+\dontshow{\}) # examplesIf}
 }

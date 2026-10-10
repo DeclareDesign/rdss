@@ -30,6 +30,12 @@ remotes::install_github("DeclareDesign/rdss")
 remotes::install_github("szonszein/interference")
 ```
 
+`did_multiplegt_tidy()`, used in the book's section on difference-in-differences, needs the 'polars' package, which is also not on CRAN:
+
+```{r, eval = FALSE}
+install.packages("polars", repos = "https://rpolars.r-universe.dev")
+```
+
 ## Example
 
 Each helper fills one step of a declaration in the book, and its help page links to the section that uses it. `lag_by_group()`, for instance, builds the lagged treatment indicator in the difference-in-differences design:

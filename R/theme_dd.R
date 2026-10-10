@@ -1,6 +1,12 @@
-#' ggplot Theme used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)
+#' ggplot theme used in the book Research Design in the Social Sciences
 #'
-#' @return ggplot theme
+#' [ggplot2::theme_minimal()] with light gray major gridlines only, no axis ticks, and no legend. The book labels series directly, so it hides the legend; add `theme(legend.position = "right")` after it to get one back.
+#'
+#' @return A ggplot2 theme.
+#'
+#' @examples
+#' library(ggplot2)
+#' ggplot(mtcars, aes(wt, mpg)) + geom_point() + theme_dd()
 #'
 #' @export
 #' @importFrom ggplot2 theme_minimal theme element_blank element_text margin element_line

@@ -7,24 +7,22 @@
 causal_forest_handler(data, covariate_names, share_train = 0.5, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame with columns \code{Y}, \code{Z}, and the covariates named in \code{covariate_names}.}
 
-\item{covariate_names}{Names of covariates}
+\item{covariate_names}{A character vector naming the covariate columns the forest may split on.}
 
-\item{share_train}{Share of units to be used for training}
+\item{share_train}{The share of units assigned to the training set. Defaults to 0.5.}
 
-\item{...}{Options to causal_forest}
+\item{...}{Further arguments passed to \code{\link[grf:causal_forest]{grf::causal_forest()}}.}
 }
 \value{
-a data.frame of estimates
+\code{data} with four columns added: \code{pred} (the predicted treatment effect), \code{var_imp} (the position in \code{covariate_names} of the most important covariate), and the logical indicators \code{train} and \code{test}.
 }
 \description{
-Runs estimates estimation function from interference package and returns tidy data frame output
+Splits the data at random into a training and a test set, fits \code{\link[grf:causal_forest]{grf::causal_forest()}} on the training set, and predicts each unit's treatment effect. The data must contain the outcome as \code{Y} and the treatment as \code{Z}.
 }
 \details{
-https://draft.declaredesign.org/complex-designs.html#discovery-using-causal-forests
-
-See ?causal_forest for further details
+See https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests
 }
 \examples{
 

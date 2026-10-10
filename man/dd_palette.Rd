@@ -2,43 +2,36 @@
 % Please edit documentation in R/palettes.R
 \name{dd_palette}
 \alias{dd_palette}
-\title{Access color palette used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)}
+\title{Color palettes used in the book Research Design in the Social Sciences}
 \usage{
 dd_palette(name, n)
 }
 \arguments{
-\item{name}{Color palette name (character)}
+\item{name}{The palette name, as a string. One of the names listed below.}
 
-\item{n}{Number of colors}
+\item{n}{The number of colors to return, from the start of the palette. Defaults to all of them.}
 }
 \value{
-character vector of colors
+A character vector of hex color codes.
 }
 \description{
 Based on Karthik Ram's wesanderson package (https://github.com/karthik/wesanderson)
 }
 \details{
-Available color palettes:
+Palettes:
+\itemize{
+\item \code{three_color_palette}: light blue, orange, pink
+\item \code{grey_palette}: light blue, orange, pink, light gray
+\item \code{quilt_palette}: light gray, pink, purple, light blue, orange
+\item \code{two_color_palette}: dark blue, pink
+\item \code{quilt_three_color_palette}: light gray, translucent light blue, light blue
+\item \code{two_color_gray}: dark blue, light gray
+}
 
-color_palette = c("#72B4F3", "#F38672", "#C6227F")
+Single colors: \code{dd_dark_blue} (\code{"#3564ED"}), \code{dd_light_blue} (\code{"#72B4F3"}), \code{dd_orange} (\code{"#F38672"}), \code{dd_purple} (\code{"#7E43B6"}), \code{dd_gray} (\code{gray(0.2)}), \code{dd_pink} (\code{"#C6227F"}), \code{dd_light_gray} (\code{gray(0.8)}), and the translucent \code{dd_dark_blue_alpha} and \code{dd_light_blue_alpha}.
+}
+\examples{
+dd_palette("three_color_palette")
+dd_palette("quilt_palette", n = 3)
 
-grey_palette = c("#72B4F3", "#F38672", "#C6227F", gray(0.8))
-
-dd_dark_blue = "#3564ED"
-
-dd_light_blue = "#72B4F3"
-
-dd_orange = "#F38672"
-
-dd_purple = "#7E43B6"
-
-dd_gray = gray(0.2)
-
-dd_pink = "#C6227F"
-
-dd_light_gray = gray(0.8)
-
-dd_dark_blue_alpha = "#3564EDA0"
-
-dd_light_blue_alpha = "#72B4F3A0"
 }

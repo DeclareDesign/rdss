@@ -7,11 +7,14 @@
 get_exposure_AS(obs_exposure)
 }
 \arguments{
-\item{obs_exposure}{A numeric vector}
+\item{obs_exposure}{An exposure map, as returned by \code{interference::make_exposure_map_AS()}.}
 }
 \value{
-a data.frame of observed exposure to a treatment created using the interference package
+A character vector with one element per unit.
 }
 \description{
+Converts the exposure map from \code{interference::make_exposure_map_AS()}, a 0/1 matrix with one row per unit and one column per exposure condition, into a vector naming each unit's condition (e.g. \code{"dir_ind1"} or \code{"no"}).
+}
+\details{
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 }

@@ -1,15 +1,18 @@
 
 #' Add alpha transparency to a color defined in hexadecimal
 #'
-#' @param col Original color code in hex
-#' @param alpha Level of alpha transparency to add
+#' @param col A color as a six-digit hex code, e.g. `"#72B4F3"`.
+#' @param alpha Opacity, from 0 (transparent) to 1 (opaque).
 #'
-#' @return color codes with alpha added
+#' @return The color as an eight-digit hex code.
+#'
+#' @examples
+#' hex_add_alpha("#72B4F3", 0.5)
 #'
 #' @export
 #'
 hex_add_alpha <- function(col, alpha) {
-  sprintf("%s%02X", col, floor(alpha * 256))
+  sprintf("%s%02X", col, pmin(floor(alpha * 256), 255))
 }
 
 dd_palettes <- list(
@@ -48,40 +51,31 @@ dd_palettes <- list(
 # two_color_palette_gray <- c(two_color_palette, dd_light_gray)
 # three_color_palette_gray <- c(three_color_palette, dd_light_gray)
 
-#' Access color palette used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)
+#' Color palettes used in the book Research Design in the Social Sciences
 #'
 #' Based on Karthik Ram's wesanderson package (https://github.com/karthik/wesanderson)
 #'
-#' @param name Color palette name (character)
-#' @param n Number of colors
+#' @param name The palette name, as a string. One of the names listed below.
+#' @param n The number of colors to return, from the start of the palette. Defaults to all of them.
 #'
 #' @details
 #'
-#' Available color palettes:
+#' Palettes:
 #'
-#' color_palette = c("#72B4F3", "#F38672", "#C6227F")
+#' * `three_color_palette`: light blue, orange, pink
+#' * `grey_palette`: light blue, orange, pink, light gray
+#' * `quilt_palette`: light gray, pink, purple, light blue, orange
+#' * `two_color_palette`: dark blue, pink
+#' * `quilt_three_color_palette`: light gray, translucent light blue, light blue
+#' * `two_color_gray`: dark blue, light gray
 #'
-#' grey_palette = c("#72B4F3", "#F38672", "#C6227F", gray(0.8))
+#' Single colors: `dd_dark_blue` (`"#3564ED"`), `dd_light_blue` (`"#72B4F3"`), `dd_orange` (`"#F38672"`), `dd_purple` (`"#7E43B6"`), `dd_gray` (`gray(0.2)`), `dd_pink` (`"#C6227F"`), `dd_light_gray` (`gray(0.8)`), and the translucent `dd_dark_blue_alpha` and `dd_light_blue_alpha`.
 #'
-#' dd_dark_blue = "#3564ED"
+#' @examples
+#' dd_palette("three_color_palette")
+#' dd_palette("quilt_palette", n = 3)
 #'
-#' dd_light_blue = "#72B4F3"
-#'
-#' dd_orange = "#F38672"
-#'
-#' dd_purple = "#7E43B6"
-#'
-#' dd_gray = gray(0.2)
-#'
-#' dd_pink = "#C6227F"
-#'
-#' dd_light_gray = gray(0.8)
-#'
-#' dd_dark_blue_alpha = "#3564EDA0"
-#'
-#' dd_light_blue_alpha = "#72B4F3A0"
-#'
-#' @return character vector of colors
+#' @return A character vector of hex color codes.
 #'
 #' @export
 #'

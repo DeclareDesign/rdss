@@ -12,9 +12,9 @@ estimator_AS_tidy(
 )
 }
 \arguments{
-\item{data}{A \code{data.frame} containing the observed data.}
+\item{data}{A data frame with columns \code{Z} and \code{Y}.}
 
-\item{permutatation_matrix}{A matrix of random treatment assignments. Each
+\item{permutatation_matrix}{(The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments. Each
 column corresponds to one permutation of the treatment vector, as returned
 by \code{t(obtain_permutation_matrix(declaration))}. The exposure probabilities
 are computed from it unless \code{obs_prob_exposure} is supplied.}
@@ -43,13 +43,13 @@ prob_exposure <- interference::make_exposure_prob(
 When \code{NULL}, the default, they are computed from \code{permutatation_matrix}.}
 }
 \value{
-a data.frame of estimates
+A data frame with six rows (three inquiries by two estimators) and columns \code{term}, \code{inquiry}, \code{estimator}, and \code{estimate}. No standard errors are returned.
 }
 \description{
-Runs estimates estimation function from interference package and returns tidy data frame output
+Runs the Aronow and Samii estimator from the 'interference' package and returns Horvitz-Thompson and Hajek estimates of the total, direct, and indirect effects. Exposure is defined by one-hop neighbours in \code{adj_matrix}. The data must contain the treatment as \code{Z} and the outcome as \code{Y}.
 }
 \details{
-The estimator_AS_tidy function requires the 'interference' package, which is not available on CRAN.
+The function requires the 'interference' package, which is not available on CRAN.
 
 To use this function, install it with
 remotes::install_github('szonszein/interference')

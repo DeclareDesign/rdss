@@ -3,19 +3,19 @@
 \docType{data}
 \name{lapop_brazil}
 \alias{lapop_brazil}
-\title{Data used in student exercises for RDSS based on LAPOP survey of Brazil in 2018}
+\title{Teaching data based on the 2018 LAPOP survey of Brazil}
 \format{
-A data.frame
+A data frame with 10,000 rows and 10 columns: \code{ID}, \code{municipality}, and eight survey items (\code{trust_police}, \code{govt_responsive}, \code{ideology}, \code{govt_pride}, \code{self_efficacy_political}, \code{trust_military}, \code{trust_supreme_court}, and \code{support_political_system}).
 }
 \usage{
 lapop_brazil
 }
 \description{
-These data were resampled with replacement from LAPOP data (to 10,000 rows) for a subset of variables. These data cannot be used for scientific inferences, and are only useful for teaching purposes. ID numbers were scrambled so that individuals and municipalities cannot easily be identified.
+Used in the book's student exercises. These data were resampled with replacement from the LAPOP data, to 10,000 rows, for a subset of variables. These data cannot be used for scientific inferences, and are only useful for teaching purposes. ID numbers were scrambled so that individuals and municipalities cannot easily be identified.
 }
 \details{
 Download the original data from https://www.vanderbilt.edu/lapop/raw-data.php
 
-See https://www.vanderbilt.edu/lapop/core-surveys.php for survey questionnaire
+See https://www.vanderbilt.edu/lapop/core-surveys.php for the survey questionnaire.
 }
 \keyword{datasets}

@@ -5,12 +5,12 @@
 \alias{foos_etal}
 \title{Replication data for Foos, John, Muller, and Cunningham (2021), Journal of Politics (derived from Dataverse 10.7910/DVN/NDPXND)}
 \format{
-A data.frame
+A data frame with 8,375 rows and 5 columns: \code{marked_register_2014}, \code{ward}, \code{street}, \code{treat}, and \code{weights}.
 }
 \usage{
 foos_etal
 }
 \description{
-Replication data for Foos, John, Muller, and Cunningham (2021), Journal of Politics (derived from Dataverse 10.7910/DVN/NDPXND)
+One row per voter. \code{treat} is the randomly assigned treatment, \code{marked_register_2014} the turnout outcome, and \code{ward} and \code{street} (a hashed identifier) the levels at which voters are clustered.
 }
 \keyword{datasets}

@@ -3,14 +3,14 @@
 \docType{data}
 \name{clingingsmith_etal}
 \alias{clingingsmith_etal}
-\title{Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133-1170}
+\title{Replication data for Clingingsmith, Khwaja, and Kremer (2009), Quarterly Journal of Economics}
 \format{
-A data.frame
+A data frame with 958 rows and 8 columns: \code{success}, \code{views_saudi}, \code{views_indonesian}, \code{views_turkish}, \code{views_african}, \code{views_chinese}, \code{views_european}, and \code{views}.
 }
 \usage{
 clingingsmith_etal
 }
 \description{
-Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133-1170
+From "Estimating the Impact of the Hajj: Religion and Tolerance in Islam's Global Gathering," The Quarterly Journal of Economics 124(3): 1133-1170. One row per applicant to the Hajj visa lottery. \code{success} is 1 for lottery winners; the \code{views_} columns are attitudes toward each group, and \code{views} is their sum.
 }
 \keyword{datasets}

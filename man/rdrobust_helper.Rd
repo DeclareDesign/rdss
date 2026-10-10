@@ -7,19 +7,22 @@
 rdrobust_helper(data, y, x, subset = NULL, ...)
 }
 \arguments{
-\item{data}{a data.frame}
+\item{data}{A data frame.}
 
-\item{y}{unquoted name of the outcome variable}
+\item{y}{The bare column name of the outcome.}
 
-\item{x}{unquoted name of the running variable}
+\item{x}{The bare column name of the running variable.}
 
-\item{subset}{an optional vector specifying a subset of observations to be used in the fitting process}
+\item{subset}{An optional logical expression in terms of the columns of \code{data}, selecting the rows to use.}
 
-\item{...}{Other arguments to \code{rdrobust}}
+\item{...}{Further arguments to \code{\link[rdrobust:rdrobust]{rdrobust::rdrobust()}}, e.g. \code{c} for the cutoff.}
 }
 \value{
 rdrobust model fit object
 }
 \description{
-Helper function for using rdrobust as a model in \code{declare_estimator}
+Lets \code{\link[rdrobust:rdrobust]{rdrobust::rdrobust()}}, which takes vectors, be called with a data frame and column names. Pass it as \code{.method} in \code{declare_estimator()}; \code{\link[=tidy.rdrobust]{tidy.rdrobust()}} then tidies the fit.
+}
+\details{
+See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs
 }

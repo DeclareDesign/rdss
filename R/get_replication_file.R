@@ -1,6 +1,8 @@
 
 #' Download a replication file from the dataverse archive for Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign
 #'
+#' Downloads one of the book's design declarations or diagnosis objects from its Dataverse archive and returns it as an R object. Requires an internet connection.
+#'
 #' See https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HYVPO5 for further details and the code used to create these files.
 #'
 #' The available names include:
@@ -146,10 +148,10 @@
 #' diagnosis_23.1 \cr
 #' diagnosis_23a \cr
 #'
-#' @param name quoted name of the file on the dataverse archive
-#' @param verbose print declaration code if requesting a declaration
+#' @param name The name of the file, as a string, e.g. `"declaration_2.1"`. The names are listed above.
+#' @param verbose If `TRUE`, print the code that creates a declaration when one is requested.
 #'
-#' @return an r object
+#' @return The requested object: a design declaration, or a diagnosis or simulation data frame.
 #' @export
 #'
 #' @importFrom dataverse get_dataframe_by_name get_file_by_name

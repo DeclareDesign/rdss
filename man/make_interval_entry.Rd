@@ -7,14 +7,14 @@
 make_interval_entry(conf.low, conf.high, digits = 2)
 }
 \arguments{
-\item{conf.low}{a numeric vector of lower bounds}
+\item{conf.low}{A numeric vector of lower bounds.}
 
-\item{conf.high}{a numeric vector of upper bounds}
+\item{conf.high}{A numeric vector of upper bounds.}
 
-\item{digits}{number of digits to retain}
+\item{digits}{The number of decimal places. Defaults to 2.}
 }
 \value{
-a character vector of intervals
+A character vector, e.g. \code{"[-0.17, 0.31]"}.
 }
 \description{
 Format confidence intervals for nice printing

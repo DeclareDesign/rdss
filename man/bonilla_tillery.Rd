@@ -5,12 +5,12 @@
 \alias{bonilla_tillery}
 \title{Replication data for Bonilla and Tillery (2020), American Political Science Review (obtained from Dataverse 10.7910/DVN/IUZDQI)}
 \format{
-A data.frame
+A data frame with 849 rows and 10 columns: \code{female}, \code{lgbtq}, \code{age}, \code{religiosity}, \code{income}, \code{college}, \code{blm_familiarity}, \code{linked_fate}, \code{Z}, and \code{blm_support}.
 }
 \usage{
 bonilla_tillery
 }
 \description{
-Replication data for Bonilla and Tillery (2020), American Political Science Review (obtained from Dataverse 10.7910/DVN/IUZDQI)
+One row per survey respondent. \code{Z} is the randomly assigned message (a factor with four levels) and \code{blm_support} the outcome; the remaining columns are respondent characteristics.
 }
 \keyword{datasets}

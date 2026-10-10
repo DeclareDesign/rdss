@@ -1,15 +1,15 @@
 #' Post stratification estimator helper
 #'
-#' Calculates predicted values from a multilevel regression and the post-stratified state-level estimates
+#' Predicts each row's outcome from a fitted model, then averages the predictions within each group using the post-stratification weights. In the book, the rows are demographic cells and the groups are states.
 #'
-#' Please see https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
+#' See https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
 #'
-#' @param model_fit a model fit object from, e.g., glmer or lm_robust
-#' @param data a data.frame
-#' @param group unquoted name of the group variable to construct estimates for
-#' @param weights unquoted name of post-stratification weights variable
+#' @param model_fit A fitted model that [marginaleffects::predictions()] accepts, e.g. from `lme4::glmer()`. Random effects are left out of the predictions (`re.form = NA`).
+#' @param data A data frame of post-stratification cells to predict for.
+#' @param group The bare column name of the grouping variable.
+#' @param weights The bare column name of the post-stratification weights, e.g. each cell's population share.
 #'
-#' @return data.frame of post-stratified group-level estimates
+#' @return A data frame with one row per group and columns for the group and `estimate`.
 #'
 #' @export
 #'

@@ -8,20 +8,20 @@
 post_stratification_helper(model_fit, data, group, weights)
 }
 \arguments{
-\item{model_fit}{a model fit object from, e.g., glmer or lm_robust}
+\item{model_fit}{A fitted model that \code{\link[marginaleffects:predictions]{marginaleffects::predictions()}} accepts, e.g. from \code{lme4::glmer()}. Random effects are left out of the predictions (\code{re.form = NA}).}
 
-\item{data}{a data.frame}
+\item{data}{A data frame of post-stratification cells to predict for.}
 
-\item{group}{unquoted name of the group variable to construct estimates for}
+\item{group}{The bare column name of the grouping variable.}
 
-\item{weights}{unquoted name of post-stratification weights variable}
+\item{weights}{The bare column name of the post-stratification weights, e.g. each cell's population share.}
 }
 \value{
-data.frame of post-stratified group-level estimates
+A data frame with one row per group and columns for the group and \code{estimate}.
 }
 \description{
-Calculates predicted values from a multilevel regression and the post-stratified state-level estimates
+Predicts each row's outcome from a fitted model, then averages the predictions within each group using the post-stratification weights. In the book, the rows are demographic cells and the groups are states.
 }
 \details{
-Please see https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
+See https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
 }

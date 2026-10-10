@@ -10,7 +10,7 @@ A data frame with 1000 rows and 4 variables:
 \item{party}{political party registration}
 \item{age}{age of voter in years}
 \item{census_tract}{US Census tract number}
-\item{voted_2012}{voter turnout in 2012 election}
+\item{voted_2012}{1 if the voter voted in the 2012 general election, 0 otherwise}
 }
 }
 \source{
@@ -20,6 +20,6 @@ California Secretary of State.
 la_voter_file
 }
 \description{
-A dataset containing the party registration, age, census tract number, and voter turnout in 2012 for 1,000 randomly-sampled registered voters in Los Angeles County, California.
+Party registration, age, census tract, and 2012 turnout for 1,000 registered voters sampled at random from the Los Angeles County voter file. One row per voter.
 }
 \keyword{datasets}

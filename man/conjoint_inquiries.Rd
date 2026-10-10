@@ -7,15 +7,18 @@
 conjoint_inquiries(data, levels_list, utility_fn)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame with one row per profile and columns \code{subject}, \code{task}, and \code{profile} (1 or 2).}
 
-\item{levels_list}{List of conjoint levels}
+\item{levels_list}{A named list of attribute levels, as in \code{\link[=conjoint_assignment]{conjoint_assignment()}}. The first level of each attribute is the reference.}
 
-\item{utility_fn}{a function that takes data and returns an additional column called U, which represents the utility of the choice}
+\item{utility_fn}{A function that adds the utility column \code{U}, as in \code{\link[=conjoint_measurement]{conjoint_measurement()}}.}
 }
 \value{
-a data.frame of estimand values
+A data frame with one row per non-reference level: \code{attribute}, \code{reference}, \code{level}, \code{inquiry}, and \code{estimand}.
 }
 \description{
+Computes the true average marginal component effect (AMCE) of every attribute level relative to that attribute's first level. Each AMCE is the average change in the probability that the second profile in a task is chosen when the attribute moves from its first level to the given level, with the other attributes drawn at random by \code{\link[=conjoint_assignment]{conjoint_assignment()}}.
+}
+\details{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

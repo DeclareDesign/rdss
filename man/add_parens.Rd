@@ -7,12 +7,12 @@
 add_parens(x, digits = 3)
 }
 \arguments{
-\item{x}{Numeric vector}
+\item{x}{A numeric vector.}
 
-\item{digits}{Number of digits to retain}
+\item{digits}{The number of decimal places. Defaults to 3.}
 }
 \value{
-A character vector with enclosing parentheses
+A character vector, e.g. \code{"(0.120)"}.
 }
 \description{
 Add parentheses around standard error estimates

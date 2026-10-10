@@ -2,16 +2,19 @@
 % Please edit documentation in R/helpers-meta-analysis.R
 \name{rma_mu_tau}
 \alias{rma_mu_tau}
-\title{Extract mu and tau parameters from rma model fit}
+\title{Extract mu and tau-squared from a random-effects meta-analysis}
 \usage{
 rma_mu_tau(fit)
 }
 \arguments{
-\item{fit}{Fit object from the rma function in the metafor package}
+\item{fit}{A fit from \code{\link[=rma_helper]{rma_helper()}} or \code{\link[metafor:rma]{metafor::rma()}}.}
 }
 \value{
-a data.frame of estimates
+A data frame with two rows, \code{mu} and \code{tau_sq}, with estimates, standard errors, and confidence intervals (for \code{tau_sq}, intervals only when \code{method = "REML"}). If the fit failed, one row with \code{estimate = NA} and \code{error = TRUE}.
 }
 \description{
+A tidier for fits from \code{\link[=rma_helper]{rma_helper()}}: \code{mu} is the average effect across studies and \code{tau_sq} the variance of the true effects across studies.
+}
+\details{
 See https://book.declaredesign.org/complex-designs.html#meta-analysis
 }

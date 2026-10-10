@@ -7,12 +7,12 @@
 conjoint_measurement(data, utility_fn)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame with one row per profile and columns \code{subject}, \code{task}, and \code{profile}. Each task must hold exactly two profiles.}
 
-\item{utility_fn}{a function that takes data and returns an additional column called U, which represents the utility of the choice}
+\item{utility_fn}{A function that takes \code{data} and returns it with a column \code{U} added, the utility the subject gets from each profile.}
 }
 \value{
-a data.frame
+\code{data} with \code{U} and \code{choice} added.
 }
 \description{
 Applies \code{utility_fn} and, within each subject and task, compares the two profiles and sets \code{choice} to 1 for the one with the higher utility \code{U} (the second profile on a tie).

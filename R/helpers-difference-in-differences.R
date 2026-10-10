@@ -1,14 +1,16 @@
 #' Generate lags in grouped data
 #'
+#' Lags `x` within each group, ordering by `order_by` rather than by row order. Write the variables as bare column names inside [fabricatr::fabricate()] or [dplyr::mutate()]; see the README for an example.
+#'
 #' See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 #'
-#' @param x Vector of values
-#' @param groups Grouping variable
-#' @param n Positive integer of length 1, giving the number of positions to lead or lag by
+#' @param x The variable to lag.
+#' @param groups The grouping variable, e.g. a unit identifier.
+#' @param n A positive integer: the number of periods to lag by. Defaults to 1.
 #' @param order_by Ordering variable within group (e.g., time)
-#' @param default Value used for non-existent rows. Defaults to NA.
+#' @param default The value for rows with no earlier period in their group. Defaults to `NA`.
 #'
-#' @return vector of lagged values
+#' @return A vector the length of `x`, in the original row order.
 #'
 #' @export
 #'
@@ -29,14 +31,14 @@ lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
 
 #' Tidy helper function for did_multiplegt
 #'
-#' Runs did_multiplegt estimation function and returns tidy data frame output
+#' Runs [DIDmultiplegt::did_multiplegt()], the de Chaisemartin and D'Haultfoeuille estimator, and returns its estimate as a one-row data frame.
 #'
 #' See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 #'
-#' @param data a data.frame
-#' @param ... options passed to did_multiplegt
+#' @param data A data frame, passed to `did_multiplegt()` as `df`.
+#' @param ... Further arguments to `did_multiplegt()`, which must include the column names of the outcome (`Y`), group (`G`), time period (`T`), and treatment (`D`), as strings.
 #'
-#' @return a data.frame of estimates
+#' @return A data frame with one column, `estimate`.
 #'
 #' @export
 #'

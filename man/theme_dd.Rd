@@ -2,13 +2,18 @@
 % Please edit documentation in R/theme_dd.R
 \name{theme_dd}
 \alias{theme_dd}
-\title{ggplot Theme used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)}
+\title{ggplot theme used in the book Research Design in the Social Sciences}
 \usage{
 theme_dd()
 }
 \value{
-ggplot theme
+A ggplot2 theme.
 }
 \description{
-ggplot Theme used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)
+\code{\link[ggplot2:theme_minimal]{ggplot2::theme_minimal()}} with light gray major gridlines only, no axis ticks, and no legend. The book labels series directly, so it hides the legend; add \code{theme(legend.position = "right")} after it to get one back.
+}
+\examples{
+library(ggplot2)
+ggplot(mtcars, aes(wt, mpg)) + geom_point() + theme_dd()
+
 }

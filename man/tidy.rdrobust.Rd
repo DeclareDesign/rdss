@@ -7,15 +7,15 @@
 \method{tidy}{rdrobust}(x, ...)
 }
 \arguments{
-\item{x}{Model fit object from rdrobust}
+\item{x}{A fit from \code{\link[rdrobust:rdrobust]{rdrobust::rdrobust()}}.}
 
-\item{...}{Other arguments (not used)}
+\item{...}{Not used.}
 }
 \value{
-a data.frame of estimates
+A data frame with one row per estimate rdrobust reports (conventional, bias-corrected, and robust) and columns \code{term}, \code{estimate}, \code{std.error}, \code{statistic}, \code{p.value}, \code{conf.low}, \code{conf.high}, and \code{cutoff}.
 }
 \description{
-Runs rdrobust estimation function and returns tidy data frame output
+A \code{\link[generics:tidy]{generics::tidy()}} method for fits from \code{\link[rdrobust:rdrobust]{rdrobust::rdrobust()}}, so they can be used in \code{declare_estimator()}. Use \code{\link[=rdrobust_helper]{rdrobust_helper()}} to fit the model.
 }
 \details{
 See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs

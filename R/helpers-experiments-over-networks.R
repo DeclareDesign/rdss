@@ -2,11 +2,13 @@
 
 #' Helper function to obtain the observed exposure for the Aronow and Samii estimator
 #'
+#' Converts the exposure map from `interference::make_exposure_map_AS()`, a 0/1 matrix with one row per unit and one column per exposure condition, into a vector naming each unit's condition (e.g. `"dir_ind1"` or `"no"`).
+#'
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
-#' @param obs_exposure A numeric vector
+#' @param obs_exposure An exposure map, as returned by `interference::make_exposure_map_AS()`.
 #'
-#' @return a data.frame of observed exposure to a treatment created using the interference package
+#' @return A character vector with one element per unit.
 #'
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr filter pull everything
@@ -24,10 +26,9 @@ get_exposure_AS <- function(obs_exposure) {
 
 #' Tidy helper function for estimator_AS function
 #'
-#' Runs estimates estimation function from interference package and returns tidy data frame output
+#' Runs the Aronow and Samii estimator from the 'interference' package and returns Horvitz-Thompson and Hajek estimates of the total, direct, and indirect effects. Exposure is defined by one-hop neighbours in `adj_matrix`. The data must contain the treatment as `Z` and the outcome as `Y`.
 #'
-#'
-#' The estimator_AS_tidy function requires the 'interference' package, which is not available on CRAN.
+#' The function requires the 'interference' package, which is not available on CRAN.
 #'
 #' To use this function, install it with
 #' remotes::install_github('szonszein/interference')
@@ -37,9 +38,9 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 #' See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 #'
-#' @param data A `data.frame` containing the observed data.
+#' @param data A data frame with columns `Z` and `Y`.
 #'
-#' @param permutatation_matrix A matrix of random treatment assignments. Each
+#' @param permutatation_matrix (The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments. Each
 #'   column corresponds to one permutation of the treatment vector, as returned
 #'   by `t(obtain_permutation_matrix(declaration))`. The exposure probabilities
 #'   are computed from it unless `obs_prob_exposure` is supplied.
@@ -67,7 +68,7 @@ get_exposure_AS <- function(obs_exposure) {
 #'   }
 #'   When `NULL`, the default, they are computed from `permutatation_matrix`.
 #'
-#' @return a data.frame of estimates
+#' @return A data frame with six rows (three inquiries by two estimators) and columns `term`, `inquiry`, `estimator`, and `estimate`. No standard errors are returned.
 #'
 #' @export
 #'

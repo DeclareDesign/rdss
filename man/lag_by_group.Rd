@@ -7,19 +7,22 @@
 lag_by_group(x, groups, n = 1, order_by, default = NA)
 }
 \arguments{
-\item{x}{Vector of values}
+\item{x}{The variable to lag.}
 
-\item{groups}{Grouping variable}
+\item{groups}{The grouping variable, e.g. a unit identifier.}
 
-\item{n}{Positive integer of length 1, giving the number of positions to lead or lag by}
+\item{n}{A positive integer: the number of periods to lag by. Defaults to 1.}
 
 \item{order_by}{Ordering variable within group (e.g., time)}
 
-\item{default}{Value used for non-existent rows. Defaults to NA.}
+\item{default}{The value for rows with no earlier period in their group. Defaults to \code{NA}.}
 }
 \value{
-vector of lagged values
+A vector the length of \code{x}, in the original row order.
 }
 \description{
+Lags \code{x} within each group, ordering by \code{order_by} rather than by row order. Write the variables as bare column names inside \code{\link[fabricatr:fabricate]{fabricatr::fabricate()}} or \code{\link[dplyr:mutate]{dplyr::mutate()}}; see the README for an example.
+}
+\details{
 See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 }

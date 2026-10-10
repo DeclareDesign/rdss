@@ -7,22 +7,22 @@
 rma_helper(data, yi, sei, method = "REML", ...)
 }
 \arguments{
-\item{data}{a data.frame}
+\item{data}{A data frame with one row per study.}
 
-\item{yi}{unquoted variable name of estimates used in meta-analysis}
+\item{yi}{The bare column name of the study estimates.}
 
-\item{sei}{unquoted variable name of standard errors used in meta-analysis}
+\item{sei}{The bare column name of their standard errors.}
 
 \item{method}{character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".}
 
-\item{...}{Further options to be passed to rma}
+\item{...}{Further arguments to \code{\link[metafor:rma]{metafor::rma()}}.}
 }
 \value{
-a data.frame of estimates
+An \code{rma.uni} fit; pass it to \code{\link[=rma_mu_tau]{rma_mu_tau()}} to tidy it.
 }
 \description{
 See https://book.declaredesign.org/complex-designs.html#meta-analysis
 }
 \details{
-See ?rma for further details
+Fits \code{\link[metafor:rma]{metafor::rma()}} to study-level estimates and standard errors. If the fit fails, it returns the error as an object \code{\link[=rma_mu_tau]{rma_mu_tau()}} recognizes, so one failed simulation does not stop a diagnosis.
 }

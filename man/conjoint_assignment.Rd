@@ -7,13 +7,16 @@
 conjoint_assignment(data, levels_list)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame with one row per profile.}
 
-\item{levels_list}{List of conjoint levels to assign}
+\item{levels_list}{A named list with one element per attribute, each a vector of that attribute's levels, e.g. \code{list(gender = c("woman", "man"), age = c("young", "old"))}.}
 }
 \value{
-a data.frame with random assignment added
+\code{data} with one column per attribute, named as in \code{levels_list}.
 }
 \description{
+For each attribute, assigns every row one of that attribute's levels by complete random assignment, so the levels appear in as equal numbers as possible.
+}
+\details{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

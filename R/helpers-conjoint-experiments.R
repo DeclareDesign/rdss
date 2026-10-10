@@ -1,14 +1,14 @@
 #' Tidy estimates from the amce estimator
 #'
-#' Runs amce estimation function and returns tidy data frame output
+#' A [generics::tidy()] method for fits from [cjoint::amce()]: one row per attribute level, with normal-approximation confidence intervals.
 #'
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @param x an amce fit object from cjoint::amce
-#' @param alpha Confidence level
-#' @param ... Extra arguments to pass to tidy
+#' @param x A fit from [cjoint::amce()].
+#' @param alpha The significance level for the confidence intervals. Defaults to 0.05, which gives 95 percent intervals.
+#' @param ... Not used.
 #'
-#' @return a data.frame of estimates
+#' @return A data frame with columns `attribute`, `level`, `estimate`, `std.error`, `statistic`, `p.value`, `conf.low`, and `conf.high`.
 #'
 #' @export
 #'
@@ -29,8 +29,7 @@
 #'                   `Reason for Application` + `Prior Entry`, data = immigrationconjoint,
 #'                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
 #'
-#' # Print summary
-#' # tidy(results)
+#' tidy(results)
 #' }
 #'
 tidy.amce <-
@@ -62,12 +61,14 @@ tidy.amce <-
 
 #' Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels
 #'
+#' For each attribute, assigns every row one of that attribute's levels by complete random assignment, so the levels appear in as equal numbers as possible.
+#'
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @param data A data.frame
-#' @param levels_list List of conjoint levels to assign
+#' @param data A data frame with one row per profile.
+#' @param levels_list A named list with one element per attribute, each a vector of that attribute's levels, e.g. `list(gender = c("woman", "man"), age = c("young", "old"))`.
 #'
-#' @return a data.frame with random assignment added
+#' @return `data` with one column per attribute, named as in `levels_list`.
 #'
 #' @export
 #'
@@ -91,10 +92,10 @@ conjoint_assignment <-
 #'
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @param data A data.frame
-#' @param utility_fn a function that takes data and returns an additional column called U, which represents the utility of the choice
+#' @param data A data frame with one row per profile and columns `subject`, `task`, and `profile`. Each task must hold exactly two profiles.
+#' @param utility_fn A function that takes `data` and returns it with a column `U` added, the utility the subject gets from each profile.
 #'
-#' @return a data.frame
+#' @return `data` with `U` and `choice` added.
 #'
 #' @export
 #'
@@ -111,13 +112,15 @@ conjoint_measurement <-
 
 #' Conjoint experiment inquiries handler
 #'
+#' Computes the true average marginal component effect (AMCE) of every attribute level relative to that attribute's first level. Each AMCE is the average change in the probability that the second profile in a task is chosen when the attribute moves from its first level to the given level, with the other attributes drawn at random by [conjoint_assignment()].
+#'
 #' See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 #'
-#' @param data A data.frame
-#' @param levels_list List of conjoint levels
-#' @param utility_fn a function that takes data and returns an additional column called U, which represents the utility of the choice
+#' @param data A data frame with one row per profile and columns `subject`, `task`, and `profile` (1 or 2).
+#' @param levels_list A named list of attribute levels, as in [conjoint_assignment()]. The first level of each attribute is the reference.
+#' @param utility_fn A function that adds the utility column `U`, as in [conjoint_measurement()].
 #'
-#' @return a data.frame of estimand values
+#' @return A data frame with one row per non-reference level: `attribute`, `reference`, `level`, `inquiry`, and `estimand`.
 #'
 #' @importFrom dplyr filter `%>%` mutate bind_rows
 #' @importFrom rlang `!!` `:=`

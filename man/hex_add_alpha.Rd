@@ -7,13 +7,17 @@
 hex_add_alpha(col, alpha)
 }
 \arguments{
-\item{col}{Original color code in hex}
+\item{col}{A color as a six-digit hex code, e.g. \code{"#72B4F3"}.}
 
-\item{alpha}{Level of alpha transparency to add}
+\item{alpha}{Opacity, from 0 (transparent) to 1 (opaque).}
 }
 \value{
-color codes with alpha added
+The color as an eight-digit hex code.
 }
 \description{
 Add alpha transparency to a color defined in hexadecimal
+}
+\examples{
+hex_add_alpha("#72B4F3", 0.5)
+
 }

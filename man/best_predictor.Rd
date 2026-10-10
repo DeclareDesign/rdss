@@ -2,20 +2,23 @@
 % Please edit documentation in R/helpers-causal-forests.R
 \name{best_predictor}
 \alias{best_predictor}
-\title{Best predictor function from causal_forest}
+\title{Find the covariate that best predicts treatment effect heterogeneity}
 \usage{
 best_predictor(data, covariate_names, cuts = 20)
 }
 \arguments{
-\item{data}{A data.frame of covariates}
+\item{data}{A data frame with a column \code{tau} holding each unit's treatment effect, and the covariates named in \code{covariate_names}.}
 
-\item{covariate_names}{A character vector of covariates to assess}
+\item{covariate_names}{A character vector of covariates to assess.}
 
-\item{cuts}{Either a numeric vector of two or more unique cut points or a single number (greater than or equal to 2) giving the number of intervals into which each covariate is to be cut.}
+\item{cuts}{Either a numeric vector of two or more unique cut points or a single number (greater than or equal to 2) giving the number of intervals into which each covariate is to be cut. Defaults to 20.}
 }
 \value{
-a data.frame of the best predictors
+A data frame with one row: \code{inquiry} (\code{"best_predictor"}) and \code{estimand}, the position in \code{covariate_names} of the best predictor.
 }
 \description{
-Best predictor function from causal_forest
+An inquiry handler. For each covariate, regresses the true unit-level effect \code{tau} on the covariate cut into intervals, and reports which covariate gives the highest R-squared. Pair it with \code{\link[=causal_forest_handler]{causal_forest_handler()}}, whose \code{var_imp} column is the estimate of the same quantity.
+}
+\details{
+See https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests
 }

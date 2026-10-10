@@ -7,15 +7,15 @@
 format_num(x, digits = 3)
 }
 \arguments{
-\item{x}{Numeric vector}
+\item{x}{A numeric vector.}
 
-\item{digits}{Number of digits to retain}
+\item{digits}{The number of decimal places. Defaults to 3.}
 }
 \value{
-a character vector of formatted numbers
+A character vector.
 }
 \description{
-Round and pad a number to a specific decimal place
+Rounds to \code{digits} decimal places and keeps trailing zeros, so a column of numbers lines up in a table.
 }
 \examples{
 

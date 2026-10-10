@@ -1,9 +1,9 @@
 #' Add parentheses around standard error estimates
 #'
-#' @param x Numeric vector
-#' @param digits Number of digits to retain
+#' @param x A numeric vector.
+#' @param digits The number of decimal places. Defaults to 3.
 #'
-#' @return A character vector with enclosing parentheses
+#' @return A character vector, e.g. `"(0.120)"`.
 #'
 #' @export
 #'
@@ -19,10 +19,12 @@ add_parens <- function(x, digits = 3) {
 
 #' Round and pad a number to a specific decimal place
 #'
-#' @param x Numeric vector
-#' @param digits Number of digits to retain
+#' Rounds to `digits` decimal places and keeps trailing zeros, so a column of numbers lines up in a table.
 #'
-#' @return a character vector of formatted numbers
+#' @param x A numeric vector.
+#' @param digits The number of decimal places. Defaults to 3.
+#'
+#' @return A character vector.
 #'
 #' @export
 #'
@@ -38,11 +40,11 @@ format_num <- function(x, digits = 3) {
 
 #' Format estimates and standard errors for nice printing
 #'
-#' @param estimate a numeric vector of parameter estimates
-#' @param std.error a numeric vector of standard error estimates
-#' @param digits number of digits to retain
+#' @param estimate A numeric vector of estimates.
+#' @param std.error A numeric vector of standard errors, the same length as `estimate`.
+#' @param digits The number of decimal places. Defaults to 2.
 #'
-#' @return a character vector of formatted estimates and standard errors
+#' @return A character vector, e.g. `"0.07 (0.12)"`.
 #'
 #' @export
 #'
@@ -59,11 +61,11 @@ make_se_entry <- function(estimate, std.error, digits = 2){
 
 #' Format confidence intervals for nice printing
 #'
-#' @param conf.low a numeric vector of lower bounds
-#' @param conf.high a numeric vector of upper bounds
-#' @param digits number of digits to retain
+#' @param conf.low A numeric vector of lower bounds.
+#' @param conf.high A numeric vector of upper bounds.
+#' @param digits The number of decimal places. Defaults to 2.
 #'
-#' @return a character vector of intervals
+#' @return A character vector, e.g. `"[-0.17, 0.31]"`.
 #'
 #' @export
 #'

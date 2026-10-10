@@ -7,15 +7,15 @@
 did_multiplegt_tidy(data, ...)
 }
 \arguments{
-\item{data}{a data.frame}
+\item{data}{A data frame, passed to \code{did_multiplegt()} as \code{df}.}
 
-\item{...}{options passed to did_multiplegt}
+\item{...}{Further arguments to \code{did_multiplegt()}, which must include the column names of the outcome (\code{Y}), group (\code{G}), time period (\code{T}), and treatment (\code{D}), as strings.}
 }
 \value{
-a data.frame of estimates
+A data frame with one column, \code{estimate}.
 }
 \description{
-Runs did_multiplegt estimation function and returns tidy data frame output
+Runs \code{\link[DIDmultiplegt:did_multiplegt]{DIDmultiplegt::did_multiplegt()}}, the de Chaisemartin and D'Haultfoeuille estimator, and returns its estimate as a one-row data frame.
 }
 \details{
 See https://book.declaredesign.org/observational-causal.html#difference-in-differences

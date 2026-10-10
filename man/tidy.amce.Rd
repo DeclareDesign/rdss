@@ -7,17 +7,17 @@
 \method{tidy}{amce}(x, alpha = 0.05, ...)
 }
 \arguments{
-\item{x}{an amce fit object from cjoint::amce}
+\item{x}{A fit from \code{\link[cjoint:amce]{cjoint::amce()}}.}
 
-\item{alpha}{Confidence level}
+\item{alpha}{The significance level for the confidence intervals. Defaults to 0.05, which gives 95 percent intervals.}
 
-\item{...}{Extra arguments to pass to tidy}
+\item{...}{Not used.}
 }
 \value{
-a data.frame of estimates
+A data frame with columns \code{attribute}, \code{level}, \code{estimate}, \code{std.error}, \code{statistic}, \code{p.value}, \code{conf.low}, and \code{conf.high}.
 }
 \description{
-Runs amce estimation function and returns tidy data frame output
+A \code{\link[generics:tidy]{generics::tidy()}} method for fits from \code{\link[cjoint:amce]{cjoint::amce()}}: one row per attribute level, with normal-approximation confidence intervals.
 }
 \details{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
@@ -36,8 +36,7 @@ results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
                   `Reason for Application` + `Prior Entry`, data = immigrationconjoint,
                 cluster = TRUE, respondent.id = "CaseID", design = immigrationdesign)
 
-# Print summary
-# tidy(results)
+tidy(results)
 }
 
 }

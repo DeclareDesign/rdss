@@ -1,13 +1,13 @@
 #' Tidy helper function for rdrobust function
 #'
-#' Runs rdrobust estimation function and returns tidy data frame output
+#' A [generics::tidy()] method for fits from [rdrobust::rdrobust()], so they can be used in `declare_estimator()`. Use [rdrobust_helper()] to fit the model.
 #'
 #' See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs
 #'
-#' @param x Model fit object from rdrobust
-#' @param ... Other arguments (not used)
+#' @param x A fit from [rdrobust::rdrobust()].
+#' @param ... Not used.
 #'
-#' @return a data.frame of estimates
+#' @return A data frame with one row per estimate rdrobust reports (conventional, bias-corrected, and robust) and columns `term`, `estimate`, `std.error`, `statistic`, `p.value`, `conf.low`, `conf.high`, and `cutoff`.
 #'
 #' @export
 tidy.rdrobust <- function(x, ...) {
@@ -26,11 +26,15 @@ tidy.rdrobust <- function(x, ...) {
 
 #' Helper function for using rdrobust as a model in `declare_estimator`
 #'
-#' @param data a data.frame
-#' @param y unquoted name of the outcome variable
-#' @param x unquoted name of the running variable
-#' @param subset an optional vector specifying a subset of observations to be used in the fitting process
-#' @param ... Other arguments to \code{rdrobust}
+#' Lets [rdrobust::rdrobust()], which takes vectors, be called with a data frame and column names. Pass it as `.method` in `declare_estimator()`; [tidy.rdrobust()] then tidies the fit.
+#'
+#' See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs
+#'
+#' @param data A data frame.
+#' @param y The bare column name of the outcome.
+#' @param x The bare column name of the running variable.
+#' @param subset An optional logical expression in terms of the columns of `data`, selecting the rows to use.
+#' @param ... Further arguments to [rdrobust::rdrobust()], e.g. `c` for the cutoff.
 #'
 #' @importFrom dplyr filter
 #' @importFrom rlang enquo `!!`

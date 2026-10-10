@@ -1,10 +1,12 @@
-#' Extract mu and tau parameters from rma model fit
+#' Extract mu and tau-squared from a random-effects meta-analysis
+#'
+#' A tidier for fits from [rma_helper()]: `mu` is the average effect across studies and `tau_sq` the variance of the true effects across studies.
 #'
 #' See https://book.declaredesign.org/complex-designs.html#meta-analysis
 #'
-#' @param fit Fit object from the rma function in the metafor package
+#' @param fit A fit from [rma_helper()] or [metafor::rma()].
 #'
-#' @return a data.frame of estimates
+#' @return A data frame with two rows, `mu` and `tau_sq`, with estimates, standard errors, and confidence intervals (for `tau_sq`, intervals only when `method = "REML"`). If the fit failed, one row with `estimate = NA` and `error = TRUE`.
 #'
 #' @export
 #'
@@ -49,15 +51,15 @@ rma_mu_tau <- function(fit) {
 #'
 #' See https://book.declaredesign.org/complex-designs.html#meta-analysis
 #'
-#' See ?rma for further details
+#' Fits [metafor::rma()] to study-level estimates and standard errors. If the fit fails, it returns the error as an object [rma_mu_tau()] recognizes, so one failed simulation does not stop a diagnosis.
 #'
-#' @param data a data.frame
-#' @param yi unquoted variable name of estimates used in meta-analysis
-#' @param sei unquoted variable name of standard errors used in meta-analysis
+#' @param data A data frame with one row per study.
+#' @param yi The bare column name of the study estimates.
+#' @param sei The bare column name of their standard errors.
 #' @param method character string to specify whether a fixed- or a random/mixed-effects model should be fitted. A fixed-effects model (with or without moderators) is fitted when using method = "FE". Random/mixed-effects models are fitted by setting method equal to one of the following: "DL", "HE", "SJ", "ML", "REML", "EB", "HS", "HSk", or "GENQ". Default is "REML".
-#' @param ... Further options to be passed to rma
+#' @param ... Further arguments to [metafor::rma()].
 #'
-#' @return a data.frame of estimates
+#' @return An `rma.uni` fit; pass it to [rma_mu_tau()] to tidy it.
 #'
 #' @export
 #'

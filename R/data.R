@@ -1,47 +1,53 @@
 #' Voter file sample for Los Angeles County
 #'
-#' A dataset containing the party registration, age, census tract number, and voter turnout in 2012 for 1,000 randomly-sampled registered voters in Los Angeles County, California.
+#' Party registration, age, census tract, and 2012 turnout for 1,000 registered voters sampled at random from the Los Angeles County voter file. One row per voter.
 #'
 #' @format A data frame with 1000 rows and 4 variables:
 #' \describe{
 #'   \item{party}{political party registration}
 #'   \item{age}{age of voter in years}
 #'   \item{census_tract}{US Census tract number}
-#'   \item{voted_2012}{voter turnout in 2012 election}
+#'   \item{voted_2012}{1 if the voter voted in the 2012 general election, 0 otherwise}
 #' }
 #' @source California Secretary of State.
 "la_voter_file"
 
 #' Shapefile of Fairfax County, Virginia, voting precincts
 #'
-#' An sf object containing the boundaries of voting precincts for Fairfax County, Virginia as well as precinct ID, name, district, polling place name, address, city, zip code, area, length, and geometry (polygons)
+#' Boundaries of the 238 voting precincts in Fairfax County, Virginia, with each precinct's ID, name, district, and polling place. One row per precinct. The book uses it to build the adjacency matrix for the experiment over networks; see [estimator_AS_tidy()].
 #'
-#' @format An sf object with 236 rows and 10 variables:
+#' @format An sf object with 238 rows and 10 columns:
 "fairfax"
 
 #' Replication data for Bonilla and Tillery (2020), American Political Science Review (obtained from Dataverse 10.7910/DVN/IUZDQI)
 #'
-#' @format A data.frame
+#' One row per survey respondent. `Z` is the randomly assigned message (a factor with four levels) and `blm_support` the outcome; the remaining columns are respondent characteristics.
+#'
+#' @format A data frame with 849 rows and 10 columns: `female`, `lgbtq`, `age`, `religiosity`, `income`, `college`, `blm_familiarity`, `linked_fate`, `Z`, and `blm_support`.
 "bonilla_tillery"
 
 #' Replication data for Foos, John, Muller, and Cunningham (2021), Journal of Politics (derived from Dataverse 10.7910/DVN/NDPXND)
 #'
-#' @format A data.frame
+#' One row per voter. `treat` is the randomly assigned treatment, `marked_register_2014` the turnout outcome, and `ward` and `street` (a hashed identifier) the levels at which voters are clustered.
+#'
+#' @format A data frame with 8,375 rows and 5 columns: `marked_register_2014`, `ward`, `street`, `treat`, and `weights`.
 "foos_etal"
 
-#' Replication data for David Clingingsmith, Asim Ijaz Khwaja, Michael Kremer (2020): Estimating the Impact of The Hajj: Religion and Tolerance in Islam's Global Gathering. The Quarterly Journal of Economics, Volume 124, Issue 3, August 2009, Pages 1133-1170
+#' Replication data for Clingingsmith, Khwaja, and Kremer (2009), Quarterly Journal of Economics
 #'
-#' @format A data.frame
+#' From "Estimating the Impact of the Hajj: Religion and Tolerance in Islam's Global Gathering," The Quarterly Journal of Economics 124(3): 1133-1170. One row per applicant to the Hajj visa lottery. `success` is 1 for lottery winners; the `views_` columns are attitudes toward each group, and `views` is their sum.
+#'
+#' @format A data frame with 958 rows and 8 columns: `success`, `views_saudi`, `views_indonesian`, `views_turkish`, `views_african`, `views_chinese`, `views_european`, and `views`.
 "clingingsmith_etal"
 
-#' Data used in student exercises for RDSS based on LAPOP survey of Brazil in 2018
+#' Teaching data based on the 2018 LAPOP survey of Brazil
 #'
-#' These data were resampled with replacement from LAPOP data (to 10,000 rows) for a subset of variables. These data cannot be used for scientific inferences, and are only useful for teaching purposes. ID numbers were scrambled so that individuals and municipalities cannot easily be identified.
+#' Used in the book's student exercises. These data were resampled with replacement from the LAPOP data, to 10,000 rows, for a subset of variables. These data cannot be used for scientific inferences, and are only useful for teaching purposes. ID numbers were scrambled so that individuals and municipalities cannot easily be identified.
 #'
 #' Download the original data from https://www.vanderbilt.edu/lapop/raw-data.php
 #'
-#' See https://www.vanderbilt.edu/lapop/core-surveys.php for survey questionnaire
+#' See https://www.vanderbilt.edu/lapop/core-surveys.php for the survey questionnaire.
 #'
-#' @format A data.frame
+#' @format A data frame with 10,000 rows and 10 columns: `ID`, `municipality`, and eight survey items (`trust_police`, `govt_responsive`, `ideology`, `govt_pride`, `self_efficacy_political`, `trust_military`, `trust_supreme_court`, and `support_political_system`).
 "lapop_brazil"
 

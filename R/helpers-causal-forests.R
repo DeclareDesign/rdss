@@ -1,17 +1,15 @@
 #' Tidy helper function for causal_forest function
 #'
-#' Runs estimates estimation function from interference package and returns tidy data frame output
+#' Splits the data at random into a training and a test set, fits [grf::causal_forest()] on the training set, and predicts each unit's treatment effect. The data must contain the outcome as `Y` and the treatment as `Z`.
 #'
-#' https://draft.declaredesign.org/complex-designs.html#discovery-using-causal-forests
+#' See https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests
 #'
-#' See ?causal_forest for further details
+#' @param data A data frame with columns `Y`, `Z`, and the covariates named in `covariate_names`.
+#' @param covariate_names A character vector naming the covariate columns the forest may split on.
+#' @param share_train The share of units assigned to the training set. Defaults to 0.5.
+#' @param ... Further arguments passed to [grf::causal_forest()].
 #'
-#' @param data A data.frame
-#' @param covariate_names Names of covariates
-#' @param share_train Share of units to be used for training
-#' @param ... Options to causal_forest
-#'
-#' @return a data.frame of estimates
+#' @return `data` with four columns added: `pred` (the predicted treatment effect), `var_imp` (the position in `covariate_names` of the most important covariate), and the logical indicators `train` and `test`.
 #'
 #' @export
 #'
@@ -67,13 +65,17 @@ causal_forest_handler <- function(data, covariate_names, share_train = 0.5, ...)
 }
 
 
-#' Best predictor function from causal_forest
+#' Find the covariate that best predicts treatment effect heterogeneity
 #'
-#' @param data A data.frame of covariates
-#' @param covariate_names A character vector of covariates to assess
-#' @param cuts Either a numeric vector of two or more unique cut points or a single number (greater than or equal to 2) giving the number of intervals into which each covariate is to be cut.
+#' An inquiry handler. For each covariate, regresses the true unit-level effect `tau` on the covariate cut into intervals, and reports which covariate gives the highest R-squared. Pair it with [causal_forest_handler()], whose `var_imp` column is the estimate of the same quantity.
 #'
-#' @return a data.frame of the best predictors
+#' See https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests
+#'
+#' @param data A data frame with a column `tau` holding each unit's treatment effect, and the covariates named in `covariate_names`.
+#' @param covariate_names A character vector of covariates to assess.
+#' @param cuts Either a numeric vector of two or more unique cut points or a single number (greater than or equal to 2) giving the number of intervals into which each covariate is to be cut. Defaults to 20.
+#'
+#' @return A data frame with one row: `inquiry` (`"best_predictor"`) and `estimand`, the position in `covariate_names` of the best predictor.
 #'
 #' @export
 #'

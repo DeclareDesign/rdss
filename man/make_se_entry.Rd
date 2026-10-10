@@ -7,14 +7,14 @@
 make_se_entry(estimate, std.error, digits = 2)
 }
 \arguments{
-\item{estimate}{a numeric vector of parameter estimates}
+\item{estimate}{A numeric vector of estimates.}
 
-\item{std.error}{a numeric vector of standard error estimates}
+\item{std.error}{A numeric vector of standard errors, the same length as \code{estimate}.}
 
-\item{digits}{number of digits to retain}
+\item{digits}{The number of decimal places. Defaults to 2.}
 }
 \value{
-a character vector of formatted estimates and standard errors
+A character vector, e.g. \code{"0.07 (0.12)"}.
 }
 \description{
 Format estimates and standard errors for nice printing

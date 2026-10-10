@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers-conjoint-experiments.R
 \name{conjoint_measurement}
 \alias{conjoint_measurement}
-\title{Conjoint experiment assignment handler: conducts complete random assignment of all attribute levels}
+\title{Conjoint experiment measurement handler: records which profile in each task is chosen}
 \usage{
 conjoint_measurement(data, utility_fn)
 }
@@ -15,5 +15,8 @@ conjoint_measurement(data, utility_fn)
 a data.frame
 }
 \description{
+Applies \code{utility_fn} and, within each subject and task, compares the two profiles and sets \code{choice} to 1 for the one with the higher utility \code{U} (the second profile on a tie).
+}
+\details{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }

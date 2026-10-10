@@ -44,7 +44,7 @@ reference:
   - get_rdss_file
 
 - title: Tidy helpers
-  description: These functions declare research design steps
+  description: Wrap estimators from other packages for use in design steps such as `declare_estimator()`
   contents:
   - causal_forest_handler
   - rma_helper
@@ -65,13 +65,14 @@ reference:
   - lag_by_group
 
 - title: Tidiers
-  description: These functions declare research design steps
+  description: Return model fits from other packages as tidy data frames
   contents:
   - tidy.amce
   - tidy.rdrobust
+  - tidy_stan
 
 - title: Data
-  description: These functions operate on declared designs
+  description: Datasets used in the book's examples and exercises
   contents:
   - bonilla_tillery
   - clingingsmith_etal
@@ -81,7 +82,7 @@ reference:
   - lapop_brazil
 
 - title: Utilities
-  description: These functions operate on declared designs
+  description: Format numbers for tables, and the book's ggplot theme and palette
   contents:
   - add_parens
   - format_num
@@ -90,4 +91,3 @@ reference:
   - theme_dd
   - dd_palette
   - hex_add_alpha
-  - tidy_stan

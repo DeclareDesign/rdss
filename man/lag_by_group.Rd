@@ -13,7 +13,7 @@ lag_by_group(x, groups, n = 1, order_by, default = NA)
 
 \item{n}{Positive integer of length 1, giving the number of positions to lead or lag by}
 
-\item{order_by}{Ordering variable withing group (e.g., time)}
+\item{order_by}{Ordering variable within group (e.g., time)}
 
 \item{default}{Value used for non-existent rows. Defaults to NA.}
 }

@@ -3,7 +3,7 @@
 %   R/helpers-stanreg.R
 \name{tidy_stan}
 \alias{tidy_stan}
-\title{Tidy results from a stanreg regresion and exponentiate the estimated coefficient}
+\title{Tidy results from a stanreg regression, optionally exponentiating the coefficients}
 \usage{
 tidy_stan(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 

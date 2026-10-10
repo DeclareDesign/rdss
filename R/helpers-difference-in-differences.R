@@ -5,7 +5,7 @@
 #' @param x Vector of values
 #' @param groups Grouping variable
 #' @param n Positive integer of length 1, giving the number of positions to lead or lag by
-#' @param order_by Ordering variable withing group (e.g., time)
+#' @param order_by Ordering variable within group (e.g., time)
 #' @param default Value used for non-existent rows. Defaults to NA.
 #'
 #' @return vector of lagged values

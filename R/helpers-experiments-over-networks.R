@@ -16,6 +16,21 @@
 #'
 #' @export
 #'
+#' @examplesIf requireNamespace("interference", quietly = TRUE)
+#'
+#' set.seed(343)
+#' # A ring of 20 units, each adjacent to the units on either side of it
+#' N <- 20
+#' adjacency <- matrix(0, N, N)
+#' adjacency[cbind(1:N, c(2:N, 1))] <- 1
+#' adjacency <- adjacency + t(adjacency)
+#' Z <- randomizr::complete_ra(N)
+#'
+#' exposure <- interference::make_exposure_map_AS(
+#'   adj_matrix = adjacency, tr_vector = Z, hop = 1
+#' )
+#' get_exposure_AS(exposure)
+#'
 get_exposure_AS <- function(obs_exposure) {
   obs_exposure %>%
     as_tibble() %>%
@@ -40,8 +55,8 @@ get_exposure_AS <- function(obs_exposure) {
 #'
 #' @param data A data frame with columns `Z` and `Y`.
 #'
-#' @param permutatation_matrix (The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments. Each
-#'   column corresponds to one permutation of the treatment vector, as returned
+#' @param permutatation_matrix (The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments with one
+#'   row per permutation of the treatment vector and one column per unit, as returned
 #'   by `t(obtain_permutation_matrix(declaration))`. The exposure probabilities
 #'   are computed from it unless `obs_prob_exposure` is supplied.
 #'
@@ -73,6 +88,22 @@ get_exposure_AS <- function(obs_exposure) {
 #' @export
 #'
 #' @importFrom tibble tibble
+#'
+#' @examplesIf requireNamespace("interference", quietly = TRUE)
+#'
+#' set.seed(343)
+#' # A ring of 20 units, each adjacent to the units on either side of it
+#' N <- 20
+#' adjacency <- matrix(0, N, N)
+#' adjacency[cbind(1:N, c(2:N, 1))] <- 1
+#' adjacency <- adjacency + t(adjacency)
+#' Z <- randomizr::complete_ra(N)
+#'
+#' # 100 possible assignments, one per row
+#' permutations <- t(replicate(100, randomizr::complete_ra(N)))
+#'
+#' dat <- data.frame(Z = Z, Y = Z + rnorm(N))
+#' estimator_AS_tidy(dat, permutatation_matrix = permutations, adj_matrix = adjacency)
 #'
 estimator_AS_tidy <-
   function(data, permutatation_matrix = NULL, adj_matrix, obs_prob_exposure = NULL) {

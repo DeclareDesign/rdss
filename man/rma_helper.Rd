@@ -26,3 +26,15 @@ See https://book.declaredesign.org/complex-designs.html#meta-analysis
 \details{
 Fits \code{\link[metafor:rma]{metafor::rma()}} to study-level estimates and standard errors. If the fit fails, it returns the error as an object \code{\link[=rma_mu_tau]{rma_mu_tau()}} recognizes, so one failed simulation does not stop a diagnosis.
 }
+\examples{
+\dontshow{if (requireNamespace("metafor", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+set.seed(343)
+studies <- data.frame(
+  est = rnorm(10, mean = 0.2, sd = 0.1),
+  se = runif(10, min = 0.05, max = 0.15)
+)
+fit <- rma_helper(studies, yi = est, sei = se)
+fit
+\dontshow{\}) # examplesIf}
+}

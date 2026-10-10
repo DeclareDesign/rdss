@@ -20,3 +20,21 @@ Applies \code{utility_fn} and, within each subject and task, compares the two pr
 \details{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }
+\examples{
+
+set.seed(343)
+levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+
+# 25 subjects, each choosing between two profiles in each of four tasks
+profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+profiles <- conjoint_assignment(profiles, levels_list)
+
+utility_fn <- function(data) {
+  data$U <- 0.5 * (data$gender == "woman") - 0.2 * (data$age == "old") +
+    rnorm(nrow(data))
+  data
+}
+
+head(conjoint_measurement(profiles, utility_fn))
+
+}

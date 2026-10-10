@@ -14,8 +14,8 @@ estimator_AS_tidy(
 \arguments{
 \item{data}{A data frame with columns \code{Z} and \code{Y}.}
 
-\item{permutatation_matrix}{(The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments. Each
-column corresponds to one permutation of the treatment vector, as returned
+\item{permutatation_matrix}{(The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments with one
+row per permutation of the treatment vector and one column per unit, as returned
 by \code{t(obtain_permutation_matrix(declaration))}. The exposure probabilities
 are computed from it unless \code{obs_prob_exposure} is supplied.}
 
@@ -58,4 +58,22 @@ Without it the function returns nothing and explains why, so a design that
 includes it still declares and diagnoses.
 
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
+}
+\examples{
+\dontshow{if (requireNamespace("interference", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+set.seed(343)
+# A ring of 20 units, each adjacent to the units on either side of it
+N <- 20
+adjacency <- matrix(0, N, N)
+adjacency[cbind(1:N, c(2:N, 1))] <- 1
+adjacency <- adjacency + t(adjacency)
+Z <- randomizr::complete_ra(N)
+
+# 100 possible assignments, one per row
+permutations <- t(replicate(100, randomizr::complete_ra(N)))
+
+dat <- data.frame(Z = Z, Y = Z + rnorm(N))
+estimator_AS_tidy(dat, permutatation_matrix = permutations, adj_matrix = adjacency)
+\dontshow{\}) # examplesIf}
 }

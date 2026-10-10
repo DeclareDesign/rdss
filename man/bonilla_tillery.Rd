@@ -13,4 +13,9 @@ bonilla_tillery
 \description{
 One row per survey respondent. \code{Z} is the randomly assigned message (a factor with four levels) and \code{blm_support} the outcome; the remaining columns are respondent characteristics.
 }
+\examples{
+
+estimatr::lm_robust(blm_support ~ Z, data = bonilla_tillery)
+
+}
 \keyword{datasets}

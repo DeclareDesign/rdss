@@ -17,6 +17,21 @@
 #' @importFrom stats weighted.mean
 #' @importFrom rlang `!!` enquo
 #'
+#' @examplesIf requireNamespace("lme4", quietly = TRUE) && requireNamespace("marginaleffects", quietly = TRUE)
+#'
+#' set.seed(343)
+#' # Post-stratification cells: high school graduates and non-graduates in ten
+#' # states, weighted by each state's share of graduates
+#' cells <- expand.grid(state = state.name[1:10], HS = 0:1)
+#' prob_HS <- rep(seq(0.5, 0.9, length.out = 10), 2)
+#' cells$PS_weight <- ifelse(cells$HS == 1, prob_HS, 1 - prob_HS)
+#'
+#' survey <- cells[sample(nrow(cells), 1000, replace = TRUE), ]
+#' survey$Y <- rbinom(1000, 1, prob = plogis(0.5 * survey$HS))
+#'
+#' model_fit <- lme4::glmer(Y ~ HS + (1 | state), data = survey, family = binomial)
+#' post_stratification_helper(model_fit, data = cells, group = state, weights = PS_weight)
+#'
 post_stratification_helper <- function(model_fit, data, group, weights) {
 
   if(!requireNamespace("marginaleffects")){

@@ -20,3 +20,14 @@ A \code{\link[generics:tidy]{generics::tidy()}} method for fits from \code{\link
 \details{
 See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs
 }
+\examples{
+\dontshow{if (requireNamespace("rdrobust", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+set.seed(343)
+rd <- data.frame(X = runif(1000, min = -1, max = 1))
+rd$Y <- 0.5 * (rd$X > 0) + rd$X + rnorm(1000, sd = 0.5)
+
+fit <- rdrobust_helper(rd, y = Y, x = X, c = 0)
+tidy(fit)
+\dontshow{\}) # examplesIf}
+}

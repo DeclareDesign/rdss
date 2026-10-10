@@ -15,7 +15,7 @@
 #' @importFrom dplyr `%>%` rename select mutate
 #' @importFrom stats qnorm
 #'
-#' @examples
+#' @examplesIf requireNamespace("cjoint", quietly = TRUE)
 #'
 #' \donttest{
 #' library(cjoint)
@@ -76,6 +76,16 @@ tidy.amce <-
 #' @importFrom randomizr complete_ra
 #' @importFrom tibble as_tibble
 #'
+#' @examples
+#'
+#' set.seed(343)
+#' levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+#'
+#' # 25 subjects, each choosing between two profiles in each of four tasks
+#' profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+#'
+#' head(conjoint_assignment(profiles, levels_list))
+#'
 conjoint_assignment <-
   function(data, levels_list) {
     assignment_df <-
@@ -100,6 +110,23 @@ conjoint_assignment <-
 #' @export
 #'
 #' @importFrom dplyr group_by mutate ungroup
+#'
+#' @examples
+#'
+#' set.seed(343)
+#' levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+#'
+#' # 25 subjects, each choosing between two profiles in each of four tasks
+#' profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+#' profiles <- conjoint_assignment(profiles, levels_list)
+#'
+#' utility_fn <- function(data) {
+#'   data$U <- 0.5 * (data$gender == "woman") - 0.2 * (data$age == "old") +
+#'     rnorm(nrow(data))
+#'   data
+#' }
+#'
+#' head(conjoint_measurement(profiles, utility_fn))
 #'
 conjoint_measurement <-
   function(data, utility_fn) {
@@ -127,6 +154,22 @@ conjoint_measurement <-
 #' @importFrom purrr map_dbl map_chr map pmap_dbl as_vector partial
 #'
 #' @export
+#' @examples
+#'
+#' set.seed(343)
+#' levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+#'
+#' # 25 subjects, each choosing between two profiles in each of four tasks
+#' profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+#'
+#' utility_fn <- function(data) {
+#'   data$U <- 0.5 * (data$gender == "woman") - 0.2 * (data$age == "old") +
+#'     rnorm(nrow(data))
+#'   data
+#' }
+#'
+#' conjoint_inquiries(profiles, levels_list, utility_fn)
+#'
 conjoint_inquiries <-
   function(data, levels_list, utility_fn) {
 

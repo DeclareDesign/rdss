@@ -25,6 +25,7 @@ Answers a causal query about one case using a causal model from 'CausalQueries',
 See https://book.declaredesign.org/observational-causal.html#process-tracing
 }
 \examples{
+\dontshow{if (requireNamespace("CausalQueries", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Simple example showing ambiguity in attribution
 process_tracing_estimator(
   causal_model = CausalQueries::make_model("X -> Y"),
@@ -40,4 +41,5 @@ process_tracing_estimator(
   query = "Y[X=1] > Y[X=0]",
   data = data.frame(X=1, Y = 1, M = 0),
   strategies = c("Y", "X-Y", "X-M-Y"))
+\dontshow{\}) # examplesIf}
 }

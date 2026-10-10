@@ -20,3 +20,14 @@ For each attribute, assigns every row one of that attribute's levels by complete
 \details{
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }
+\examples{
+
+set.seed(343)
+levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+
+# 25 subjects, each choosing between two profiles in each of four tasks
+profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+
+head(conjoint_assignment(profiles, levels_list))
+
+}

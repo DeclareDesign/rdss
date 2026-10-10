@@ -10,6 +10,15 @@
 #' @return A data frame with one row per estimate rdrobust reports (conventional, bias-corrected, and robust) and columns `term`, `estimate`, `std.error`, `statistic`, `p.value`, `conf.low`, `conf.high`, and `cutoff`.
 #'
 #' @export
+#' @examplesIf requireNamespace("rdrobust", quietly = TRUE)
+#'
+#' set.seed(343)
+#' rd <- data.frame(X = runif(1000, min = -1, max = 1))
+#' rd$Y <- 0.5 * (rd$X > 0) + rd$X + rnorm(1000, sd = 0.5)
+#'
+#' fit <- rdrobust_helper(rd, y = Y, x = X, c = 0)
+#' tidy(fit)
+#'
 tidy.rdrobust <- function(x, ...) {
   if(!requireNamespace("rdrobust")){
     message("The rdrobust_tidy function requires the 'rdrobust' package.")
@@ -42,6 +51,15 @@ tidy.rdrobust <- function(x, ...) {
 #' @return rdrobust model fit object
 #'
 #' @export
+#' @examplesIf requireNamespace("rdrobust", quietly = TRUE)
+#'
+#' set.seed(343)
+#' rd <- data.frame(X = runif(1000, min = -1, max = 1))
+#' rd$Y <- 0.5 * (rd$X > 0) + rd$X + rnorm(1000, sd = 0.5)
+#'
+#' fit <- rdrobust_helper(rd, y = Y, x = X, c = 0)
+#' tidy(fit)
+#'
 rdrobust_helper <- function(data, y, x, subset = NULL, ...) {
   if(!missing(subset))
     data <- filter(data, !!enquo(subset))

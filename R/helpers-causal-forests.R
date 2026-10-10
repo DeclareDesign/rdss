@@ -17,7 +17,7 @@
 #' @importFrom stats quantile predict
 #' @importFrom randomizr complete_rs
 #'
-#' @examples
+#' @examplesIf requireNamespace("grf", quietly = TRUE) && requireNamespace("DeclareDesign", quietly = TRUE)
 #'
 #' library(DeclareDesign)
 #' library(ggplot2)
@@ -80,6 +80,15 @@ causal_forest_handler <- function(data, covariate_names, share_train = 0.5, ...)
 #' @export
 #'
 #' @importFrom estimatr lm_robust
+#' @examples
+#'
+#' set.seed(343)
+#' dat <- data.frame(A = rnorm(500), B = rnorm(500))
+#' dat$tau <- 1 + dat$A
+#'
+#' # The effect varies with A, so A (position 1) is the best predictor
+#' best_predictor(dat, covariate_names = c("A", "B"), cuts = 4)
+#'
 best_predictor <- function(data, covariate_names, cuts = 20) {
   data.frame(
     inquiry = "best_predictor",

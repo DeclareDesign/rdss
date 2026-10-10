@@ -25,6 +25,7 @@ Splits the data at random into a training and a test set, fits \code{\link[grf:c
 See https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests
 }
 \examples{
+\dontshow{if (requireNamespace("grf", quietly = TRUE) && requireNamespace("DeclareDesign", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 
 library(DeclareDesign)
 library(ggplot2)
@@ -40,5 +41,5 @@ dat <- fabricate(
 estimates <- causal_forest_handler(data = dat, covariate_names = c("A", "B"), num.threads = 1)
 
 ggplot(data = estimates, aes(A, pred)) + geom_point()
-
+\dontshow{\}) # examplesIf}
 }

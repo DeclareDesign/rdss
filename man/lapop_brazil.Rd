@@ -18,4 +18,9 @@ Download the original data from https://www.vanderbilt.edu/lapop/raw-data.php
 
 See https://www.vanderbilt.edu/lapop/core-surveys.php for the survey questionnaire.
 }
+\examples{
+
+summary(lapop_brazil$trust_police)
+
+}
 \keyword{datasets}

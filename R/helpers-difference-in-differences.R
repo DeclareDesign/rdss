@@ -19,6 +19,14 @@
 #' @importFrom dplyr group_by mutate ungroup pull lag `%>%`
 #'
 #'
+#' @examples
+#'
+#' # Three units observed in four periods; unit u is treated after period u
+#' panel <- expand.grid(unit = 1:3, period = 1:4)
+#' panel$D <- as.numeric(panel$period > panel$unit)
+#'
+#' dplyr::mutate(panel, D_lag = lag_by_group(D, groups = unit, order_by = period))
+#'
 lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
   x_nm <- enexpr(x)
   grp_nm <- enexpr(groups)

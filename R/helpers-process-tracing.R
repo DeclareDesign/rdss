@@ -12,7 +12,7 @@
 #' @return A data frame with one row per strategy: `term` (the strategy), `XY` (the case's values of `X` and `Y`, e.g. `"X1Y1"`), and `estimate` (the posterior mean of the query).
 #'
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("CausalQueries", quietly = TRUE)
 #' # Simple example showing ambiguity in attribution
 #' process_tracing_estimator(
 #'   causal_model = CausalQueries::make_model("X -> Y"),

@@ -26,3 +26,12 @@ Lags \code{x} within each group, ordering by \code{order_by} rather than by row 
 \details{
 See https://book.declaredesign.org/observational-causal.html#difference-in-differences
 }
+\examples{
+
+# Three units observed in four periods; unit u is treated after period u
+panel <- expand.grid(unit = 1:3, period = 1:4)
+panel$D <- as.numeric(panel$period > panel$unit)
+
+dplyr::mutate(panel, D_lag = lag_by_group(D, groups = unit, order_by = period))
+
+}

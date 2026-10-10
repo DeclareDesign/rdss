@@ -18,3 +18,15 @@ A tidier for fits from \code{\link[=rma_helper]{rma_helper()}}: \code{mu} is the
 \details{
 See https://book.declaredesign.org/complex-designs.html#meta-analysis
 }
+\examples{
+\dontshow{if (requireNamespace("metafor", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+set.seed(343)
+studies <- data.frame(
+  est = rnorm(10, mean = 0.2, sd = 0.1),
+  se = runif(10, min = 0.05, max = 0.15)
+)
+fit <- rma_helper(studies, yi = est, sei = se)
+rma_mu_tau(fit)
+\dontshow{\}) # examplesIf}
+}

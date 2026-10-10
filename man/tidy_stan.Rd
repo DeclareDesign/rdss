@@ -26,3 +26,15 @@ Deprecated: use \code{broom.mixed::tidy()}, which this function now calls with t
 \details{
 See https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations
 }
+\examples{
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE) && requireNamespace("broom.mixed", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+\donttest{
+fit <- rstanarm::stan_glm(mpg ~ wt, data = mtcars, chains = 1, iter = 1000,
+                          refresh = 0, seed = 343)
+
+# Prefer broom.mixed::tidy(fit, conf.int = TRUE)
+tidy_stan(fit, conf.int = TRUE)
+}
+\dontshow{\}) # examplesIf}
+}

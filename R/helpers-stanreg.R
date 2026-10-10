@@ -15,6 +15,16 @@
 #' @return A data frame with one row per coefficient.
 #'
 #' @export
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE) && requireNamespace("broom.mixed", quietly = TRUE)
+#'
+#' \donttest{
+#' fit <- rstanarm::stan_glm(mpg ~ wt, data = mtcars, chains = 1, iter = 1000,
+#'                           refresh = 0, seed = 343)
+#'
+#' # Prefer broom.mixed::tidy(fit, conf.int = TRUE)
+#' tidy_stan(fit, conf.int = TRUE)
+#' }
+#'
 tidy_stan <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...) {
 
   message("This function is deprecated. Please use the 'tidy' function from the 'broom.mixed' package.")

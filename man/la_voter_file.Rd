@@ -22,4 +22,9 @@ la_voter_file
 \description{
 Party registration, age, census tract, and 2012 turnout for 1,000 registered voters sampled at random from the Los Angeles County voter file. One row per voter.
 }
+\examples{
+
+table(la_voter_file$party)
+
+}
 \keyword{datasets}

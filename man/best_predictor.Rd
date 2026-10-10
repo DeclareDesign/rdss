@@ -22,3 +22,13 @@ An inquiry handler. For each covariate, regresses the true unit-level effect \co
 \details{
 See https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests
 }
+\examples{
+
+set.seed(343)
+dat <- data.frame(A = rnorm(500), B = rnorm(500))
+dat$tau <- 1 + dat$A
+
+# The effect varies with A, so A (position 1) is the best predictor
+best_predictor(dat, covariate_names = c("A", "B"), cuts = 4)
+
+}

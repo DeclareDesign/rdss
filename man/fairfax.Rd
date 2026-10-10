@@ -13,4 +13,9 @@ fairfax
 \description{
 Boundaries of the 238 voting precincts in Fairfax County, Virginia, with each precinct's ID, name, district, and polling place. One row per precinct. The book uses it to build the adjacency matrix for the experiment over networks; see \code{\link[=estimator_AS_tidy]{estimator_AS_tidy()}}.
 }
+\examples{
+
+names(fairfax)
+
+}
 \keyword{datasets}

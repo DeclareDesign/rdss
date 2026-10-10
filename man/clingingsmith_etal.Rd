@@ -13,4 +13,9 @@ clingingsmith_etal
 \description{
 From "Estimating the Impact of the Hajj: Religion and Tolerance in Islam's Global Gathering," The Quarterly Journal of Economics 124(3): 1133-1170. One row per applicant to the Hajj visa lottery. \code{success} is 1 for lottery winners; the \code{views_} columns are attitudes toward each group, and \code{views} is their sum.
 }
+\examples{
+
+estimatr::difference_in_means(views ~ success, data = clingingsmith_etal)
+
+}
 \keyword{datasets}

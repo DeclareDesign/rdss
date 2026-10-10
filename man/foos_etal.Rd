@@ -13,4 +13,9 @@ foos_etal
 \description{
 One row per voter. \code{treat} is the randomly assigned treatment, \code{marked_register_2014} the turnout outcome, and \code{ward} and \code{street} (a hashed identifier) the levels at which voters are clustered.
 }
+\examples{
+
+estimatr::lm_robust(marked_register_2014 ~ treat, clusters = street, data = foos_etal)
+
+}
 \keyword{datasets}

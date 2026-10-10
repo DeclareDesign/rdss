@@ -23,6 +23,7 @@ A \code{\link[generics:tidy]{generics::tidy()}} method for fits from \code{\link
 See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
 }
 \examples{
+\dontshow{if (requireNamespace("cjoint", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 
 \donttest{
 library(cjoint)
@@ -38,5 +39,5 @@ results <- amce(Chosen_Immigrant ~  Gender + Education + `Language Skills` +
 
 tidy(results)
 }
-
+\dontshow{\}) # examplesIf}
 }

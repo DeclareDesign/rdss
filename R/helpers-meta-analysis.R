@@ -14,6 +14,16 @@
 #' @importFrom dplyr mutate select transmute filter left_join bind_rows
 #' @importFrom stats confint
 #' @importFrom tibble rownames_to_column
+#' @examplesIf requireNamespace("metafor", quietly = TRUE)
+#'
+#' set.seed(343)
+#' studies <- data.frame(
+#'   est = rnorm(10, mean = 0.2, sd = 0.1),
+#'   se = runif(10, min = 0.05, max = 0.15)
+#' )
+#' fit <- rma_helper(studies, yi = est, sei = se)
+#' rma_mu_tau(fit)
+#'
 rma_mu_tau <- function(fit) {
 
   if (!inherits(fit, "try-error")) {
@@ -64,6 +74,16 @@ rma_mu_tau <- function(fit) {
 #' @export
 #'
 #' @importFrom rlang quo_text enexpr
+#' @examplesIf requireNamespace("metafor", quietly = TRUE)
+#'
+#' set.seed(343)
+#' studies <- data.frame(
+#'   est = rnorm(10, mean = 0.2, sd = 0.1),
+#'   se = runif(10, min = 0.05, max = 0.15)
+#' )
+#' fit <- rma_helper(studies, yi = est, sei = se)
+#' fit
+#'
 rma_helper <- function(data, yi, sei, method = "REML", ...){
   if(!requireNamespace("metafor")){
     message("The rma_helper function requires the 'metafor' package.")

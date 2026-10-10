@@ -48,6 +48,9 @@ jobs:
           # builds of the same versions.
           # Back to "true" once a released pak reads zstd.
           use-public-rspm: always
+          # polars (Suggests, for did_multiplegt's dyn mode) is not on CRAN, and pak
+          # does not read DESCRIPTION's Additional_repositories.
+          extra-repositories: https://rpolars.r-universe.dev
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

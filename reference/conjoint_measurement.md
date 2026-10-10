@@ -14,16 +14,17 @@ conjoint_measurement(data, utility_fn)
 
 - data:
 
-  A data.frame
+  A data frame with one row per profile and columns `subject`, `task`,
+  and `profile`. Each task must hold exactly two profiles.
 
 - utility_fn:
 
-  a function that takes data and returns an additional column called U,
-  which represents the utility of the choice
+  A function that takes `data` and returns it with a column `U` added,
+  the utility the subject gets from each profile.
 
 ## Value
 
-a data.frame
+`data` with `U` and `choice` added.
 
 ## Details
 

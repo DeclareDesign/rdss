@@ -1,4 +1,4 @@
-# Access color palette used in the book "Research Design: Declare, Diagnose, Redesign" (Blair, Coppock, Humphreys)
+# Color palettes used in the book Research Design in the Social Sciences
 
 Based on Karthik Ram's wesanderson package
 (https://github.com/karthik/wesanderson)
@@ -13,38 +13,45 @@ dd_palette(name, n)
 
 - name:
 
-  Color palette name (character)
+  The palette name, as a string. One of the names listed below.
 
 - n:
 
-  Number of colors
+  The number of colors to return, from the start of the palette.
+  Defaults to all of them.
 
 ## Value
 
-character vector of colors
+A character vector of hex color codes.
 
 ## Details
 
-Available color palettes:
+Palettes:
 
-color_palette = c("#72B4F3", "#F38672", "#C6227F")
+- `three_color_palette`: light blue, orange, pink
 
-grey_palette = c("#72B4F3", "#F38672", "#C6227F", gray(0.8))
+- `grey_palette`: light blue, orange, pink, light gray
 
-dd_dark_blue = "#3564ED"
+- `quilt_palette`: light gray, pink, purple, light blue, orange
 
-dd_light_blue = "#72B4F3"
+- `two_color_palette`: dark blue, pink
 
-dd_orange = "#F38672"
+- `quilt_three_color_palette`: light gray, translucent light blue, light
+  blue
 
-dd_purple = "#7E43B6"
+- `two_color_gray`: dark blue, light gray
 
-dd_gray = gray(0.2)
+Single colors: `dd_dark_blue` (`"#3564ED"`), `dd_light_blue`
+(`"#72B4F3"`), `dd_orange` (`"#F38672"`), `dd_purple` (`"#7E43B6"`),
+`dd_gray` (`gray(0.2)`), `dd_pink` (`"#C6227F"`), `dd_light_gray`
+(`gray(0.8)`), and the translucent `dd_dark_blue_alpha` and
+`dd_light_blue_alpha`.
 
-dd_pink = "#C6227F"
+## Examples
 
-dd_light_gray = gray(0.8)
-
-dd_dark_blue_alpha = "#3564EDA0"
-
-dd_light_blue_alpha = "#72B4F3A0"
+``` r
+dd_palette("three_color_palette")
+#> [1] "#72B4F3" "#F38672" "#C6227F"
+dd_palette("quilt_palette", n = 3)
+#> [1] "#CCCCCC" "#C6227F" "#7E43B6"
+```

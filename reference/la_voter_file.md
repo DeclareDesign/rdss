@@ -1,8 +1,8 @@
 # Voter file sample for Los Angeles County
 
-A dataset containing the party registration, age, census tract number,
-and voter turnout in 2012 for 1,000 randomly-sampled registered voters
-in Los Angeles County, California.
+Party registration, age, census tract, and 2012 turnout for 1,000
+registered voters sampled at random from the Los Angeles County voter
+file. One row per voter.
 
 ## Usage
 
@@ -28,7 +28,7 @@ A data frame with 1000 rows and 4 variables:
 
 - voted_2012:
 
-  voter turnout in 2012 election
+  1 if the voter voted in the 2012 general election, 0 otherwise
 
 ## Source
 

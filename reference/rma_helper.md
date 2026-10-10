@@ -12,15 +12,15 @@ rma_helper(data, yi, sei, method = "REML", ...)
 
 - data:
 
-  a data.frame
+  A data frame with one row per study.
 
 - yi:
 
-  unquoted variable name of estimates used in meta-analysis
+  The bare column name of the study estimates.
 
 - sei:
 
-  unquoted variable name of standard errors used in meta-analysis
+  The bare column name of their standard errors.
 
 - method:
 
@@ -33,12 +33,20 @@ rma_helper(data, yi, sei, method = "REML", ...)
 
 - ...:
 
-  Further options to be passed to rma
+  Further arguments to
+  [`metafor::rma()`](https://wviechtb.github.io/metafor/reference/rma.uni.html).
 
 ## Value
 
-a data.frame of estimates
+An `rma.uni` fit; pass it to
+[`rma_mu_tau()`](https://declaredesign.org/r/rdss/reference/rma_mu_tau.md)
+to tidy it.
 
 ## Details
 
-See ?rma for further details
+Fits
+[`metafor::rma()`](https://wviechtb.github.io/metafor/reference/rma.uni.html)
+to study-level estimates and standard errors. If the fit fails, it
+returns the error as an object
+[`rma_mu_tau()`](https://declaredesign.org/r/rdss/reference/rma_mu_tau.md)
+recognizes, so one failed simulation does not stop a diagnosis.

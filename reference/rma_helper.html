@@ -54,15 +54,15 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>a data.frame</p></dd>
+<dd><p>A data frame with one row per study.</p></dd>
 
 
 <dt id="arg-yi">yi<a class="anchor" aria-label="anchor" href="#arg-yi"></a></dt>
-<dd><p>unquoted variable name of estimates used in meta-analysis</p></dd>
+<dd><p>The bare column name of the study estimates.</p></dd>
 
 
 <dt id="arg-sei">sei<a class="anchor" aria-label="anchor" href="#arg-sei"></a></dt>
-<dd><p>unquoted variable name of standard errors used in meta-analysis</p></dd>
+<dd><p>The bare column name of their standard errors.</p></dd>
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
@@ -70,16 +70,16 @@
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Further options to be passed to rma</p></dd>
+<dd><p>Further arguments to <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">metafor::rma()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a data.frame of estimates</p>
+    <p>An <code>rma.uni</code> fit; pass it to <code><a href="rma_mu_tau.html">rma_mu_tau()</a></code> to tidy it.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>See ?rma for further details</p>
+    <p>Fits <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">metafor::rma()</a></code> to study-level estimates and standard errors. If the fit fails, it returns the error as an object <code><a href="rma_mu_tau.html">rma_mu_tau()</a></code> recognizes, so one failed simulation does not stop a diagnosis.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

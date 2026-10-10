@@ -1,7 +1,10 @@
 # Tidy helper function for estimator_AS function
 
-Runs estimates estimation function from interference package and returns
-tidy data frame output
+Runs the Aronow and Samii estimator from the 'interference' package and
+returns Horvitz-Thompson and Hajek estimates of the total, direct, and
+indirect effects. Exposure is defined by one-hop neighbours in
+`adj_matrix`. The data must contain the treatment as `Z` and the outcome
+as `Y`.
 
 ## Usage
 
@@ -18,10 +21,11 @@ estimator_AS_tidy(
 
 - data:
 
-  A `data.frame` containing the observed data.
+  A data frame with columns `Z` and `Y`.
 
 - permutatation_matrix:
 
+  (The spelling is the published one and is kept so existing code runs.)
   A matrix of random treatment assignments. Each column corresponds to
   one permutation of the treatment vector, as returned by
   `t(obtain_permutation_matrix(declaration))`. The exposure
@@ -59,12 +63,14 @@ estimator_AS_tidy(
 
 ## Value
 
-a data.frame of estimates
+A data frame with six rows (three inquiries by two estimators) and
+columns `term`, `inquiry`, `estimator`, and `estimate`. No standard
+errors are returned.
 
 ## Details
 
-The estimator_AS_tidy function requires the 'interference' package,
-which is not available on CRAN.
+The function requires the 'interference' package, which is not available
+on CRAN.
 
 To use this function, install it with
 remotes::install_github('szonszein/interference')

@@ -12,19 +12,19 @@ make_se_entry(estimate, std.error, digits = 2)
 
 - estimate:
 
-  a numeric vector of parameter estimates
+  A numeric vector of estimates.
 
 - std.error:
 
-  a numeric vector of standard error estimates
+  A numeric vector of standard errors, the same length as `estimate`.
 
 - digits:
 
-  number of digits to retain
+  The number of decimal places. Defaults to 2.
 
 ## Value
 
-a character vector of formatted estimates and standard errors
+A character vector, e.g. `"0.07 (0.12)"`.
 
 ## Examples
 

@@ -12,15 +12,15 @@ add_parens(x, digits = 3)
 
 - x:
 
-  Numeric vector
+  A numeric vector.
 
 - digits:
 
-  Number of digits to retain
+  The number of decimal places. Defaults to 3.
 
 ## Value
 
-A character vector with enclosing parentheses
+A character vector, e.g. `"(0.120)"`.
 
 ## Examples
 

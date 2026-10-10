@@ -1,15 +1,12 @@
-# Tidy results from a stanreg regression, optionally exponentiating the coefficients
+# Tidy results from a stanreg regression (deprecated)
 
-Note no standard errors or other summary statistics are provided
-
-This function is deprecated. Please use the 'tidy' function from the
-'broom.mixed' package.
+Deprecated: use
+[`broom.mixed::tidy()`](https://generics.r-lib.org/reference/tidy.html),
+which this function now calls with the same arguments.
 
 ## Usage
 
 ``` r
-tidy_stan(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
-
 tidy_stan(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 ```
 
@@ -17,7 +14,8 @@ tidy_stan(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 
 - x:
 
-  A stanreg fit from stan_glm
+  A fit from
+  [`rstanarm::stan_glm()`](https://mc-stan.org/rstanarm/reference/stan_glm.html).
 
 - conf.int:
 
@@ -32,23 +30,19 @@ tidy_stan(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 
 - exponentiate:
 
-  Logical indicating whether or not to exponentiate the the coefficient
+  Logical indicating whether or not to exponentiate the coefficient
   estimates. Defaults to FALSE.
 
 - ...:
 
-  Other arguments to broom.mixed::tidy
+  Further arguments to
+  [`broom.mixed::tidy()`](https://generics.r-lib.org/reference/tidy.html).
 
 ## Value
 
-data.frame of results
-
-data.frame of results
+A data frame with one row per coefficient.
 
 ## Details
-
-See
-https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations
 
 See
 https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations

@@ -1,6 +1,13 @@
 # Tidy helper function for rdrobust function
 
-Runs rdrobust estimation function and returns tidy data frame output
+A [`generics::tidy()`](https://generics.r-lib.org/reference/tidy.html)
+method for fits from
+[`rdrobust::rdrobust()`](https://rdrr.io/pkg/rdrobust/man/rdrobust.html),
+so they can be used in
+[`declare_estimator()`](https://declaredesign.org/r/declaredesign/reference/declare_estimator.html).
+Use
+[`rdrobust_helper()`](https://declaredesign.org/r/rdss/reference/rdrobust_helper.md)
+to fit the model.
 
 ## Usage
 
@@ -13,15 +20,18 @@ tidy(x, ...)
 
 - x:
 
-  Model fit object from rdrobust
+  A fit from
+  [`rdrobust::rdrobust()`](https://rdrr.io/pkg/rdrobust/man/rdrobust.html).
 
 - ...:
 
-  Other arguments (not used)
+  Not used.
 
 ## Value
 
-a data.frame of estimates
+A data frame with one row per estimate rdrobust reports (conventional,
+bias-corrected, and robust) and columns `term`, `estimate`, `std.error`,
+`statistic`, `p.value`, `conf.low`, `conf.high`, and `cutoff`.
 
 ## Details
 

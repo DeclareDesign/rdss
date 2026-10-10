@@ -12,12 +12,19 @@ hex_add_alpha(col, alpha)
 
 - col:
 
-  Original color code in hex
+  A color as a six-digit hex code, e.g. `"#72B4F3"`.
 
 - alpha:
 
-  Level of alpha transparency to add
+  Opacity, from 0 (transparent) to 1 (opaque).
 
 ## Value
 
-color codes with alpha added
+The color as an eight-digit hex code.
+
+## Examples
+
+``` r
+hex_add_alpha("#72B4F3", 0.5)
+#> [1] "#72B4F380"
+```

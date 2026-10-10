@@ -1,6 +1,10 @@
-# Best predictor function from causal_forest
+# Find the covariate that best predicts treatment effect heterogeneity
 
-Best predictor function from causal_forest
+An inquiry handler. For each covariate, regresses the true unit-level
+effect `tau` on the covariate cut into intervals, and reports which
+covariate gives the highest R-squared. Pair it with
+[`causal_forest_handler()`](https://declaredesign.org/r/rdss/reference/causal_forest_handler.md),
+whose `var_imp` column is the estimate of the same quantity.
 
 ## Usage
 
@@ -12,18 +16,25 @@ best_predictor(data, covariate_names, cuts = 20)
 
 - data:
 
-  A data.frame of covariates
+  A data frame with a column `tau` holding each unit's treatment effect,
+  and the covariates named in `covariate_names`.
 
 - covariate_names:
 
-  A character vector of covariates to assess
+  A character vector of covariates to assess.
 
 - cuts:
 
   Either a numeric vector of two or more unique cut points or a single
   number (greater than or equal to 2) giving the number of intervals
-  into which each covariate is to be cut.
+  into which each covariate is to be cut. Defaults to 20.
 
 ## Value
 
-a data.frame of the best predictors
+A data frame with one row: `inquiry` (`"best_predictor"`) and
+`estimand`, the position in `covariate_names` of the best predictor.
+
+## Details
+
+See
+https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests

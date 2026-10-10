@@ -1,7 +1,9 @@
 # Tidy helper function for did_multiplegt
 
-Runs did_multiplegt estimation function and returns tidy data frame
-output
+Runs
+[`DIDmultiplegt::did_multiplegt()`](https://rdrr.io/pkg/DIDmultiplegt/man/did_multiplegt.html),
+the de Chaisemartin and D'Haultfoeuille estimator, and returns its
+estimate as a one-row data frame.
 
 ## Usage
 
@@ -13,15 +15,17 @@ did_multiplegt_tidy(data, ...)
 
 - data:
 
-  a data.frame
+  A data frame, passed to `did_multiplegt()` as `df`.
 
 - ...:
 
-  options passed to did_multiplegt
+  Further arguments to `did_multiplegt()`, which must include the column
+  names of the outcome (`Y`), group (`G`), time period (`T`), and
+  treatment (`D`), as strings.
 
 ## Value
 
-a data.frame of estimates
+A data frame with one column, `estimate`.
 
 ## Details
 

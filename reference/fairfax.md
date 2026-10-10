@@ -1,8 +1,10 @@
 # Shapefile of Fairfax County, Virginia, voting precincts
 
-An sf object containing the boundaries of voting precincts for Fairfax
-County, Virginia as well as precinct ID, name, district, polling place
-name, address, city, zip code, area, length, and geometry (polygons)
+Boundaries of the 238 voting precincts in Fairfax County, Virginia, with
+each precinct's ID, name, district, and polling place. One row per
+precinct. The book uses it to build the adjacency matrix for the
+experiment over networks; see
+[`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md).
 
 ## Usage
 
@@ -12,4 +14,4 @@ fairfax
 
 ## Format
 
-An sf object with 236 rows and 10 variables:
+An sf object with 238 rows and 10 columns:

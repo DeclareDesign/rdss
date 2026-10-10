@@ -12,19 +12,19 @@ make_interval_entry(conf.low, conf.high, digits = 2)
 
 - conf.low:
 
-  a numeric vector of lower bounds
+  A numeric vector of lower bounds.
 
 - conf.high:
 
-  a numeric vector of upper bounds
+  A numeric vector of upper bounds.
 
 - digits:
 
-  number of digits to retain
+  The number of decimal places. Defaults to 2.
 
 ## Value
 
-a character vector of intervals
+A character vector, e.g. `"[-0.17, 0.31]"`.
 
 ## Examples
 

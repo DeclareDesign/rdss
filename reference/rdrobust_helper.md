@@ -1,6 +1,12 @@
 # Helper function for using rdrobust as a model in `declare_estimator`
 
-Helper function for using rdrobust as a model in `declare_estimator`
+Lets
+[`rdrobust::rdrobust()`](https://rdrr.io/pkg/rdrobust/man/rdrobust.html),
+which takes vectors, be called with a data frame and column names. Pass
+it as `.method` in
+[`declare_estimator()`](https://declaredesign.org/r/declaredesign/reference/declare_estimator.html);
+[`tidy.rdrobust()`](https://declaredesign.org/r/rdss/reference/tidy.rdrobust.md)
+then tidies the fit.
 
 ## Usage
 
@@ -12,25 +18,32 @@ rdrobust_helper(data, y, x, subset = NULL, ...)
 
 - data:
 
-  a data.frame
+  A data frame.
 
 - y:
 
-  unquoted name of the outcome variable
+  The bare column name of the outcome.
 
 - x:
 
-  unquoted name of the running variable
+  The bare column name of the running variable.
 
 - subset:
 
-  an optional vector specifying a subset of observations to be used in
-  the fitting process
+  An optional logical expression in terms of the columns of `data`,
+  selecting the rows to use.
 
 - ...:
 
-  Other arguments to `rdrobust`
+  Further arguments to
+  [`rdrobust::rdrobust()`](https://rdrr.io/pkg/rdrobust/man/rdrobust.html),
+  e.g. `c` for the cutoff.
 
 ## Value
 
 rdrobust model fit object
+
+## Details
+
+See
+https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs

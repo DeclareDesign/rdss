@@ -74,6 +74,30 @@
     <p>See https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">343</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">levels_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"woman"</span>, <span class="st">"man"</span><span class="op">)</span>, age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"young"</span>, <span class="st">"old"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 25 subjects, each choosing between two profiles in each of four tasks</span></span></span>
+<span class="r-in"><span><span class="va">profiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>profile <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, task <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, subject <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">utility_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">data</span><span class="op">$</span><span class="va">U</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"woman"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">age</span> <span class="op">==</span> <span class="st">"old"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">data</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">conjoint_inquiries</span><span class="op">(</span><span class="va">profiles</span>, <span class="va">levels_list</span>, <span class="va">utility_fn</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   attribute reference level inquiry   estimand</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> gender    woman     man   genderman    -<span style="color: #BB0000;">0.02</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> age       young     old   ageold       -<span style="color: #BB0000;">0.14</span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

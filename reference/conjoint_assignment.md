@@ -30,3 +30,23 @@ conjoint_assignment(data, levels_list)
 
 See
 https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+
+## Examples
+
+``` r
+
+set.seed(343)
+levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+
+# 25 subjects, each choosing between two profiles in each of four tasks
+profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+
+head(conjoint_assignment(profiles, levels_list))
+#>   profile task subject gender   age
+#> 1       1    1       1    man   old
+#> 2       2    1       1  woman   old
+#> 3       1    2       1    man young
+#> 4       2    2       1    man   old
+#> 5       1    3       1  woman young
+#> 6       2    3       1  woman   old
+```

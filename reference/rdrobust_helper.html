@@ -82,6 +82,21 @@
     <p>See https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">343</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rd</span><span class="op">$</span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">rd</span><span class="op">$</span><span class="va">X</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="va">rd</span><span class="op">$</span><span class="va">X</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, sd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">rdrobust_helper</span><span class="op">(</span><span class="va">rd</span>, y <span class="op">=</span> <span class="va">Y</span>, x <span class="op">=</span> <span class="va">X</span>, c <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             term  estimate std.error statistic      p.value  conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   Conventional 0.4394154 0.1193589  3.681462 0.0002319002 0.2054762 0.6733547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Bias-Corrected 0.4526316 0.1193589  3.792188 0.0001493258 0.2186923 0.6865708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         Robust 0.4526316 0.1458573  3.103249 0.0019140878 0.1667564 0.7385067</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

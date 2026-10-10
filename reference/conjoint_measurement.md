@@ -30,3 +30,32 @@ conjoint_measurement(data, utility_fn)
 
 See
 https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+
+## Examples
+
+``` r
+
+set.seed(343)
+levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+
+# 25 subjects, each choosing between two profiles in each of four tasks
+profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+profiles <- conjoint_assignment(profiles, levels_list)
+
+utility_fn <- function(data) {
+  data$U <- 0.5 * (data$gender == "woman") - 0.2 * (data$age == "old") +
+    rnorm(nrow(data))
+  data
+}
+
+head(conjoint_measurement(profiles, utility_fn))
+#> # A tibble: 6 × 7
+#>   profile  task subject gender age        U choice
+#>     <int> <int>   <int> <fct>  <fct>  <dbl>  <dbl>
+#> 1       1     1       1 man    old    0.448      0
+#> 2       2     1       1 woman  old    0.956      1
+#> 3       1     2       1 man    young -0.182      0
+#> 4       2     2       1 man    old    0.176      1
+#> 5       1     3       1 woman  young  0.228      1
+#> 6       2     3       1 woman  old   -0.148      0
+```

@@ -15,3 +15,12 @@ fairfax
 ## Format
 
 An sf object with 238 rows and 10 columns:
+
+## Examples
+
+``` r
+
+names(fairfax)
+#>  [1] "PREC_IDENT" "PREC_NAME"  "DISTRICT"   "POLLING_PL" "ADDRESS"   
+#>  [6] "CITY"       "ZIP"        "SHAPE_AREA" "SHAPE_LEN"  "geometry"  
+```

@@ -26,3 +26,12 @@ https://www.vanderbilt.edu/lapop/raw-data.php
 
 See https://www.vanderbilt.edu/lapop/core-surveys.php for the survey
 questionnaire.
+
+## Examples
+
+``` r
+
+summary(lapop_brazil$trust_police)
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>   1.000   3.000   5.000   4.427   6.000   7.000 
+```

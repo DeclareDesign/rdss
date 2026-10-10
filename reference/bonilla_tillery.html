@@ -54,6 +54,23 @@
     <p>A data frame with 849 rows and 10 columns: <code>female</code>, <code>lgbtq</code>, <code>age</code>, <code>religiosity</code>, <code>income</code>, <code>college</code>, <code>blm_familiarity</code>, <code>linked_fate</code>, <code>Z</code>, and <code>blm_support</code>.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">estimatr</span><span class="fu">::</span><span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html" class="external-link">lm_robust</a></span><span class="op">(</span><span class="va">blm_support</span> <span class="op">~</span> <span class="va">Z</span>, data <span class="op">=</span> <span class="va">bonilla_tillery</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate Std. Error   t value      Pr(&gt;|t|)    CI Lower</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      0.84191176 0.01531579 54.970183 2.731468e-281  0.81185031</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Znationalism    -0.01181468 0.02125833 -0.555767  5.785173e-01 -0.05354000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Zfeminism       -0.03623491 0.02203460 -1.644455  1.004543e-01 -0.07948389</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Zintersectional -0.03714986 0.02247282 -1.653102  9.868161e-02 -0.08125896</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    CI Upper  DF</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)     0.871973220 845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Znationalism    0.029910644 845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Zfeminism       0.007014069 845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Zintersectional 0.006959240 845</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

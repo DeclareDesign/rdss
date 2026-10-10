@@ -26,8 +26,8 @@ estimator_AS_tidy(
 - permutatation_matrix:
 
   (The spelling is the published one and is kept so existing code runs.)
-  A matrix of random treatment assignments. Each column corresponds to
-  one permutation of the treatment vector, as returned by
+  A matrix of random treatment assignments with one row per permutation
+  of the treatment vector and one column per unit, as returned by
   `t(obtain_permutation_matrix(declaration))`. The exposure
   probabilities are computed from it unless `obs_prob_exposure` is
   supplied.
@@ -80,3 +80,31 @@ that includes it still declares and diagnoses.
 
 See
 https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
+
+## Examples
+
+``` r
+
+set.seed(343)
+# A ring of 20 units, each adjacent to the units on either side of it
+N <- 20
+adjacency <- matrix(0, N, N)
+adjacency[cbind(1:N, c(2:N, 1))] <- 1
+adjacency <- adjacency + t(adjacency)
+Z <- randomizr::complete_ra(N)
+
+# 100 possible assignments, one per row
+permutations <- t(replicate(100, randomizr::complete_ra(N)))
+
+dat <- data.frame(Z = Z, Y = Z + rnorm(N))
+estimator_AS_tidy(dat, permutatation_matrix = permutations, adj_matrix = adjacency)
+#> # A tibble: 6 × 4
+#>   term     inquiry      estimator        estimate
+#>   <chr>    <chr>        <chr>               <dbl>
+#> 1 dir_ind1 total_ATE    Horvitz-Thompson     2.08
+#> 2 isol_dir direct_ATE   Horvitz-Thompson     1.42
+#> 3 ind1     indirect_ATE Horvitz-Thompson     1.53
+#> 4 dir_ind1 total_ATE    Hajek                2.11
+#> 5 isol_dir direct_ATE   Hajek                1.33
+#> 6 ind1     indirect_ATE Hajek                1.46
+```

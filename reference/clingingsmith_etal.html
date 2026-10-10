@@ -54,6 +54,16 @@
     <p>A data frame with 958 rows and 8 columns: <code>success</code>, <code>views_saudi</code>, <code>views_indonesian</code>, <code>views_turkish</code>, <code>views_african</code>, <code>views_chinese</code>, <code>views_european</code>, and <code>views</code>.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">estimatr</span><span class="fu">::</span><span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/difference_in_means.html" class="external-link">difference_in_means</a></span><span class="op">(</span><span class="va">views</span> <span class="op">~</span> <span class="va">success</span>, data <span class="op">=</span> <span class="va">clingingsmith_etal</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Design:  Standard </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Estimate Std. Error  t value    Pr(&gt;|t|)  CI Lower  CI Upper       DF</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> success 0.4748337  0.1626723 2.918958 0.003594545 0.1555969 0.7940705 954.3044</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

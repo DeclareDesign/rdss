@@ -40,3 +40,27 @@ A data frame with one row per non-reference level: `attribute`,
 
 See
 https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments
+
+## Examples
+
+``` r
+
+set.seed(343)
+levels_list <- list(gender = c("woman", "man"), age = c("young", "old"))
+
+# 25 subjects, each choosing between two profiles in each of four tasks
+profiles <- expand.grid(profile = 1:2, task = 1:4, subject = 1:25)
+
+utility_fn <- function(data) {
+  data$U <- 0.5 * (data$gender == "woman") - 0.2 * (data$age == "old") +
+    rnorm(nrow(data))
+  data
+}
+
+conjoint_inquiries(profiles, levels_list, utility_fn)
+#> # A tibble: 2 × 5
+#>   attribute reference level inquiry   estimand
+#>   <chr>     <chr>     <chr> <chr>        <dbl>
+#> 1 gender    woman     man   genderman    -0.02
+#> 2 age       young     old   ageold       -0.14
+```

@@ -82,6 +82,30 @@
     <p>See https://book.declaredesign.org/observational-causal.html#difference-in-differences</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Three units observed in four periods; unit u is treated after period u</span></span></span>
+<span class="r-in"><span><span class="va">panel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>unit <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, period <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">panel</span><span class="op">$</span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">panel</span><span class="op">$</span><span class="va">period</span> <span class="op">&gt;</span> <span class="va">panel</span><span class="op">$</span><span class="va">unit</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">panel</span>, D_lag <span class="op">=</span> <span class="fu">lag_by_group</span><span class="op">(</span><span class="va">D</span>, groups <span class="op">=</span> <span class="va">unit</span>, order_by <span class="op">=</span> <span class="va">period</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    unit period D D_lag</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     1      1 0    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2      1 0    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3      1 0    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1      2 1     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     2      2 0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     3      2 0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     1      3 1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     2      3 1     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     3      3 0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    1      4 1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11    2      4 1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12    3      4 1     0</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

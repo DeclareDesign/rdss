@@ -30,3 +30,21 @@ errors, and confidence intervals (for `tau_sq`, intervals only when
 ## Details
 
 See https://book.declaredesign.org/complex-designs.html#meta-analysis
+
+## Examples
+
+``` r
+
+set.seed(343)
+studies <- data.frame(
+  est = rnorm(10, mean = 0.2, sd = 0.1),
+  se = runif(10, min = 0.05, max = 0.15)
+)
+fit <- rma_helper(studies, yi = est, sei = se)
+rma_mu_tau(fit)
+#> # A tibble: 2 × 7
+#>   term   estimate std.error statistic      p.value conf.low conf.high
+#>   <chr>     <dbl>     <dbl>     <dbl>        <dbl>    <dbl>     <dbl>
+#> 1 mu      0.138     0.0281       4.92  0.000000880   0.0832    0.194 
+#> 2 tau_sq  0.00135   0.00350     NA    NA             0         0.0166
+```

@@ -33,3 +33,13 @@ A data frame with 1000 rows and 4 variables:
 ## Source
 
 California Secretary of State.
+
+## Examples
+
+``` r
+
+table(la_voter_file$party)
+#> 
+#>  AI AME DEM  DS  G3 GRN  IR LIB NAT  NP NPP  PF REP 
+#>  30   1 509 148   1   5   3   6   1   1 100  11 184 
+```

@@ -54,6 +54,19 @@
     <p>A data frame with 8,375 rows and 5 columns: <code>marked_register_2014</code>, <code>ward</code>, <code>street</code>, <code>treat</code>, and <code>weights</code>.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">estimatr</span><span class="fu">::</span><span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html" class="external-link">lm_robust</a></span><span class="op">(</span><span class="va">marked_register_2014</span> <span class="op">~</span> <span class="va">treat</span>, clusters <span class="op">=</span> <span class="va">street</span>, data <span class="op">=</span> <span class="va">foos_etal</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Estimate Std. Error   t value     Pr(&gt;|t|)     CI Lower   CI Upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 0.4724791 0.01513952 31.208324 2.829526e-43  0.442293258 0.50266491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> treat       0.0340740 0.01842628  1.849206 6.673218e-02 -0.002385131 0.07053312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    DF</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  71.20713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> treat       128.15584</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

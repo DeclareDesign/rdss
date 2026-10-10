@@ -78,6 +78,36 @@
     <p>See https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">343</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Post-stratification cells: high school graduates and non-graduates in ten</span></span></span>
+<span class="r-in"><span><span class="co"># states, weighted by each state's share of graduates</span></span></span>
+<span class="r-in"><span><span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, HS <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">prob_HS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.9</span>, length.out <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cells</span><span class="op">$</span><span class="va">PS_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">HS</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">prob_HS</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">prob_HS</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">survey</span> <span class="op">&lt;-</span> <span class="va">cells</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span>, <span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">survey</span><span class="op">$</span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Logistic.html" class="external-link">plogis</a></span><span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="va">survey</span><span class="op">$</span><span class="va">HS</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">model_fit</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span><span class="va">Y</span> <span class="op">~</span> <span class="va">HS</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">state</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">survey</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">post_stratification_helper</span><span class="op">(</span><span class="va">model_fit</span>, data <span class="op">=</span> <span class="va">cells</span>, group <span class="op">=</span> <span class="va">state</span>, weights <span class="op">=</span> <span class="va">PS_weight</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    state       estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Alabama        0.560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Alaska         0.565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Arizona        0.569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Arkansas       0.574</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> California     0.578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Colorado       0.583</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Connecticut    0.587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Delaware       0.592</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Florida        0.596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Georgia        0.601</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

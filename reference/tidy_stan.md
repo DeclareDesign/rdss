@@ -46,3 +46,22 @@ A data frame with one row per coefficient.
 
 See
 https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations
+
+## Examples
+
+``` r
+
+# \donttest{
+fit <- rstanarm::stan_glm(mpg ~ wt, data = mtcars, chains = 1, iter = 1000,
+                          refresh = 0, seed = 343)
+
+# Prefer broom.mixed::tidy(fit, conf.int = TRUE)
+tidy_stan(fit, conf.int = TRUE)
+#> This function is deprecated. Please use the 'tidy' function from the 'broom.mixed' package.
+#> # A tibble: 2 × 5
+#>   term        estimate std.error conf.low conf.high
+#>   <chr>          <dbl>     <dbl>    <dbl>     <dbl>
+#> 1 (Intercept)    37.3      1.88     33.2      41.0 
+#> 2 wt             -5.31     0.566    -6.45     -4.18
+# }
+```

@@ -44,3 +44,27 @@ A vector the length of `x`, in the original row order.
 
 See
 https://book.declaredesign.org/observational-causal.html#difference-in-differences
+
+## Examples
+
+``` r
+
+# Three units observed in four periods; unit u is treated after period u
+panel <- expand.grid(unit = 1:3, period = 1:4)
+panel$D <- as.numeric(panel$period > panel$unit)
+
+dplyr::mutate(panel, D_lag = lag_by_group(D, groups = unit, order_by = period))
+#>    unit period D D_lag
+#> 1     1      1 0    NA
+#> 2     2      1 0    NA
+#> 3     3      1 0    NA
+#> 4     1      2 1     0
+#> 5     2      2 0     0
+#> 6     3      2 0     0
+#> 7     1      3 1     1
+#> 8     2      3 1     0
+#> 9     3      3 0     0
+#> 10    1      4 1     1
+#> 11    2      4 1     1
+#> 12    3      4 1     0
+```

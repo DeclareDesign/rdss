@@ -71,12 +71,15 @@
 <p><code><a href="reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code>, used in the book’s section on experiments over networks, also needs the ‘interference’ package, which is not on CRAN:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szonszein/interference"</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="reference/did_multiplegt_tidy.html">did_multiplegt_tidy()</a></code>, used in the book’s section on difference-in-differences, needs the ‘polars’ package, which is also not on CRAN:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"polars"</span>, repos <span class="op">=</span> <span class="st">"https://rpolars.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Each helper fills one step of a declaration in the book, and its help page links to the section that uses it. <code><a href="reference/lag_by_group.html">lag_by_group()</a></code>, for instance, builds the lagged treatment indicator in the difference-in-differences design:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://declaredesign.org/r/rdss/">rdss</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
@@ -89,15 +92,15 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>D_lag <span class="op">=</span> <span class="fu"><a href="reference/lag_by_group.html">lag_by_group</a></span><span class="op">(</span><span class="va">D</span>, groups <span class="op">=</span> <span class="va">unit</span>, n <span class="op">=</span> <span class="fl">1</span>, order_by <span class="op">=</span> <span class="va">period</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">panel</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## # A tibble: 6 × 4</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">##   unit  period     D D_lag</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">## 1 a          1     0    NA</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">## 2 a          2     1     0</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">## 3 a          3     1     1</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">## 4 b          1     0    NA</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">## 5 b          2     0     0</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">## 6 b          3     1     0</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## # A tibble: 6 × 4</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="do">##   unit  period     D D_lag</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">## 1 a          1     0    NA</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">## 2 a          2     1     0</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="do">## 3 a          3     1     1</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="do">## 4 b          1     0    NA</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="do">## 5 b          2     0     0</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="do">## 6 b          3     1     0</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

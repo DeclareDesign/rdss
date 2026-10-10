@@ -2,6 +2,14 @@
 
 ## rdss 1.0.16
 
+- [`did_multiplegt_tidy()`](https://declaredesign.org/r/rdss/reference/did_multiplegt_tidy.md)
+  tidies `did_multiplegt(mode = "dyn")`, returning each effect with its
+  standard error and confidence interval. The book’s `mode = "old"` call
+  returns `NaN` under DIDmultiplegt 2.1.0, which first differences with
+  [`stats::lag()`](https://rdrr.io/r/stats/lag.html) and so never sees a
+  treatment switch; the function now warns when that happens.
+  `mode = "dyn"` needs the ‘polars’ package, from
+  <https://rpolars.r-universe.dev>.
 - [`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md)
   computes exposure probabilities from `permutatation_matrix` again, so
   the book’s chapter 18 declaration produces estimates rather than

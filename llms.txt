@@ -39,6 +39,15 @@ used in the book’s section on experiments over networks, also needs the
 remotes::install_github("szonszein/interference")
 ```
 
+[`did_multiplegt_tidy()`](https://declaredesign.org/r/rdss/reference/did_multiplegt_tidy.md),
+used in the book’s section on difference-in-differences, needs the
+‘polars’ package, which is also not on CRAN:
+
+``` r
+
+install.packages("polars", repos = "https://rpolars.r-universe.dev")
+```
+
 ## Example
 
 Each helper fills one step of a declaration in the book, and its help

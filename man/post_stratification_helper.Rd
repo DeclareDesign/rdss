@@ -8,7 +8,7 @@
 post_stratification_helper(model_fit, data, group, weights)
 }
 \arguments{
-\item{model_fit}{A fitted model that \code{\link[marginaleffects:predictions]{marginaleffects::predictions()}} accepts, e.g. from \code{lme4::glmer()}. Random effects are left out of the predictions (\code{re.form = NA}).}
+\item{model_fit}{A fitted model that \code{\link[marginaleffects:predictions]{marginaleffects::predictions()}} accepts, e.g. from \code{lme4::glmer()} or \code{estimatr::lm_robust()}. For a mixed model, random effects are left out of the predictions (\code{re.form = NA}); for any other model no such argument is passed.}
 
 \item{data}{A data frame of post-stratification cells to predict for.}
 

@@ -1,5 +1,10 @@
 # rdss 1.0.16
 
+* `post_stratification_helper()` passes `re.form = NA` to
+  `marginaleffects::predictions()` only when the fit is a mixed model. With
+  an `lm_robust()` or other single-level fit, marginaleffects warned that
+  `re.form` is not a known argument on every call.
+
 * `did_multiplegt_tidy()` tidies `did_multiplegt(mode = "dyn")`, returning
   each effect with its standard error and confidence interval. The book's
   `mode = "old"` call returns `NaN` under DIDmultiplegt 2.1.0, which first

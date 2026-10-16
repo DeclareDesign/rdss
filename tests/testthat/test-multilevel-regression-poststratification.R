@@ -52,3 +52,17 @@ test_that("post_stratification_helper works", {
   expect_error(simulate_once(declaration_15.4), NA)
 
 })
+
+test_that("post_stratification_helper passes re.form only to a mixed model", {
+  skip_if_not_installed("marginaleffects")
+  cells <- expand.grid(state = state.name[1:5], HS = 0:1)
+  cells$PS_weight <- ifelse(cells$HS == 1, 0.6, 0.4)
+  survey <- cells[rep(seq_len(nrow(cells)), 20), ]
+  survey$Y <- rbinom(nrow(survey), 1, prob = 0.4 + 0.2 * survey$HS)
+  fit <- estimatr::lm_robust(Y ~ HS, data = survey)
+  expect_no_warning(
+    out <- post_stratification_helper(fit, data = cells, group = state, weights = PS_weight)
+  )
+  expect_equal(nrow(out), 5)
+  expect_true(all(out$estimate > 0 & out$estimate < 1))
+})

@@ -4,7 +4,7 @@
 #'
 #' See https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification
 #'
-#' @param model_fit A fitted model that [marginaleffects::predictions()] accepts, e.g. from `lme4::glmer()`. Random effects are left out of the predictions (`re.form = NA`).
+#' @param model_fit A fitted model that [marginaleffects::predictions()] accepts, e.g. from `lme4::glmer()` or `estimatr::lm_robust()`. For a mixed model, random effects are left out of the predictions (`re.form = NA`); for any other model no such argument is passed.
 #' @param data A data frame of post-stratification cells to predict for.
 #' @param group The bare column name of the grouping variable.
 #' @param weights The bare column name of the post-stratification weights, e.g. each cell's population share.
@@ -39,15 +39,16 @@ post_stratification_helper <- function(model_fit, data, group, weights) {
     return(invisible())
   }
 
-  marginaleffects::predictions(
-    model_fit,
-    newdata = data,
-    type = "response",
-    re.form = NA
-    # For this model type, `marginaleffects` only takes into account the
-    # uncertainty in fixed-effect parameters. You can use the `re.form=NA`
-    # argument to acknowledge this explicitly and silence this warning.
-  ) %>%
+  # `re.form = NA` is an lme4 prediction argument. marginaleffects warns when
+  # it is passed to a model that does not take it, so it goes only to a mixed
+  # model fit.
+  predictions <- if (inherits(model_fit, "merMod")) {
+    marginaleffects::predictions(model_fit, newdata = data, type = "response", re.form = NA)
+  } else {
+    marginaleffects::predictions(model_fit, newdata = data, type = "response")
+  }
+
+  predictions %>%
     group_by({{group}}) %>%
     summarize(estimate = weighted.mean(estimate, !!enquo(weights)), .groups = "drop")
 }

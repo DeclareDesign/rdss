@@ -17,8 +17,10 @@ post_stratification_helper(model_fit, data, group, weights)
   A fitted model that
   [`marginaleffects::predictions()`](https://rdrr.io/pkg/marginaleffects/man/predictions.html)
   accepts, e.g. from
-  [`lme4::glmer()`](https://rdrr.io/pkg/lme4/man/glmer.html). Random
-  effects are left out of the predictions (`re.form = NA`).
+  [`lme4::glmer()`](https://rdrr.io/pkg/lme4/man/glmer.html) or
+  [`estimatr::lm_robust()`](https://declaredesign.org/r/estimatr/reference/lm_robust.html).
+  For a mixed model, random effects are left out of the predictions
+  (`re.form = NA`); for any other model no such argument is passed.
 
 - data:
 

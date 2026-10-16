@@ -54,7 +54,7 @@
 
 
 <dl><dt id="arg-model-fit">model_fit<a class="anchor" aria-label="anchor" href="#arg-model-fit"></a></dt>
-<dd><p>A fitted model that <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::predictions()</a></code> accepts, e.g. from <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code>. Random effects are left out of the predictions (<code>re.form = NA</code>).</p></dd>
+<dd><p>A fitted model that <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::predictions()</a></code> accepts, e.g. from <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code> or <code><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html" class="external-link">estimatr::lm_robust()</a></code>. For a mixed model, random effects are left out of the predictions (<code>re.form = NA</code>); for any other model no such argument is passed.</p></dd>
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>

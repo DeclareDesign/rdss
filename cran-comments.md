@@ -8,17 +8,19 @@ As in 1.0.14, `estimator_AS_tidy()` is a stub in the CRAN version: it keeps its 
 
 ## Test environments
 
-* local macOS, R 4.6.1, `R CMD check --as-cran` on the submitted tarball: Status OK
+* win-builder: R-devel (2026-10-23 r90760 ucrt), 1 NOTE, on the submitted tarball
+* local macOS, R 4.6.1, `R CMD check --as-cran`: Status OK
 * ubuntu on GitHub Actions (devel, release, oldrel-1): OK
 * windows on GitHub Actions (release): OK
 * macOS on GitHub Actions (release): OK
-* win-builder (devel): to be added before submission
+
+The GitHub Actions runs are of the development version, which differs from this submission only in carrying the working `estimator_AS_tidy()` and its test.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
 
-'polars' is in Suggests and is available from https://rpolars.r-universe.dev, which is named in `Additional_repositories`. It is needed only by `did_multiplegt_tidy(mode = "dyn")`, whose example runs only when 'polars' is installed.
+The note, from CRAN incoming feasibility, reports the maintainer change described above and that 'polars' is not in a mainstream repository. 'polars' is in Suggests and is available from https://rpolars.r-universe.dev, which is named in `Additional_repositories`. It is needed only by `did_multiplegt_tidy(mode = "dyn")`, whose example runs only when 'polars' is installed.
 
 ## Reverse dependencies
 

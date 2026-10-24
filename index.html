@@ -68,9 +68,10 @@
 <p>or the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"DeclareDesign/rdss"</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code>, used in the book’s section on experiments over networks, also needs the ‘interference’ package, which is not on CRAN:</p>
+<p><code><a href="reference/estimator_AS_tidy.html">estimator_AS_tidy()</a></code>, used in the book’s section on experiments over networks, needs the ‘interference’ package, which is not on CRAN. It works only in the GitHub version of rdss, so install both from GitHub:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szonszein/interference"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szonszein/interference"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"DeclareDesign/rdss"</span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="reference/did_multiplegt_tidy.html">did_multiplegt_tidy()</a></code>, used in the book’s section on difference-in-differences, needs the ‘polars’ package, which is also not on CRAN:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"polars"</span>, repos <span class="op">=</span> <span class="st">"https://rpolars.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
@@ -131,8 +132,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Graeme Blair <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9164-2102" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Alexander Coppock <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5733-2386" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Graeme Blair <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9164-2102" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Alexander Coppock <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5733-2386" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>Macartan Humphreys <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7029-2326" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>

@@ -2,10 +2,9 @@
 
 ## Authors
 
-- **Graeme Blair**. Author, maintainer.
-  [](https://orcid.org/0000-0001-9164-2102)
+- **Graeme Blair**. Author. [](https://orcid.org/0000-0001-9164-2102)
 
-- **Alexander Coppock**. Author.
+- **Alexander Coppock**. Author, maintainer.
   [](https://orcid.org/0000-0002-5733-2386)
 
 - **Macartan Humphreys**. Author.

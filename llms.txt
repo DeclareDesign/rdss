@@ -31,12 +31,14 @@ remotes::install_github("DeclareDesign/rdss")
 ```
 
 [`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md),
-used in the book’s section on experiments over networks, also needs the
-‘interference’ package, which is not on CRAN:
+used in the book’s section on experiments over networks, needs the
+‘interference’ package, which is not on CRAN. It works only in the
+GitHub version of rdss, so install both from GitHub:
 
 ``` r
 
 remotes::install_github("szonszein/interference")
+remotes::install_github("DeclareDesign/rdss")
 ```
 
 [`did_multiplegt_tidy()`](https://declaredesign.org/r/rdss/reference/did_multiplegt_tidy.md),

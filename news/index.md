@@ -2,6 +2,14 @@
 
 ## rdss 1.0.16
 
+- On CRAN,
+  [`estimator_AS_tidy()`](https://declaredesign.org/r/rdss/reference/estimator_AS_tidy.md)
+  is a stub that says how to install the GitHub version, as it was in
+  1.0.14, because the ‘interference’ package it wraps is not in any
+  repository CRAN can reach. The GitHub version carries the working
+  function. The stub’s message now points at `DeclareDesign/rdss`
+  itself; 1.0.14’s pointed at a `remotes` branch that no longer exists.
+
 - [`post_stratification_helper()`](https://declaredesign.org/r/rdss/reference/post_stratification_helper.md)
   passes `re.form = NA` to
   [`marginaleffects::predictions()`](https://rdrr.io/pkg/marginaleffects/man/predictions.html)

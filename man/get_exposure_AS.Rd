@@ -19,19 +19,8 @@ Converts the exposure map from \code{interference::make_exposure_map_AS()}, a 0/
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
 }
 \examples{
-\dontshow{if (requireNamespace("interference", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-
-set.seed(343)
-# A ring of 20 units, each adjacent to the units on either side of it
-N <- 20
-adjacency <- matrix(0, N, N)
-adjacency[cbind(1:N, c(2:N, 1))] <- 1
-adjacency <- adjacency + t(adjacency)
-Z <- randomizr::complete_ra(N)
-
-exposure <- interference::make_exposure_map_AS(
-  adj_matrix = adjacency, tr_vector = Z, hop = 1
-)
+# An exposure map for three units, one column per exposure condition
+exposure <- cbind(dir_ind1 = c(1, 0, 0), isol_dir = c(0, 1, 0), no = c(0, 0, 1))
 get_exposure_AS(exposure)
-\dontshow{\}) # examplesIf}
+
 }

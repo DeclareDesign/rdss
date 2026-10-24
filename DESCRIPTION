@@ -26,7 +26,6 @@ Suggests:
     spdep,
     DeclareDesign,
     curl,
-    interference,
     polars
 Depends: 
     R (>= 4.1.0)
@@ -34,6 +33,4 @@ Config/testthat/edition: 3
 URL: https://declaredesign.org/r/rdss/, https://github.com/DeclareDesign/rdss
 BugReports: https://github.com/DeclareDesign/rdss/issues
 Additional_repositories: https://rpolars.r-universe.dev
-Remotes:
-    szonszein/interference
 Config/roxygen2/version: 8.0.0

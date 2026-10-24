@@ -14,66 +14,24 @@ estimator_AS_tidy(
 \arguments{
 \item{data}{A data frame with columns \code{Z} and \code{Y}.}
 
-\item{permutatation_matrix}{(The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments with one
-row per permutation of the treatment vector and one column per unit, as returned
-by \code{t(obtain_permutation_matrix(declaration))}. The exposure probabilities
-are computed from it unless \code{obs_prob_exposure} is supplied.}
+\item{permutatation_matrix}{(The spelling is the published one and is kept so existing code runs.) A matrix of random treatment assignments with one row per permutation of the treatment vector and one column per unit.}
 
-\item{adj_matrix}{An adjacency matrix defining the network structure. This
-can be created, for example, as follows:
-\preformatted{
-adjacency <- fairfax |>
-  as("Spatial") |>
-  spdep::poly2nb(queen = TRUE) |>
-  spdep::nb2mat(style = "B", zero.policy = TRUE)
-}}
+\item{adj_matrix}{An adjacency matrix defining the network structure.}
 
-\item{obs_prob_exposure}{Optional exposure probabilities. They depend only
-on the permutation matrix and the network, so in a simulation they are the
-same on every draw; computing them once and passing them here avoids
-recomputing them each time. For example:
-\preformatted{
-prob_exposure <- interference::make_exposure_prob(
-  potential_tr_vector = permutatation_matrix,
-  adj_matrix = adjacency,
-  exposure_map_fn = interference::make_exposure_map_AS,
-  exposure_map_fn_add_args = list(hop = 1)
-)
-}
-When \code{NULL}, the default, they are computed from \code{permutatation_matrix}.}
+\item{obs_prob_exposure}{Optional precomputed exposure probabilities.}
 }
 \value{
-A data frame with six rows (three inquiries by two estimators) and columns \code{term}, \code{inquiry}, \code{estimator}, and \code{estimate}. No standard errors are returned.
+Nothing, invisibly, in the CRAN version. The GitHub version returns a data frame with columns \code{term}, \code{inquiry}, \code{estimator}, and \code{estimate}.
 }
 \description{
-Runs the Aronow and Samii estimator from the 'interference' package and returns Horvitz-Thompson and Hajek estimates of the total, direct, and indirect effects. Exposure is defined by one-hop neighbours in \code{adj_matrix}. The data must contain the treatment as \code{Z} and the outcome as \code{Y}.
+Runs the Aronow and Samii estimator from the 'interference' package and returns Horvitz-Thompson and Hajek estimates of the total, direct, and indirect effects.
 }
 \details{
-The function requires the 'interference' package, which is not available on CRAN.
-
-To use this function, install it with
+The 'interference' package is not available on CRAN, so in the CRAN version of rdss this function only explains how to install the GitHub versions of both packages, where it works:
 remotes::install_github('szonszein/interference')
+remotes::install_github('DeclareDesign/rdss')
 
-Without it the function returns nothing and explains why, so a design that
-includes it still declares and diagnoses.
+It returns nothing, so a design that includes it still declares and diagnoses.
 
 See https://book.declaredesign.org/experimental-causal.html#experiments-over-networks
-}
-\examples{
-\dontshow{if (requireNamespace("interference", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-
-set.seed(343)
-# A ring of 20 units, each adjacent to the units on either side of it
-N <- 20
-adjacency <- matrix(0, N, N)
-adjacency[cbind(1:N, c(2:N, 1))] <- 1
-adjacency <- adjacency + t(adjacency)
-Z <- randomizr::complete_ra(N)
-
-# 100 possible assignments, one per row
-permutations <- t(replicate(100, randomizr::complete_ra(N)))
-
-dat <- data.frame(Z = Z, Y = Z + rnorm(N))
-estimator_AS_tidy(dat, permutatation_matrix = permutations, adj_matrix = adjacency)
-\dontshow{\}) # examplesIf}
 }

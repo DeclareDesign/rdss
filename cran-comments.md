@@ -1,5 +1,7 @@
 ## Submission
 
+This release changes the maintainer from Graeme Blair <graeme.blair@gmail.com> to Alexander Coppock <acoppock@gmail.com>. Graeme Blair remains an author and will confirm the change by email.
+
 rdss 1.0.16 keeps the package working with DeclareDesign 2.0.0, which is the reason for the release. It also declares `Depends: R (>= 4.1.0)`, which clears the "Missing dependency on R >= 4.1.0" note reported on all 13 check flavors for 1.0.14 (the package code uses the native pipe), and fixes several helper functions used by the book.
 
 As in 1.0.14, `estimator_AS_tidy()` is a stub in the CRAN version: it keeps its signature and returns a message saying how to install the GitHub version. The function wraps the 'interference' package, which is distributed only from GitHub, so the CRAN version neither suggests 'interference' nor carries a `Remotes` field.

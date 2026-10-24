@@ -1,5 +1,7 @@
 # rdss 1.0.16
 
+* On CRAN, `estimator_AS_tidy()` is a stub that says how to install the GitHub version, as it was in 1.0.14, because the 'interference' package it wraps is not in any repository CRAN can reach. The GitHub version carries the working function. The stub's message now points at `DeclareDesign/rdss` itself; 1.0.14's pointed at a `remotes` branch that no longer exists.
+
 * `post_stratification_helper()` passes `re.form = NA` to
   `marginaleffects::predictions()` only when the fit is a mixed model. With
   an `lm_robust()` or other single-level fit, marginaleffects warned that

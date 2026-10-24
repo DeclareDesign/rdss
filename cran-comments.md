@@ -1,13 +1,12 @@
 ## Submission
 
-rdss 1.0.16 declares `Depends: R (>= 4.1.0)`, which clears the "Missing
-dependency on R >= 4.1.0" issue reported on all 13 check flavors for 1.0.14
-(the package code uses the native pipe). It also restores
-`estimator_AS_tidy()`, which had stopped returning estimates, and corrects
-package metadata.
+rdss 1.0.16 keeps the package working with DeclareDesign 2.0.0, which is the reason for the release. It also declares `Depends: R (>= 4.1.0)`, which clears the "Missing dependency on R >= 4.1.0" note reported on all 13 check flavors for 1.0.14 (the package code uses the native pipe), and fixes several helper functions used by the book.
+
+As in 1.0.14, `estimator_AS_tidy()` is a stub in the CRAN version: it keeps its signature and returns a message saying how to install the GitHub version. The function wraps the 'interference' package, which is distributed only from GitHub, so the CRAN version neither suggests 'interference' nor carries a `Remotes` field.
 
 ## Test environments
 
+* local macOS, R 4.6.1, `R CMD check --as-cran` on the submitted tarball: Status OK
 * ubuntu on GitHub Actions (devel, release, oldrel-1): OK
 * windows on GitHub Actions (release): OK
 * macOS on GitHub Actions (release): OK
@@ -15,28 +14,10 @@ package metadata.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 0 notes
 
-The notes are:
+'polars' is in Suggests and is available from https://rpolars.r-universe.dev, which is named in `Additional_repositories`. It is needed only by `did_multiplegt_tidy(mode = "dyn")`, whose example runs only when 'polars' is installed.
 
-    Suggests or Enhances not in mainstream repositories:
-      interference
+## Reverse dependencies
 
-This is intentional and unchanged in character from earlier releases. A single
-function, `estimator_AS_tidy()`, wraps the 'interference' package, which
-implements the Aronow and Samii estimator for experiments over networks and is
-distributed only from https://github.com/szonszein/interference. The function is
-used conditionally: it calls `requireNamespace("interference")` first and, when
-the package is absent, returns invisibly after a message naming the install
-command. Nothing else in the package depends on it, no example or test requires
-it, and the package's own tests skip that file when it is not installed.
-
-The second note is:
-
-    Unknown, possibly misspelled, fields in DESCRIPTION:
-      'Remotes'
-
-'Remotes' is present so that the package's own continuous integration, and
-anyone installing from GitHub, can resolve the suggested 'interference'
-package. Without it the dependency solve fails before any check runs. It is
-inert for a CRAN installation, which never reads the field.
+DeclareDesign, by the same authors, suggests rdss. This release is coordinated with DeclareDesign 2.0.0.

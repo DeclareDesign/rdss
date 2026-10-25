@@ -1,5 +1,7 @@
 # rdss 1.0.16
 
+* In the GitHub version, `estimator_AS_tidy()` returns standard errors, p-values, and 95 percent confidence intervals. `interference::estimates()` computes effect variances only when told which condition is control, and rdss had never passed `control_condition`, so the variances were always empty. The Horvitz-Thompson rows use Aronow and Samii's conservative variance, the larger of the Horvitz-Thompson and constant-effects variances, since the plain Horvitz-Thompson variance of a difference can be negative. Intervals for an effect whose exposure condition is rare can undercover; the documentation gives the simulated rates.
+
 * On CRAN, `estimator_AS_tidy()` is a stub that says how to install the GitHub version, as it was in 1.0.14, because the 'interference' package it wraps is not in any repository CRAN can reach. The GitHub version carries the working function. The stub's message now points at `DeclareDesign/rdss` itself; 1.0.14's pointed at a `remotes` branch that no longer exists.
 
 * `post_stratification_helper()` passes `re.form = NA` to

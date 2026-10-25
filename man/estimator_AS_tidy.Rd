@@ -43,7 +43,7 @@ prob_exposure <- interference::make_exposure_prob(
 When \code{NULL}, the default, they are computed from \code{permutatation_matrix}.}
 }
 \value{
-A data frame with six rows (three inquiries by two estimators) and columns \code{term}, \code{inquiry}, \code{estimator}, and \code{estimate}. No standard errors are returned.
+A data frame with six rows (three inquiries by two estimators) and columns \code{term}, \code{inquiry}, \code{estimator}, \code{estimate}, \code{std.error}, \code{p.value}, \code{conf.low}, and \code{conf.high}. Each effect is a contrast with the \code{no} exposure condition. The Hajek rows use the Hajek variance estimator. The Horvitz-Thompson rows use the conservative estimator of Aronow and Samii (2017), the larger of the Horvitz-Thompson variance and the constant-effects variance, because the Horvitz-Thompson variance of a difference can be negative. The p-values and 95 percent confidence intervals use a normal approximation. When an exposure condition is rare the variance estimates are noisy and the intervals can undercover: in 300 simulations of the book's Fairfax design with 10 percent of units treated, the total effect's intervals covered 82 percent of the time (Horvitz-Thompson) and 90 percent (Hajek); the direct and indirect effects' covered 94 to 98 percent.
 }
 \description{
 Runs the Aronow and Samii estimator from the 'interference' package and returns Horvitz-Thompson and Hajek estimates of the total, direct, and indirect effects. Exposure is defined by one-hop neighbours in \code{adj_matrix}. The data must contain the treatment as \code{Z} and the outcome as \code{Y}.

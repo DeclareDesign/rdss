@@ -73,6 +73,12 @@ test_that("interference helpers work", {
   precomputed <- estimator_AS_tidy(dat, adj_matrix = adj_matrix, obs_prob_exposure = prob_exposure)
   expect_equal(precomputed, from_matrix)
 
+  # Standard errors come from contrasts with the "no" condition; without
+  # control_condition, interference::estimates() returns empty variances
+  expect_equal(from_matrix$term, rep(c("dir_ind1", "isol_dir", "ind1"), 2))
+  expect_true(all(from_matrix$std.error > 0))
+  expect_true(all(from_matrix$conf.low < from_matrix$estimate & from_matrix$estimate < from_matrix$conf.high))
+
   expect_error(estimator_AS_tidy(dat, adj_matrix = adj_matrix), "Supply either")
 
 })

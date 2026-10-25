@@ -83,7 +83,9 @@ get_exposure_AS <- function(obs_exposure) {
 #'   }
 #'   When `NULL`, the default, they are computed from `permutatation_matrix`.
 #'
-#' @return A data frame with six rows (three inquiries by two estimators) and columns `term`, `inquiry`, `estimator`, and `estimate`. No standard errors are returned.
+#' @return A data frame with six rows (three inquiries by two estimators) and columns `term`, `inquiry`, `estimator`, `estimate`, `std.error`, `p.value`, `conf.low`, and `conf.high`. Each effect is a contrast with the `no` exposure condition. The Hajek rows use the Hajek variance estimator. The Horvitz-Thompson rows use the conservative estimator of Aronow and Samii (2017), the larger of the Horvitz-Thompson variance and the constant-effects variance, because the Horvitz-Thompson variance of a difference can be negative. The p-values and 95 percent confidence intervals use a normal approximation. When an exposure condition is rare the variance estimates are noisy and the intervals can undercover: in 300 simulations of the book's Fairfax design with 10 percent of units treated, the total effect's intervals covered 82 percent of the time (Horvitz-Thompson) and 90 percent (Hajek); the direct and indirect effects' covered 94 to 98 percent.
+#'
+#' @importFrom stats pnorm
 #'
 #' @export
 #'
@@ -140,13 +142,23 @@ estimator_AS_tidy <-
           ),
         obs_outcome = data$Y,
         obs_prob_exposure = obs_prob_exposure,
-        n_var_permutations = 30
+        n_var_permutations = 30,
+        control_condition = "no",
+        variance_estimators = c("hajek", "horvitz-thompson", "max_ht_const")
       )
 
+    # max_ht_const returns its contrasts in alphabetical order, so match by name
+    terms <- names(out_AS$tau_ht)
+    variance <- c(out_AS$var_tau_ht_max[terms], out_AS$var_tau_h[terms])
+
     tibble(
-      term = c(names(out_AS$tau_ht), names(out_AS$tau_h)),
+      term = rep(terms, 2),
       inquiry = rep(c("total_ATE", "direct_ATE", "indirect_ATE"), 2),
       estimator = rep(c("Horvitz-Thompson", "Hajek"), each = 3),
-      estimate = c(out_AS$tau_ht, out_AS$tau_h)
+      estimate = c(out_AS$tau_ht, out_AS$tau_h[terms]),
+      std.error = sqrt(variance),
+      p.value = 2 * pnorm(-abs(estimate / std.error)),
+      conf.low = estimate - qnorm(0.975) * std.error,
+      conf.high = estimate + qnorm(0.975) * std.error
     )
   }

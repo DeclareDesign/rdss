@@ -93,7 +93,7 @@ recomputing them each time. For example:</p><div class="sourceCode"><pre><code><
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame with six rows (three inquiries by two estimators) and columns <code>term</code>, <code>inquiry</code>, <code>estimator</code>, and <code>estimate</code>. No standard errors are returned.</p>
+    <p>A data frame with six rows (three inquiries by two estimators) and columns <code>term</code>, <code>inquiry</code>, <code>estimator</code>, <code>estimate</code>, <code>std.error</code>, <code>p.value</code>, <code>conf.low</code>, and <code>conf.high</code>. Each effect is a contrast with the <code>no</code> exposure condition. The Hajek rows use the Hajek variance estimator. The Horvitz-Thompson rows use the conservative estimator of Aronow and Samii (2017), the larger of the Horvitz-Thompson variance and the constant-effects variance, because the Horvitz-Thompson variance of a difference can be negative. The p-values and 95 percent confidence intervals use a normal approximation. When an exposure condition is rare the variance estimates are noisy and the intervals can undercover: in 300 simulations of the book's Fairfax design with 10 percent of units treated, the total effect's intervals covered 82 percent of the time (Horvitz-Thompson) and 90 percent (Hajek); the direct and indirect effects' covered 94 to 98 percent.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -121,15 +121,15 @@ includes it still declares and diagnoses.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Z <span class="op">=</span> <span class="va">Z</span>, Y <span class="op">=</span> <span class="va">Z</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">estimator_AS_tidy</span><span class="op">(</span><span class="va">dat</span>, permutatation_matrix <span class="op">=</span> <span class="va">permutations</span>, adj_matrix <span class="op">=</span> <span class="va">adjacency</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   term     inquiry      estimator        estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> dir_ind1 total_ATE    Horvitz-Thompson     2.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> isol_dir direct_ATE   Horvitz-Thompson     1.42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ind1     indirect_ATE Horvitz-Thompson     1.53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> dir_ind1 total_ATE    Hajek                2.11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> isol_dir direct_ATE   Hajek                1.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ind1     indirect_ATE Hajek                1.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term     inquiry      estimator  estimate std.error p.value conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> dir_ind1 total_ATE    Horvitz-T…     2.08     1.55  0.178     -<span style="color: #BB0000;">0.951</span>      5.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> isol_dir direct_ATE   Horvitz-T…     1.42     2.00  0.479     -<span style="color: #BB0000;">2.51</span>       5.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ind1     indirect_ATE Horvitz-T…     1.53     1.38  0.267     -<span style="color: #BB0000;">1.17</span>       4.23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> dir_ind1 total_ATE    Hajek          2.11     0.810 0.009<span style="text-decoration: underline;">11</span>    0.525      3.70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> isol_dir direct_ATE   Hajek          1.33     1.25  0.288     -<span style="color: #BB0000;">1.12</span>       3.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ind1     indirect_ATE Hajek          1.46     0.579 0.011<span style="text-decoration: underline;">9</span>     0.322      2.59</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

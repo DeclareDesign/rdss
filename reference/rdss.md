@@ -16,16 +16,16 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Graeme Blair <graeme.blair@gmail.com>
-([ORCID](https://orcid.org/0000-0001-9164-2102))
+**Maintainer**: Alexander Coppock <acoppock@gmail.com>
+([ORCID](https://orcid.org/0000-0002-5733-2386))
 
 Authors:
 
-- Graeme Blair <graeme.blair@gmail.com>
-  ([ORCID](https://orcid.org/0000-0001-9164-2102))
-
 - Alexander Coppock <acoppock@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-5733-2386))
+
+- Graeme Blair <graeme.blair@gmail.com>
+  ([ORCID](https://orcid.org/0000-0001-9164-2102))
 
 - Macartan Humphreys <macartan@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-7029-2326))

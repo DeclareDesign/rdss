@@ -150,6 +150,8 @@ estimator_AS_tidy <-
     # max_ht_const returns its contrasts in alphabetical order, so match by name
     terms <- names(out_AS$tau_ht)
     variance <- c(out_AS$var_tau_ht_max[terms], out_AS$var_tau_h[terms])
+    # the Hajek variance of a difference can be negative; report no standard error
+    variance[variance < 0] <- NA
 
     tibble(
       term = rep(terms, 2),

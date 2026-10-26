@@ -1,4 +1,4 @@
-# rdss: Helper functions for Research Design in the Social Sciences book
+# rdss: Companion Datasets and Functions for Research Design in the Social Sciences
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rdss)](https://cran.r-project.org/package=rdss)
@@ -9,10 +9,13 @@ status](https://github.com/DeclareDesign/rdss/actions/workflows/R-CMD-check.yaml
 [![Codecov test
 coverage](https://codecov.io/gh/DeclareDesign/rdss/graph/badge.svg)](https://app.codecov.io/gh/DeclareDesign/rdss)
 
-Helper functions for using the book [*Research Design in the Social
-Sciences: Declaration, Diagnosis,
-Redesign*](https://book.declaredesign.org/) by Blair, Coppock, and
-Humphreys 2023 (Princeton University Press).
+Datasets and helper functions for the book [*Research Design in the
+Social Sciences: Declaration, Diagnosis, and
+Redesign*](https://book.declaredesign.org/) by Graeme Blair, Alexander
+Coppock, and Macartan Humphreys (Princeton University Press, 2023). The
+[package website](https://declaredesign.org/r/rdss/) has a [Get
+started](https://declaredesign.org/r/rdss/articles/rdss.html) article
+that lists which helpers each section of the book uses.
 
 ## Installation
 
@@ -178,7 +181,8 @@ Datasets used in the book’s examples and exercises
 - [`la_voter_file`](https://declaredesign.org/r/rdss/reference/la_voter_file.md)
   : Voter file sample for Los Angeles County
 - [`lapop_brazil`](https://declaredesign.org/r/rdss/reference/lapop_brazil.md)
-  : Teaching data based on the 2018 LAPOP survey of Brazil
+  : Teaching data based on the 2018/19 LAPOP AmericasBarometer survey of
+  Brazil
 
 ## Utilities
 
@@ -200,3 +204,9 @@ Format numbers for tables, and the book’s ggplot theme and palette
 - [`hex_add_alpha()`](https://declaredesign.org/r/rdss/reference/hex_add_alpha.md)
   : Add alpha transparency to a color defined in hexadecimal
 
+# Articles
+
+### All vignettes
+
+- [Getting started with
+  rdss](https://declaredesign.org/r/rdss/articles/rdss.md):

@@ -16,6 +16,16 @@ A data frame with 849 rows and 10 columns: `female`, `lgbtq`, `age`,
 `religiosity`, `income`, `college`, `blm_familiarity`, `linked_fate`,
 `Z`, and `blm_support`.
 
+## Source
+
+Bonilla, Tabitha, and Alvin B. Tillery. 2020. "Which Identity Frames
+Boost Support for and Mobilization in the \#BlackLivesMatter Movement?
+An Experimental Test." *American Political Science Review* 114(4):
+947-962.
+[doi:10.1017/S0003055420000544](https://doi.org/10.1017/S0003055420000544)
+. Data from Dataverse,
+[doi:10.7910/DVN/IUZDQI](https://doi.org/10.7910/DVN/IUZDQI) .
+
 ## Examples
 
 ``` r

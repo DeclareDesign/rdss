@@ -90,7 +90,8 @@ Datasets used in the book’s examples and exercises
 - [`la_voter_file`](https://declaredesign.org/r/rdss/reference/la_voter_file.md)
   : Voter file sample for Los Angeles County
 - [`lapop_brazil`](https://declaredesign.org/r/rdss/reference/lapop_brazil.md)
-  : Teaching data based on the 2018 LAPOP survey of Brazil
+  : Teaching data based on the 2018/19 LAPOP AmericasBarometer survey of
+  Brazil
 
 ## Utilities
 

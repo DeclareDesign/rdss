@@ -1,8 +1,17 @@
 # rdss package
 
-Companion datasets and functions for the book "Research Design in the
-Social Sciences: Declaration, Diagnosis, and Redesign"
-(book.declaredesign.org)
+Companion datasets and functions for the book *Research Design in the
+Social Sciences: Declaration, Diagnosis, and Redesign* by Graeme Blair,
+Alexander Coppock, and Macartan Humphreys (Princeton University Press,
+2023), free to read at <https://book.declaredesign.org>.
+
+## Details
+
+Most functions fill one step of a design declaration in the book, and
+each help page links to the section that uses it. The Get started
+article on the package website,
+<https://declaredesign.org/r/rdss/articles/rdss.html>, lists them
+chapter by chapter.
 
 ## See also
 

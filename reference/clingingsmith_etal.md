@@ -18,6 +18,15 @@ A data frame with 958 rows and 8 columns: `success`, `views_saudi`,
 `views_indonesian`, `views_turkish`, `views_african`, `views_chinese`,
 `views_european`, and `views`.
 
+## Source
+
+Clingingsmith, David, Asim Ijaz Khwaja, and Michael Kremer. 2009.
+"Estimating the Impact of the Hajj: Religion and Tolerance in Islam's
+Global Gathering." *The Quarterly Journal of Economics* 124(3):
+1133-1170.
+[doi:10.1162/qjec.2009.124.3.1133](https://doi.org/10.1162/qjec.2009.124.3.1133)
+.
+
 ## Examples
 
 ``` r

@@ -82,6 +82,11 @@
   [`broom.mixed::tidy()`](https://generics.r-lib.org/reference/tidy.html),
   was already the one in effect.
 
+- A Get started article on the package website lists the rdss functions
+  each section of the book uses, and works through the conjoint
+  declaration. The datasets cite their sources, and the package has a
+  hex logo.
+
 - Point `URL` and `BugReports` at the GitHub repository.
 
 - Drop a stray zero-byte `_pkgdown 2.yml`, and stop shipping
@@ -91,14 +96,17 @@
 
 CRAN release: 2025-01-09
 
-- fixes issue with intermittent test failure
-- deprecates tidy_stan in favor of new broom.mixed::tidy function
+- Fix an intermittent test failure.
+- Deprecate
+  [`tidy_stan()`](https://declaredesign.org/r/rdss/reference/tidy_stan.md)
+  in favor of
+  [`broom.mixed::tidy()`](https://generics.r-lib.org/reference/tidy.html).
 
 ## rdss 1.0.12
 
 CRAN release: 2024-10-10
 
-- address bugs with future package
+- Address bugs with the future package.
 
 ## rdss 1.0.10
 
@@ -117,23 +125,26 @@ CRAN release: 2024-03-02
 CRAN release: 2024-02-20
 
 - Update to new roxygen and R package documentation standards for CRAN.
-- Add ability to obtain declarations with get_rdss_file.
+- Add
+  [`get_rdss_file()`](https://declaredesign.org/r/rdss/reference/get_rdss_file.md)
+  to download the book’s declarations.
 
 ## rdss 1.0.4
 
 CRAN release: 2023-05-02
 
-- No changes (resubmission after CRAN archiving)
+- No changes (resubmission after CRAN archiving).
 
 ## rdss 1.0.2
 
 CRAN release: 2023-03-27
 
-- Add lapop_brazil dataset, resampled from the LAPOP 2018 survey in
-  Brazil. Used in the RDSS exercises.
+- Add the `lapop_brazil` dataset, resampled from the LAPOP
+  AmericasBarometer 2018/19 survey of Brazil. Used in the RDSS
+  exercises.
 
 ## rdss 1.0.0
 
 CRAN release: 2023-01-17
 
-- First release to CRAN (renamed from rdddr, previously on CRAN)
+- First release to CRAN (renamed from rdddr, previously on CRAN).

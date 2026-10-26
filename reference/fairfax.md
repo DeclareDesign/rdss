@@ -16,6 +16,11 @@ fairfax
 
 An sf object with 238 rows and 10 columns:
 
+## Source
+
+Fairfax County Government, voting precincts layer
+(`REGMGR.VOTING_PRECINCTS`).
+
 ## Examples
 
 ``` r

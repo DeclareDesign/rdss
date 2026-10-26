@@ -1,4 +1,4 @@
-# Teaching data based on the 2018 LAPOP survey of Brazil
+# Teaching data based on the 2018/19 LAPOP AmericasBarometer survey of Brazil
 
 Used in the book's student exercises. These data were resampled with
 replacement from the LAPOP data, to 10,000 rows, for a subset of
@@ -19,10 +19,16 @@ eight survey items (`trust_police`, `govt_responsive`, `ideology`,
 `govt_pride`, `self_efficacy_political`, `trust_military`,
 `trust_supreme_court`, and `support_political_system`).
 
+## Source
+
+LAPOP AmericasBarometer 2018/19 survey of Brazil (fieldwork January to
+March 2019), Vanderbilt University,
+<https://www.vanderbilt.edu/cgd/data-access/>.
+
 ## Details
 
 Download the original data from
-https://www.vanderbilt.edu/lapop/raw-data.php
+https://www.vanderbilt.edu/cgd/data-access/
 
 See https://www.vanderbilt.edu/lapop/core-surveys.php for the survey
 questionnaire.

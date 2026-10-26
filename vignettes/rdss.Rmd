@@ -1,0 +1,135 @@
+---
+title: "Getting started with rdss"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with rdss}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE)
+```
+
+rdss is the companion package to [*Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign*](https://book.declaredesign.org) by Graeme Blair, Alexander Coppock, and Macartan Humphreys (Princeton University Press, 2023). The book declares its designs with [DeclareDesign](https://declaredesign.org/r/declaredesign/). Most declarations need nothing beyond DeclareDesign, but some call an estimator from another package whose output DeclareDesign cannot read directly, or build a model or inquiry that takes more than a line to write. rdss holds those pieces, along with the datasets the book analyzes and the helpers that format its tables and figures.
+
+This article lists which book sections use which rdss functions, says what each needs installed, and works through one declaration from start to finish.
+
+## Installing
+
+```{r, eval = FALSE}
+install.packages("rdss")
+```
+
+Each helper wraps an estimator from another package, and rdss lists those packages as suggested rather than required, so installing rdss does not install all of them. Install the ones the sections you are reading need; the table below names them. Two are not on CRAN:
+
+- `estimator_AS_tidy()` wraps the [interference](https://github.com/szonszein/interference) package, which is on GitHub only. The CRAN version of rdss carries a stub that explains this. To run the book's experiment over networks, install both packages from GitHub:
+
+  ```{r, eval = FALSE}
+  remotes::install_github("szonszein/interference")
+  remotes::install_github("DeclareDesign/rdss")
+  ```
+
+- `did_multiplegt_tidy()` with `mode = "dyn"` needs polars, from R-universe:
+
+  ```{r, eval = FALSE}
+  install.packages("polars", repos = "https://rpolars.r-universe.dev")
+  ```
+
+## Functions by book section
+
+| Book section | rdss functions | Also needs |
+|---|---|---|
+| [Bayesian formalizations](https://book.declaredesign.org/choosing-an-answer-strategy.html#bayesian-formalizations) | `tidy_stan()` (deprecated: use `broom.mixed::tidy()`) | rstanarm, broom.mixed |
+| [Choosing an answer strategy](https://book.declaredesign.org/choosing-an-answer-strategy.html) | `clingingsmith_etal`, `foos_etal` (data) | |
+| [Multilevel regression and poststratification](https://book.declaredesign.org/observational-descriptive.html#multi-level-regression-and-poststratification) | `post_stratification_helper()` | lme4, marginaleffects |
+| [Process tracing](https://book.declaredesign.org/observational-causal.html#process-tracing) | `process_tracing_estimator()` | CausalQueries |
+| [Difference-in-differences](https://book.declaredesign.org/observational-causal.html#difference-in-differences) | `lag_by_group()`, `did_multiplegt_tidy()` | DIDmultiplegt, polars |
+| [Regression discontinuity designs](https://book.declaredesign.org/observational-causal.html#regression-discontinuity-designs) | `rdrobust_helper()`, `tidy.rdrobust()` | rdrobust |
+| [Conjoint experiments](https://book.declaredesign.org/experimental-descriptive.html#conjoint-experiments) | `conjoint_assignment()`, `conjoint_measurement()`, `conjoint_inquiries()`, `tidy.amce()` | cjoint |
+| [Experiments over networks](https://book.declaredesign.org/experimental-causal.html#experiments-over-networks) | `get_exposure_AS()`, `estimator_AS_tidy()`, `fairfax` (data) | interference (GitHub), spdep |
+| [Meta-analysis](https://book.declaredesign.org/complex-designs.html#meta-analysis) | `rma_helper()`, `rma_mu_tau()` | metafor |
+| [Discovery using causal forests](https://book.declaredesign.org/complex-designs.html#discovery-using-causal-forests) | `causal_forest_handler()`, `best_predictor()` | grf |
+
+The remaining datasets (`bonilla_tillery`, `la_voter_file`, and `lapop_brazil`) are for the book's exercises. `format_num()`, `add_parens()`, `make_se_entry()`, and `make_interval_entry()` format numbers for tables; `theme_dd()`, `dd_palette()`, and `hex_add_alpha()` give figures the book's look.
+
+## A worked example: a conjoint experiment
+
+The book's conjoint declaration (declaration 17.5) shows how the helpers slot into a design. Subjects each see three tasks, and each task pits two candidate profiles against each other. Profiles vary in gender, party, and region, and subjects choose the profile with the higher utility. The utility function encodes the conjecture under study: women gain support only in the North and East, and the Right only in the North and South.
+
+```{r}
+library(rdss)
+library(DeclareDesign)
+library(cjoint)
+library(dplyr)
+
+levels_list <-
+  list(
+    gender = c("Man", "Woman"),
+    party = c("Left", "Right"),
+    region = c("North", "South", "East", "West")
+  )
+
+conjoint_utility <- function(data) {
+  data |>
+    mutate(
+      U = 0.25 * (gender == "Woman") * (region %in% c("North", "East")) +
+        0.5 * (party == "Right") * (region %in% c("North", "South")) + uij
+    )
+}
+```
+
+Three rdss helpers fill the steps that would otherwise each take a page of code. `conjoint_inquiries()` computes the true average marginal component effect (AMCE) of every attribute level from the utility function. `conjoint_assignment()` draws the attributes of every profile at random. `conjoint_measurement()` applies the utility function and records which profile in each task is chosen. The estimator is `cjoint::amce()`, which DeclareDesign can use directly because rdss supplies a `tidy()` method for its output.
+
+```{r}
+declaration_17.5 <-
+  declare_model(
+    subject = add_level(N = 500),
+    task = add_level(N = 3, task = 1:N),
+    profile = add_level(N = 2, profile = 1:2, uij = rnorm(N, sd = 1))
+  ) +
+  declare_inquiry(
+    handler = conjoint_inquiries,
+    levels_list = levels_list,
+    utility_fn = conjoint_utility
+  ) +
+  declare_assignment(handler = conjoint_assignment, levels_list = levels_list) +
+  declare_measurement(handler = conjoint_measurement, utility_fn = conjoint_utility) +
+  declare_estimator(
+    choice ~ gender + party + region,
+    respondent.id = "subject",
+    .method = amce
+  )
+```
+
+One draw of the data has a row per profile, with the chosen profile marked:
+
+```{r}
+set.seed(343)
+draw_data(declaration_17.5) |>
+  head()
+```
+
+The inquiries are the true AMCEs, one per non-reference level:
+
+```{r}
+draw_estimands(declaration_17.5)
+```
+
+Diagnosing the design compares the `amce()` estimates with those targets over many simulated runs of the study:
+
+```{r}
+set.seed(343)
+diagnosis <- diagnose_design(declaration_17.5, sims = 100, bootstrap_sims = FALSE)
+diagnosis
+```
+
+Bias is near zero for every level. Power is not: the design detects the larger effects almost every time and the smaller ones in well under half of runs, which is the kind of finding that should send a researcher back to `N` before fielding the study.
+
+## The book's declarations and diagnoses
+
+`get_rdss_file()` downloads the book's saved declarations and diagnosis objects from its [Dataverse archive](https://doi.org/10.7910/DVN/HYVPO5), so you can inspect a diagnosis without rerunning a long simulation. Its help page lists the available names.
+
+```{r, eval = FALSE}
+diagnosis_9.1 <- get_rdss_file("diagnosis_9.1")
+```

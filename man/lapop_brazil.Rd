@@ -3,9 +3,12 @@
 \docType{data}
 \name{lapop_brazil}
 \alias{lapop_brazil}
-\title{Teaching data based on the 2018 LAPOP survey of Brazil}
+\title{Teaching data based on the 2018/19 LAPOP AmericasBarometer survey of Brazil}
 \format{
 A data frame with 10,000 rows and 10 columns: \code{ID}, \code{municipality}, and eight survey items (\code{trust_police}, \code{govt_responsive}, \code{ideology}, \code{govt_pride}, \code{self_efficacy_political}, \code{trust_military}, \code{trust_supreme_court}, and \code{support_political_system}).
+}
+\source{
+LAPOP AmericasBarometer 2018/19 survey of Brazil (fieldwork January to March 2019), Vanderbilt University, \url{https://www.vanderbilt.edu/cgd/data-access/}.
 }
 \usage{
 lapop_brazil
@@ -14,7 +17,7 @@ lapop_brazil
 Used in the book's student exercises. These data were resampled with replacement from the LAPOP data, to 10,000 rows, for a subset of variables. These data cannot be used for scientific inferences, and are only useful for teaching purposes. ID numbers were scrambled so that individuals and municipalities cannot easily be identified.
 }
 \details{
-Download the original data from https://www.vanderbilt.edu/lapop/raw-data.php
+Download the original data from https://www.vanderbilt.edu/cgd/data-access/
 
 See https://www.vanderbilt.edu/lapop/core-surveys.php for the survey questionnaire.
 }

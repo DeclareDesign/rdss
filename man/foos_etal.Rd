@@ -7,6 +7,9 @@
 \format{
 A data frame with 8,375 rows and 5 columns: \code{marked_register_2014}, \code{ward}, \code{street}, \code{treat}, and \code{weights}.
 }
+\source{
+Foos, Florian, Peter John, Christian Müller, and Kevin Cunningham. 2021. "Social Mobilization in Partisan Spaces." \emph{The Journal of Politics} 83(3): 1190-1197. \doi{10.1086/710970}. Data from Dataverse, \doi{10.7910/DVN/NDPXND}.
+}
 \usage{
 foos_etal
 }

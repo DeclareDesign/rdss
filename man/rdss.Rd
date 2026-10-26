@@ -6,7 +6,10 @@
 \alias{rdss}
 \title{rdss package}
 \description{
-Companion datasets and functions for the book "Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign" (book.declaredesign.org)
+Companion datasets and functions for the book \emph{Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign} by Graeme Blair, Alexander Coppock, and Macartan Humphreys (Princeton University Press, 2023), free to read at \url{https://book.declaredesign.org}.
+}
+\details{
+Most functions fill one step of a design declaration in the book, and each help page links to the section that uses it. The Get started article on the package website, \url{https://declaredesign.org/r/rdss/articles/rdss.html}, lists them chapter by chapter.
 }
 \seealso{
 Useful links:

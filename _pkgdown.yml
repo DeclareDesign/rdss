@@ -15,7 +15,7 @@ navbar:
   - text: "Software"
     menu:
       - text: DeclareDesign
-        href: http://declaredesign.org/r/declaredesign/
+        href: https://declaredesign.org/r/declaredesign/
       - text: randomizr
         href: https://declaredesign.org/r/randomizr/
       - text: fabricatr
@@ -31,8 +31,12 @@ navbar:
   - text: declaredesign.org
     href: https://declaredesign.org
   left:
+  - text: Get started
+    href: articles/rdss.html
   - text: Reference
     href: reference/index.html
+  - text: News
+    href: news/index.html
 
 reference:
 - title: Package

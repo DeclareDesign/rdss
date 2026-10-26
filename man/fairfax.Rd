@@ -7,6 +7,9 @@
 \format{
 An sf object with 238 rows and 10 columns:
 }
+\source{
+Fairfax County Government, voting precincts layer (\code{REGMGR.VOTING_PRECINCTS}).
+}
 \usage{
 fairfax
 }

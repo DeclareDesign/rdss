@@ -8,8 +8,8 @@ As in 1.0.14, `estimator_AS_tidy()` is a stub in the CRAN version: it keeps its 
 
 ## Test environments
 
-* win-builder: R-devel (2026-10-24 r90762 ucrt), 1 NOTE, on the submitted tarball
-* local macOS, R 4.6.1, `R CMD check --as-cran`: Status OK
+* win-builder: R-devel (2026-10-24 r90762 ucrt), 1 NOTE, on a tarball that differs from this one only in documentation (a package website article, dataset `@source` fields, NEWS, and the book's year in Description)
+* local macOS, R 4.6.1, `R CMD check --as-cran` on the submitted tarball: 1 NOTE, the one described below
 * ubuntu on GitHub Actions (devel, release, oldrel-1): OK
 * windows on GitHub Actions (release): OK
 * macOS on GitHub Actions (release): OK

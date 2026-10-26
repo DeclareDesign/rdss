@@ -7,6 +7,9 @@
 \format{
 A data frame with 849 rows and 10 columns: \code{female}, \code{lgbtq}, \code{age}, \code{religiosity}, \code{income}, \code{college}, \code{blm_familiarity}, \code{linked_fate}, \code{Z}, and \code{blm_support}.
 }
+\source{
+Bonilla, Tabitha, and Alvin B. Tillery. 2020. "Which Identity Frames Boost Support for and Mobilization in the #BlackLivesMatter Movement? An Experimental Test." \emph{American Political Science Review} 114(4): 947-962. \doi{10.1017/S0003055420000544}. Data from Dataverse, \doi{10.7910/DVN/IUZDQI}.
+}
 \usage{
 bonilla_tillery
 }

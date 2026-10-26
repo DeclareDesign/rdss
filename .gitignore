@@ -42,3 +42,6 @@ docs
 
 # Private development log (mirrored to claude_control/logs/rdss.md)
 notes/
+tests/testthat/_problems/
+tests/testthat/testthat-problems.rds
+.DS_Store

@@ -7,6 +7,9 @@
 \format{
 A data frame with 958 rows and 8 columns: \code{success}, \code{views_saudi}, \code{views_indonesian}, \code{views_turkish}, \code{views_african}, \code{views_chinese}, \code{views_european}, and \code{views}.
 }
+\source{
+Clingingsmith, David, Asim Ijaz Khwaja, and Michael Kremer. 2009. "Estimating the Impact of the Hajj: Religion and Tolerance in Islam's Global Gathering." \emph{The Quarterly Journal of Economics} 124(3): 1133-1170. \doi{10.1162/qjec.2009.124.3.1133}.
+}
 \usage{
 clingingsmith_etal
 }

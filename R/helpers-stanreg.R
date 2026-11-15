@@ -29,10 +29,7 @@ tidy_stan <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FAL
 
   message("This function is deprecated. Please use the 'tidy' function from the 'broom.mixed' package.")
 
-  if(!requireNamespace("broom.mixed")){
-    message("The tidy_stan function requires the 'broom.mixed' package.")
-    return(invisible())
-  }
+  rlang::check_installed("broom.mixed", reason = "to use `tidy_stan`.")
 
   ret <- broom.mixed::tidy(x, conf.int = conf.int, conf.level = conf.level, exponentiate = exponentiate, ...)
 

@@ -34,10 +34,7 @@
 #'
 post_stratification_helper <- function(model_fit, data, group, weights) {
 
-  if(!requireNamespace("marginaleffects")){
-    message("The post_stratification_helper function requires the 'marginaleffects' package.")
-    return(invisible())
-  }
+  rlang::check_installed("marginaleffects", reason = "to use `post_stratification_helper`.")
 
   # `re.form = NA` is an lme4 prediction argument. marginaleffects warns when
   # it is passed to a model that does not take it, so it goes only to a mixed

@@ -35,7 +35,7 @@
 tidy.amce <-
   function(x, alpha = 0.05, ...) {
 
-    rlang::check_installed("cjoint", reason = "to use `tidy function for amce objects`.")
+    rlang::check_installed("cjoint", reason = "to use `tidy()` on an amce object.")
 
     z_score <- qnorm(1 - ((alpha) / 2))
     summary_fit <- cjoint::summary.amce(x)

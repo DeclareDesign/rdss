@@ -1,3 +1,7 @@
+# rdss (development version)
+
+* The eight helpers that wrap a Suggests package (`tidy_stan()`, `rdrobust_tidy()`, `process_tracing_estimator()`, `rma_helper()`, `did_multiplegt_tidy()`, `causal_forest_helper()`, `post_stratification_helper()`, and `tidy()` on an `amce` object) stop with an error naming the missing package, and offer to install it in an interactive session. They printed a message and returned `NULL` invisibly, so the failure surfaced later, in whatever code used the result.
+
 # rdss 1.0.16
 
 * In the GitHub version, `estimator_AS_tidy()` returns standard errors, p-values, and 95 percent confidence intervals. `interference::estimates()` computes effect variances only when told which condition is control, and rdss had never passed `control_condition`, so the variances were always empty. The Horvitz-Thompson rows use Aronow and Samii's conservative variance, the larger of the Horvitz-Thompson and constant-effects variances, since the plain Horvitz-Thompson variance of a difference can be negative. Intervals for an effect whose exposure condition is rare can undercover; the documentation gives the simulated rates.

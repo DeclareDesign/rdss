@@ -35,10 +35,7 @@
 tidy.amce <-
   function(x, alpha = 0.05, ...) {
 
-    if(!requireNamespace("cjoint")){
-      message("The tidy function for amce objects requires the 'cjoint' package.")
-      return(invisible())
-    }
+    rlang::check_installed("cjoint", reason = "to use `tidy()` on an amce object.")
 
     z_score <- qnorm(1 - ((alpha) / 2))
     summary_fit <- cjoint::summary.amce(x)

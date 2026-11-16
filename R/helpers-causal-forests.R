@@ -36,10 +36,7 @@
 #'
 causal_forest_handler <- function(data, covariate_names, share_train = 0.5, ...) {
 
-  if(!requireNamespace("grf")){
-    message("The causal_forest_helper function requires the 'grf' package.")
-    return(invisible())
-  }
+  rlang::check_installed("grf", reason = "to use `causal_forest_helper`.")
 
   X <- as.matrix(data %>% select(all_of(covariate_names)))
 

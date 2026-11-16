@@ -31,10 +31,7 @@
 
 process_tracing_estimator <- function(causal_model, query, data, strategies) {
 
-  if(!requireNamespace("CausalQueries")){
-    message("The process_tracing_estimator function requires the 'CausalQueries' package.")
-    return(invisible())
-  }
+  rlang::check_installed("CausalQueries", reason = "to use `process_tracing_estimator`.")
 
   if(nrow(data) !=1) {
     stop("please provide a single row dataset")

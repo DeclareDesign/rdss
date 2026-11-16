@@ -76,10 +76,7 @@ lag_by_group <- function(x, groups, n = 1, order_by, default = NA) {
 #'
 did_multiplegt_tidy <- function(data, ...) {
 
-  if(!requireNamespace("DIDmultiplegt")){
-    message("The did_multiplegt_tidy function requires the 'DIDmultiplegt' package.")
-    return(invisible())
-  }
+  rlang::check_installed("DIDmultiplegt", reason = "to use `did_multiplegt_tidy`.")
 
   args <- list(...)
   if (identical(args$mode, "dyn") && is.null(args$graph_off)) {

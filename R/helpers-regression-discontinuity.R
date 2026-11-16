@@ -20,10 +20,7 @@
 #' tidy(fit)
 #'
 tidy.rdrobust <- function(x, ...) {
-  if(!requireNamespace("rdrobust")){
-    message("The rdrobust_tidy function requires the 'rdrobust' package.")
-    return(invisible())
-  }
+  rlang::check_installed("rdrobust", reason = "to use `rdrobust_tidy`.")
 
   ret <- data.frame(rownames(x$coef), x$coef, x$se, x$z, x$pv, x$ci, c = x$c)
   row.names(ret) <- NULL

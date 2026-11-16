@@ -85,10 +85,7 @@ rma_mu_tau <- function(fit) {
 #' fit
 #'
 rma_helper <- function(data, yi, sei, method = "REML", ...){
-  if(!requireNamespace("metafor")){
-    message("The rma_helper function requires the 'metafor' package.")
-    return(invisible())
-  }
+  rlang::check_installed("metafor", reason = "to use `rma_helper`.")
   fit <- try({metafor::rma(yi = data[[quo_text(enexpr(yi))]], sei = data[[quo_text(enexpr(sei))]], method = method, ... = ...)})
   if(inherits(fit, "try-error")) {
     class(fit) <- c("rma.uni", "try-error")

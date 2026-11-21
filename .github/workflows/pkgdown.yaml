@@ -33,6 +33,10 @@ jobs:
           dependencies: '"hard"'
           extra-packages: any::pkgdown, any::DeclareDesign, any::cjoint, local::.
           needs: website
+          # Without its own key, the restore-key prefix falls back to
+          # R-CMD-check's library, which holds interference (and units, whose
+          # libudunits2 this job never installs), so its guarded example ran.
+          cache-version: pkgdown
 
       - name: Build site
         run: pkgdown::build_site(new_process = FALSE, install = FALSE)

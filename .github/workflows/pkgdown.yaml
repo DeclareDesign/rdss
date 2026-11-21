@@ -1,0 +1,39 @@
+# Builds the site to check that the Get started article and the reference
+# pages render. It never deploys: the declaredesign.org nightly publishes the
+# rdss site. The article is Rbuildignored, so R CMD check never runs it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+name: pkgdown.yaml
+
+permissions: read-all
+
+jobs:
+  pkgdown:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # Hard dependencies only: the article evaluates DeclareDesign and cjoint,
+      # and every reference example is guarded by @examplesIf, so the heavy
+      # Suggests (rstanarm, CausalQueries, grf) are not needed to build.
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          dependencies: '"hard"'
+          extra-packages: any::pkgdown, any::DeclareDesign, any::cjoint, local::.
+          needs: website
+
+      - name: Build site
+        run: pkgdown::build_site(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
